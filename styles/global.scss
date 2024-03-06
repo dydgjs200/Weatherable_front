@@ -1,4 +1,10 @@
+$black: #333333;
+$bg-gray: #F6F6F6;
+
+
 body {
+    color: $black;
     margin: 0;
     padding: 0;
+    background-color: $bg-gray;
 }
