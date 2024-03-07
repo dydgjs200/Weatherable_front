@@ -11,15 +11,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@react-google-maps/api": "^2.19.3",
+    "@types/react-dom": "^18.2.20",
     "axios": "^1.6.7",
     "next": "^14.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.71.1"
+    "react-geolocated": "^4.1.2",
+    "react-kakao-maps": "^0.0.13",
+    "sass": "^1.71.1",
+    "scriptjs": "^2.5.9"
   },
   "devDependencies": {
-    "@types/node": "20.11.24",
-    "@types/react": "18.2.62",
-    "typescript": "5.3.3"
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.63",
+    "typescript": "^5.3.3"
   }
 }
