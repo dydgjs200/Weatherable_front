@@ -1,5 +1,3 @@
-import Test from '../../components/test';
-
 export default function MainPage() {
   return (
     <div>

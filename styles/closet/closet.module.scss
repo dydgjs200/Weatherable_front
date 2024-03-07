@@ -1,0 +1,17 @@
+@import '../common.scss';
+
+.container {
+  display: flex;
+  background-color: red;
+  width: 90%;
+  height: calc(100vh - 50px);
+  position: relative;
+}
+
+.addToggle {
+  background-color: $black;
+  width: 50%;
+  height: 5%;
+  position: absolute;
+  top: 60px;
+}
