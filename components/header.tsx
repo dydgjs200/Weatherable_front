@@ -22,11 +22,6 @@ export default function Header() {
               setIsOpen(!isOpen);
             }}
           >
-            {/* {isOpen ? (
-              <span className="material-symbols-outlined">close</span>
-            ) : (
-            
-            )} */}
             <span className="material-symbols-outlined">menu</span>
           </button>
         </li>

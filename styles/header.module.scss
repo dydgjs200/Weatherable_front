@@ -1,5 +1,4 @@
 .container {
-  background-color: pink;
   width: 100%;
   height: 50px;
   position: relative;
@@ -22,13 +21,13 @@
 }
 
 .sideBarContainer {
-  background-color: red;
   position: absolute;
   height: 100vh;
   width: 100%;
   background-color: rgb(51, 51, 51, 0.8);
   display: flex;
   flex-direction: row;
+  z-index: 99;
   button {
     background: none;
     border: none;
