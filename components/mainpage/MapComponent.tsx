@@ -1,10 +1,13 @@
-"use client"; // nextjs에서 useState사용시 작성필
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+'use client'; // nextjs에서 useState사용시 작성필
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import styles from '../../styles/mainpage/mainpage.module.scss';
 
 interface WeatherData {
   main: {
     temp: number;
+    temp_max: number;
+    temp_min: number;
     humidity: number;
   };
   weather: {
@@ -40,13 +43,13 @@ const LocationWeather: React.FC = () => {
         setLocation(position);
 
         // 날씨 데이터 가져오기
-        const apiKey = "08975c8087262a4eac397c8f4dca5edc";
+        const apiKey = '15c5ec95f74fa746cc03e71ed9b610f5';
         const apiURI = `http://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=${apiKey}`;
         const response = await axios.get<WeatherData>(apiURI);
         setWeatherData(response.data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching weather data:", error);
+        console.error('Error fetching weather data:', error);
       }
     };
 
@@ -59,8 +62,8 @@ const LocationWeather: React.FC = () => {
     longitude: number;
   }> => {
     const options: PositionOptions = {
-      maximumAge: 60 * 1000, // 이전 위치를 최대 1분까지 유지합니다.
-      timeout: 10 * 1000, // 위치를 가져오는 데 최대 10초까지 시도합니다.
+      maximumAge: 60 * 1000,
+      timeout: 10 * 1000,
     };
 
     return new Promise((resolve, reject) => {
@@ -78,20 +81,33 @@ const LocationWeather: React.FC = () => {
       );
     });
   };
+
+  const iconUrl = `http://openweathermap.org/img/w/${weatherData?.weather[0].icon}.png`;
+
   return (
-    <div>
+    <div className={styles.weatherContainer}>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <>
-          <p>Location: {weatherData?.name}</p>
-          <p>
-            Temperature: {Math.round((weatherData?.main.temp - 273) * 10) / 10}
+          <div className={styles.weatherIcon}>
+            <img src={iconUrl} alt="Weather Icon" />
+          </div>
+          <p className={styles.locationText}>
+            {weatherData?.name + '.' + weatherData?.sys.country}
+          </p>
+          <p className={styles.temperatureText}>
+            {Math.round((weatherData?.main.temp - 273) * 10) / 10}
             °C
           </p>
-
-          <p>Description: {weatherData?.weather[0].description}</p>
-          <p>Country: {weatherData?.sys.country}</p>
+          <p className={styles.maxTemperatureText}>
+            ▲ {Math.round((weatherData?.main.temp_max - 273) * 10) / 10}
+            °C
+          </p>
+          <p className={styles.minTemperatureText}>
+            ▼ {Math.round((weatherData?.main.temp_min - 273) * 10) / 10}
+            °C
+          </p>
         </>
       )}
     </div>
