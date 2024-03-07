@@ -10,7 +10,7 @@ interface props {
 export default function SideBar({ open, close }: props) {
   return (
     <div className={styles.sideBarContainer}>
-      <div className={styles.sideBarInnerBox}>
+      <nav className={styles.sideBarInnerBox}>
         <Link href="/">
           <img src="" alt="로고" onClick={close} />
         </Link>
@@ -21,7 +21,7 @@ export default function SideBar({ open, close }: props) {
             </Link>
           </li>
           <li>
-            <Link href="/closet" onClick={close}>
+            <Link href={`/closet/1`} onClick={close}>
               내 옷장 보기
             </Link>
           </li>
@@ -36,7 +36,7 @@ export default function SideBar({ open, close }: props) {
             </Link>
           </li>
         </ul>
-      </div>
+      </nav>
       <button onClick={close}>
         <span className="material-symbols-outlined">close</span>
       </button>
