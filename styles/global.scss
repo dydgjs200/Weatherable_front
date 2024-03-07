@@ -1,6 +1,4 @@
-// 색
-$black: #333333;
-$bg-gray: #f6f6f6;
+@import './common.scss';
 
 body {
   color: $black;
@@ -13,7 +11,7 @@ a {
 }
 
 .mainContaioner {
-  top: 70px;
   display: flex;
   justify-content: center;
+  height: calc(100vh - 50px);
 }
