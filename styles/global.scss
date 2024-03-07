@@ -1,4 +1,19 @@
+// 색
+$black: #333333;
+$bg-gray: #f6f6f6;
+
 body {
-    margin: 0;
-    padding: 0;
+  color: $black;
+  margin: 0;
+  padding: 0;
+  background-color: $bg-gray;
+}
+a {
+  text-decoration: none;
+}
+
+.mainContaioner {
+  top: 70px;
+  display: flex;
+  justify-content: center;
 }
