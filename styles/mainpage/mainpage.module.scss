@@ -1,0 +1,28 @@
+@import '../common.scss';
+
+.weatherContainer {
+  text-align: center;
+}
+
+.weatherIcon img {
+  width: 100px;
+  height: 100px;
+}
+
+.locationText {
+  font-size: 16px;
+  margin-top: 0px;
+}
+
+.temperatureText {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.maxTemperatureText {
+  font-size: 8px;
+  color: rgb(211, 59, 59);
+}
+.minTemperatureText {
+  font-size: 8px;
+  color: rgb(42, 42, 204);
+}

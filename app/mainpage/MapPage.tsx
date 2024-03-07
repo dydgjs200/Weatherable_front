@@ -1,4 +1,4 @@
-import LocationWeather from "../components/MapComponent";
+import LocationWeather from '../../components/mainpage/MapComponent';
 
 const MyPage: React.FC = () => {
   return (
