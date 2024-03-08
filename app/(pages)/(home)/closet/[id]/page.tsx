@@ -1,6 +1,8 @@
+import ClothesInfoBox from '../../../../../components/closet/clothesInfoBox';
 import AddToggleBtn from '../../../../../components/closet/addToggleBtn';
 import SelectBox from '../../../../../components/closet/selectBox';
 import styles from '../../../../../styles/closet/closet.module.scss';
+import SortBox from '../../../../../components/closet/sortBox';
 
 export default function Closet() {
   return (
@@ -14,7 +16,15 @@ export default function Closet() {
           <span>50</span>
         </div>
       </div>
-      <SelectBox />
+      <div className={styles.selectBox}>
+        <SelectBox />
+      </div>
+      <div className={styles.sortBox}>
+        <SortBox />
+      </div>
+      <div className={styles.mainInfoBox}>
+        <ClothesInfoBox />
+      </div>
       <AddToggleBtn />
     </div>
   );
