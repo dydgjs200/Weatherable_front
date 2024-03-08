@@ -83,7 +83,21 @@ const LocationWeather: React.FC = () => {
   };
 
   const iconUrl = `http://openweathermap.org/img/w/${weatherData?.weather[0].icon}.png`;
+  const temperatureText = weatherData?.main.temp
+    ? Math.round((weatherData.main.temp - 273) * 10) / 10
+    : null;
 
+  const getTemperatureDescription = (temperature: number) => {
+    if (temperature <= 0) {
+      return '날이 매우 추우니 옷을 따듯하게 입으세요';
+    } else if (temperature <= 10) {
+      return '날이 쌀쌀하니 가벼운 겉옷을 챙기세요';
+    } else if (temperature <= 20) {
+      return '날이 따듯한 편이니 겉옷은 안챙겨도 괜찮아요';
+    } else {
+      return '날이 매우 더우니 반팔을 추천해요';
+    }
+  };
   return (
     <div className={styles.weatherContainer}>
       {loading ? (
@@ -107,6 +121,12 @@ const LocationWeather: React.FC = () => {
           <p className={styles.minTemperatureText}>
             ▼ {Math.round((weatherData?.main.temp_min - 273) * 10) / 10}
             °C
+          </p>
+          <hr />
+          <p className={styles.temperatureText}>
+            {temperatureText ? (
+              <>{getTemperatureDescription(temperatureText)}</>
+            ) : null}
           </p>
         </>
       )}
