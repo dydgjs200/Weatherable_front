@@ -1,8 +1,10 @@
 @import '../common.scss';
-.login_Container {
+.signup_Container {
   width: $width;
   max-width: $max-width;
   position: relative;
+  
+  @include scrollbar();
 
   .title {
     font-size: 1.5em;
@@ -13,14 +15,14 @@
   }
 
   .content {
-    .login_Content_Container {
+    .signup_Content_Container {
       margin: 2em 1em;
 
-      .login_title {
+      .signup_title {
         font-weight: bold;
       }
 
-      .login_input {
+      .signup_input {
         margin-top: 0.25em;
         width: calc(100% - 7.75px);
         height: 40px;
@@ -28,17 +30,17 @@
       }
     }
   }
-  .login_info {
+  .signup_info {
     align-items: center;
     margin: 4em 1em;
     @include flex();
     justify-content: space-evenly;
   }
-  .login_Btn {
+  .signup_Btn {
     @include big_btn();
     width: calc(100% - 2em);
     height: 2.5em;
     display: block;
-    margin: 0 auto;
+    margin: 3em auto;
   }
 }

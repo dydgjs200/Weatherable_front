@@ -36,7 +36,7 @@ export default function Header() {
         </li>
         <li>
           <Link href="/">
-            <img src="" alt="로고" />
+            <img src="logo.png" alt="로고" />
           </Link>
         </li>
         <li>
