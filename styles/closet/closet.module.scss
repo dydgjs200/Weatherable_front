@@ -3,7 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: $width;
+  width: 100%;
   height: calc(100vh - 50px);
   position: relative;
   justify-content: center;
@@ -14,9 +14,9 @@
 .innerHeader {
   display: flex;
   // background-color: pink;
+  width: 90%;
   flex-direction: row;
   height: 5%;
-  width: $width;
   align-items: center;
   justify-content: space-between;
   margin-top: 1rem;
@@ -47,6 +47,7 @@
   top: 90%;
   left: 25%;
   display: flex;
+  z-index: 90;
   justify-content: center;
   align-items: center;
   border-radius: $radius-m;
@@ -92,9 +93,22 @@
   box-shadow: 0px 2px 8px -5px #333;
 }
 
+.sortBox {
+  width: 90%;
+  background-color: pink;
+  margin-top: 1rem;
+}
+
+.mainInfoBox {
+  background-color: pink;
+  width: 90%;
+  margin-top: 1rem;
+  display: flex;
+}
+
 .addForm {
   margin-top: 1rem;
-  width: 100%;
+  width: 90%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -103,8 +117,8 @@
     position: relative;
     border: 1px solid #a5a5a5;
     border-radius: $radius-m;
-    width: 90%;
-    height: 40%;
+    width: 100%;
+    height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,7 +127,7 @@
     }
     .editBtn {
       position: absolute;
-      z-index: 100;
+      z-index: 80;
       margin: auto;
       width: 3rem;
       height: 3rem;
@@ -138,12 +152,47 @@
 
   label {
     color: #878787;
-    // font-weight: 700;
     font-size: 0.9rem;
     margin-top: 0.5rem;
   }
-  // input {
-  //   border: 0.5px solid #878787;
-  //   width: 90%;
-  // }
+  .infoBox {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    input {
+      border: 0.5px solid #878787;
+      width: 100%;
+      padding: 0;
+    }
+    select {
+      background-color: transparent;
+    }
+  }
+  .thicknessBox {
+    // background-color: blue;
+    display: flex;
+    justify-content: space-between;
+    input {
+      border: 0.5px solid #878787;
+      width: 20%;
+      background: none;
+    }
+    input:hover,
+    active {
+      border: 1px solid blue;
+      color: blue;
+    }
+  }
+  .colorBox {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    height: 5%;
+    input {
+      border-radius: 50%;
+      width: 2vh;
+      background-color: red;
+    }
+  }
 }
