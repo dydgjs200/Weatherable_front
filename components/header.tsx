@@ -6,13 +6,22 @@ import '../styles/icons.scss';
 import { Span } from 'next/dist/trace';
 import SideBar from './sidebar';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
 
+  // 닫기 버튼
   const close = () => {
     setIsOpen(false);
   };
+
+  // 뒤로가기 버튼
+  const router = useRouter();
+  const back = () => {
+    router.back();
+  };
+
   return (
     <div className={styles.container}>
       <ul>
@@ -31,9 +40,11 @@ export default function Header() {
           </Link>
         </li>
         <li>
-          <Link href="/">
-            <span className="material-symbols-outlined">login</span>
-          </Link>
+          <button onClick={back}>
+            <span className="material-symbols-outlined">
+              keyboard_backspace
+            </span>
+          </button>
         </li>
       </ul>
       {isOpen && <SideBar open={isOpen} close={close} />}
