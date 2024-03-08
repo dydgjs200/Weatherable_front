@@ -3,8 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  // background-color: lightblue;
-  width: 90%;
+  width: $width;
   height: calc(100vh - 50px);
   position: relative;
   justify-content: center;
@@ -17,7 +16,7 @@
   // background-color: pink;
   flex-direction: row;
   height: 5%;
-  width: 90%;
+  width: $width;
   align-items: center;
   justify-content: space-between;
   margin-top: 1rem;
@@ -86,7 +85,7 @@
 
 .selectBox {
   width: 90%;
-  height: 10%;
+  height: 15%;
   background-color: $white;
   margin-top: 1rem;
   border-radius: $radius-s;
@@ -94,7 +93,57 @@
 }
 
 .addForm {
+  margin-top: 1rem;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  .imgBox {
+    position: relative;
+    border: 1px solid #a5a5a5;
+    border-radius: $radius-m;
+    width: 90%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 100%;
+    }
+    .editBtn {
+      position: absolute;
+      z-index: 100;
+      margin: auto;
+      width: 3rem;
+      height: 3rem;
+
+      input {
+        width: 0;
+        height: 0;
+        padding: 0;
+        display: none;
+      }
+      label {
+        // background-color: red;
+        width: 3rem;
+        height: 3rem;
+        margin: 0;
+        span {
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+
+  label {
+    color: #878787;
+    // font-weight: 700;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  // input {
+  //   border: 0.5px solid #878787;
+  //   width: 90%;
+  // }
 }
