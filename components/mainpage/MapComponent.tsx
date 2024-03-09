@@ -114,13 +114,14 @@ const LocationWeather: React.FC = () => {
             {Math.round((weatherData?.main.temp - 273) * 10) / 10}
             °C
           </p>
-          <p className={styles.maxTemperatureText}>
-            ▲ {Math.round((weatherData?.main.temp_max - 273) * 10) / 10}
-            °C
-          </p>
-          <p className={styles.minTemperatureText}>
-            ▼ {Math.round((weatherData?.main.temp_min - 273) * 10) / 10}
-            °C
+          <p className={styles.temperatureText}>
+            <span style={{ color: 'red' }}>
+              ▲{Math.round((weatherData?.main.temp_max - 273) * 10) / 10}°C
+            </span>{' '}
+            &nbsp; {} &nbsp; {} &nbsp; {} &nbsp; {} &nbsp; {}
+            <span style={{ color: 'blue' }}>
+              ▼{Math.round((weatherData?.main.temp_min - 273) * 10) / 10}°C
+            </span>{' '}
           </p>
           <hr />
           <p className={styles.temperatureText}>
