@@ -104,17 +104,18 @@ const LocationWeather: React.FC = () => {
         <p>Loading...</p>
       ) : (
         <>
+          <hr />
           <div className={styles.weatherIcon}>
             <img src={iconUrl} alt="Weather Icon" />
           </div>
           <p className={styles.locationText}>
             {weatherData?.name + '.' + weatherData?.sys.country}
           </p>
-          <p className={styles.temperatureText}>
+          <p className={styles.temperatureTextmain}>
             {Math.round((weatherData?.main.temp - 273) * 10) / 10}
             °C
           </p>
-          <p className={styles.temperatureText}>
+          <p className={styles.temperatureTextcolor}>
             <span style={{ color: 'red' }}>
               ▲{Math.round((weatherData?.main.temp_max - 273) * 10) / 10}°C
             </span>{' '}
@@ -124,6 +125,8 @@ const LocationWeather: React.FC = () => {
             </span>{' '}
           </p>
           <hr />
+
+          <p className={styles.today}>오늘의 날씨</p>
           <p className={styles.temperatureText}>
             {temperatureText ? (
               <>{getTemperatureDescription(temperatureText)}</>
