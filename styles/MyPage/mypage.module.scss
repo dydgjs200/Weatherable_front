@@ -1,0 +1,8 @@
+@import '../common.scss';
+
+.mypage_Container {
+  border: 1px solid red;
+  width: $width;
+  max-width: $max-width;
+  height: calc(100vh - 52px);
+}

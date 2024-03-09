@@ -1,0 +1,27 @@
+@import '../common.scss';
+
+.mypage_favorite {
+  border: 1px solid red;
+  width: $width;
+
+  .mypage_favorite_title {
+    margin-right: auto;
+    margin-left: 0.75em;
+    font-weight: bolder;
+  }
+
+  .mypage_favorite_content {
+    border: 1px solid purple;
+    width: fit-content;
+    @include flex();
+    justify-content: start;
+    overflow: scroll;
+    .mypage_favorite_contentlist {
+      width: fit-content;
+      height: 2em;
+      border: 1px solid black;
+      margin-left: 0.75em;
+      @include flex();
+    }
+  }
+}
