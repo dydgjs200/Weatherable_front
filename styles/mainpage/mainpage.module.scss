@@ -26,23 +26,118 @@
   font-size: 8px;
   color: rgb(42, 42, 204);
 }
-.mainpage__TopButton {
-  background-color: red;
-  width: 100%;
-  height: 150px;
-  align-items: center;
-}
-.mainpage__BottomButton {
-  background-color: black;
-  width: 100%;
-  height: 150px;
-}
+
 .Tshirt {
-  background-color: blue;
-  width: 50px;
+  background-image: url('../../public/Tshirt.JPG');
+  background-size: contain;
+  background-position: center;
+  width: 80px;
+  height: 80px;
+  border: 1px solid #ccc; /* 얇은 테두리 추가 */
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 만듭니다. */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+.Pants {
+  background-image: url('../../public/Pants.JPG');
+  background-size: contain;
+  background-position: center;
+  width: 80px;
+  height: 80px;
+  border: 1px solid #ccc; /* 얇은 테두리 추가 */
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 만듭니다. */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+.Outer {
+  background-image: url('../../public/Outer.JPG');
+  background-size: contain;
+  background-position: center;
+  width: 80px;
+  height: 80px;
+  border: 1px solid #ccc; /* 얇은 테두리 추가 */
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 만듭니다. */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+.Report {
+  background-color: aqua;
+  width: calc(50% - 8px);
   height: 50px;
+}
+
+.Ai {
+  background-image: url('../../public/Ai.JPG');
+  background-size: contain;
+  background-position: center;
+  width: 130px;
+  height: 130px;
+  border: 1px solid #ccc; /* 얇은 테두리 추가 */
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 만듭니다. */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
 }
 
 .test {
   width: 100%;
+}
+
+.maincontainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 50px);
+  position: relative;
+  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+.mainbuttoncontainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 50px);
+  position: relative;
+  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.maincontainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 50px);
+  position: relative;
+  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+.mainbuttoncontainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 50px);
+  position: relative;
+  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.mainpage__TopButton {
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.mainpage__BottomButton {
+  width: 80%;
+  height: 30vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Report,
+.Ai {
+  width: 130px; /* 각 버튼의 너비를 100px로 설정 */
+  height: 130px;
+  margin: 0 -100px; /* 간격 조절 */
 }

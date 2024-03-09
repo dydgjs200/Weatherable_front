@@ -5,8 +5,13 @@ export default function Mainpagebutton() {
       <hr />
       <div className={styles.mainpage__TopButton}>
         <button className={styles.Tshirt}></button>
+        <button className={styles.Pants}></button>
+        <button className={styles.Outer}></button>
       </div>
-      <div className={styles.mainpage__BottomButton}></div>
+      <div className={styles.mainpage__BottomButton}>
+        <button className={styles.Ai}></button>
+        <button className={styles.Report}></button>
+      </div>
     </>
   );
 }
