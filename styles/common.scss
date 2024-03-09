@@ -11,6 +11,10 @@ $radius-m: 0.5rem;
 $width: 100%;
 $max-width: 40em;
 
+
+// -----------------------------------------------------------
+// 함수
+
 // flex (가로 세로 중앙 정렬)
 @mixin flex() {
   display: flex;
@@ -18,13 +22,19 @@ $max-width: 40em;
   align-items: center;
 }
 
+// 큰 버튼
 @mixin big_btn() {
-  //   width: 100%;
-  //   height: 64px;
-  //   position: absolute;    // 해당 상위 div에 realtive
-  //   bottom: 0;
   background-color: #bed1cf;
   border: none;
   color: white;
   font-size: 1em;
+}
+
+// 스크롤바 안보이게
+@mixin scrollbar() {
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+      display: none;
+  }
 }
