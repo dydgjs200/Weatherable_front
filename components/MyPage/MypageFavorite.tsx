@@ -8,6 +8,7 @@ function MypageFavorite() {
           선호하는 플룻
         </div>
         <div className={`${styles.mypage_favorite_content} ${styles.margin}`}>
+          {/* map 함수 써서 반복 시켜보자. */}
           <div className={styles.mypage_favorite_contentlist}>스타일1</div>
           <div className={styles.mypage_favorite_contentlist}>스타일2</div>
           <div className={styles.mypage_favorite_contentlist}>스타일3</div>
