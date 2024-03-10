@@ -14,6 +14,9 @@ function MypageEditHeader() {
         <div
           className={`${styles.mypage_Profile_image} ${styles.margin}`}
         ></div>
+        <span>
+          <input type="file" />
+        </span>
         <div className={`${styles.mypage_Profile_nickname} ${styles.margin}`}>
           닉네임
         </div>
