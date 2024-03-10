@@ -98,19 +98,31 @@ const LocationWeather: React.FC = () => {
       return '날이 매우 더우니 반팔을 추천해요';
     }
   };
+  const getLocationName = (name: string): string => {
+    // 날씨 데이터의 이름이 "yongsan"인 경우 "용산"으로 변환
+    if (name.toLowerCase() === 'yongsan') {
+      return '서울시 용산구';
+    } else if (name.toLowerCase() === 'incheon') {
+      return '인천';
+    }
+    // 기본적으로는 날씨 데이터의 이름 그대로 사용
+    return name;
+  };
+
+  // 위치 이름 가져오기
+  const locationName = getLocationName(weatherData?.name || '');
+
   return (
     <div className={styles.weatherContainer}>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <>
-          <hr />
           <div className={styles.weatherIcon}>
             <img src={iconUrl} alt="Weather Icon" />
           </div>
-          <p className={styles.locationText}>
-            {weatherData?.name + '.' + weatherData?.sys.country}
-          </p>
+          <p className={styles.locationText}>{locationName}</p>
+
           <p className={styles.temperatureTextmain}>
             {Math.round((weatherData?.main.temp - 273) * 10) / 10}
             °C
@@ -126,12 +138,12 @@ const LocationWeather: React.FC = () => {
           </p>
           <hr />
 
-          <p className={styles.today}>오늘의 날씨</p>
-          <p className={styles.temperatureText}>
+          <div className={styles.temperatureText}>
+            <div className={styles.today}>오늘의 날씨</div>
             {temperatureText ? (
               <>{getTemperatureDescription(temperatureText)}</>
             ) : null}
-          </p>
+          </div>
         </>
       )}
     </div>

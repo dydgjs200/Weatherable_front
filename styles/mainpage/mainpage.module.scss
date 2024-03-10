@@ -1,100 +1,97 @@
 @import '../common.scss';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 $primary-color: rgb(0, 0, 0);
-
+.maincontainer {
+  font-family: 'Roboto Mono', monospace;
+}
 /* 기본 스타일 */
 .weatherContainer {
   text-align: center;
 }
-
+.all {
+  width: 100%;
+  font-family: 'Roboto Mono', monospace;
+}
 .weatherIcon img {
-  width: 100px;
-  height: 100px;
-  margin-top: 3.55vh; /* 변경: vh로 수정 */
+  width: 18vh;
+  height: 18vh;
+  margin-top: 3.55vh;
 }
 
 .locationText {
-  font-size: 2.56vh; /* 변경: vh로 수정 */
+  font-size: 2.56vh;
   margin-top: 0;
+  font-family: '', sans-serif;
 }
 
 .temperatureText {
-  font-size: 1.28vh; /* 변경: vh로 수정 */
-  margin-bottom: 0.56vh; /* 변경: vh로 수정 */
-  text-align: left;
-  margin-left: 5.12vw; /* 변경: vw로 수정 */
+  font-size: 3.28vh;
+  margin-bottom: 0.56vh;
+  text-align: center;
 }
 
 .temperatureTextmain {
-  font-size: 6.15vh; /* 변경: vh로 수정 */
-  margin-bottom: 6.25vh; /* 변경: vh로 수정 */
+  font-size: 6.15vh;
+  margin-bottom: 3.25vh;
+  margin-top: 3.25vh;
 }
 
 .temperatureTextcolor {
-  font-size: 1.28vh; /* 변경: vh로 수정 */
-  margin-bottom: 6.25vh; /* 변경: vh로 수정 */
-}
-
-.today {
-  font-size: 2.56vh; /* 변경: vh로 수정 */
-  border: 1.28vh; /* 변경: vh로 수정 */
-  text-align: left;
-  margin-left: 5.12vw; /* 변경: vw로 수정 */
-  margin-bottom: 0;
+  font-size: 2.28vh;
+  margin-bottom: 3.25vh;
 }
 
 .Ai {
-  width: 20vw; /* 변경: vw로 수정 */
-  height: 20vw; /* 변경: vw로 수정 */
-  // border: 0.64vw solid #ccc; /* 변경: vw로 수정 */
-  border-radius: 1.28vw; /* 변경: vw로 수정 */
+  width: 15vh;
+  height: 15vh;
+
+  border-radius: 1.28vw;
   border: none;
-  box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1); /* 변경: vw로 수정 */
+  box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1);
   background-size: contain;
   background-position: center;
   background-image: url('../../public/Ai.JPG');
 }
 .Tshirt {
-  width: 20vw; /* 변경: vw로 수정 */
-  height: 20vw; /* 변경: vw로 수정 */
+  width: 10vh;
+  height: 10vh;
   border: none;
-
-  border-radius: 1.28vw; /* 변경: vw로 수정 */
-  box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1); /* 변경: vw로 수정 */
+  border-radius: 1.28vw;
+  box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1);
   background-size: contain;
   background-position: center;
   background-image: url('../../public/Tshirt.JPG');
 }
 .Pants {
-  width: 20vw; /* 변경: vw로 수정 */
-  height: 20vw; /* 변경: vw로 수정 */
+  width: 10vh;
+  height: 10vh;
   border: none;
 
-  border-radius: 1.28vw; /* 변경: vw로 수정 */
-  box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1); /* 변경: vw로 수정 */
+  border-radius: 1.28vw;
+  box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1);
   background-size: contain;
   background-position: center;
   background-image: url('../../public/Pants.JPG');
 }
 .Outer {
-  width: 20vw; /* 변경: vw로 수정 */
-  height: 20vw; /* 변경: vw로 수정 */
+  width: 10vh;
+  height: 10vh;
   border: none;
 
-  border-radius: 1.28vw; /* 변경: vw로 수정 */
-  box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1); /* 변경: vw로 수정 */
-  background-size: contain;
+  border-radius: 1.28vw;
+  box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1);
+  background-size: cover;
   background-position: center;
   background-image: url('../../public/Outer.JPG');
 }
 .Report {
-  width: 20vw; /* 변경: vw로 수정 */
-  height: 20vw; /* 변경: vw로 수정 */
+  width: 15vh;
+  height: 15vh;
   border: none;
 
-  border-radius: 1.28vw; /* 변경: vw로 수정 */
-  box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1); /* 변경: vw로 수정 */
+  border-radius: 1.28vw;
+  box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1);
   background-size: contain;
   background-position: center;
   background-image: url('../../public/codi.JPG');
@@ -103,43 +100,22 @@ $primary-color: rgb(0, 0, 0);
 .test {
   width: 100%;
 }
-.mainpage__BottomButton {
-  align-items: center;
-  justify-content: center;
+.mainpage__TopButton button,
+.mainpage__BottomButton button {
+  margin: 0.5rem;
 }
-@media screen and (min-width: 768px) {
-  .maincontainer,
-  .mainbuttoncontainer {
-    height: 100vh;
-  }
-
-  .mainpage_TopButton {
-    height: 15vh; /* 수정: 버튼 컨테이너 높이 줄임 */
-  }
-
-  .mainpage_BottomButton {
-    height: 20vh; /* 수정: 버튼 컨테이너 높이 줄임 */
-    margin-top: 4rem;
-  }
-
-  /* 수정: 버튼들의 여백 조정 */
-  .mainpage__TopButton button,
-  .mainpage__BottomButton button {
-    margin: 0.5rem;
-  }
-  .locationText {
-    font-size: 24px;
-  }
-
-  .temperatureText {
-    font-size: 18px;
-  }
-
-  .temperatureTextmain {
-    font-size: 64px;
-  }
-
-  .today {
-    font-size: 24px;
+.mainpage__TopButton,
+.mainpage__BottomButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 520px) {
+  .weatherContainer {
+    .temperatureText {
+      font-size: 4.28vw;
+      margin-bottom: 0.56vh;
+      text-align: center;
+    }
   }
 }
