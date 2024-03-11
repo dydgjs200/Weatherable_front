@@ -1,8 +1,20 @@
 @import '../common.scss';
 
 .mypage_Container {
-  border: 1px solid red;
   width: $width;
   max-width: $max-width;
   height: calc(100vh - 52px);
+
+  .mypage_components {
+    @include flex();
+    height: 3em;
+
+    .mypage_components_info {
+      border-bottom: 1px solid black;
+      font-weight: bold;
+    }
+  }
+  .mypage_underbar {
+    border-bottom: 1px solid lightgrey;
+  }
 }

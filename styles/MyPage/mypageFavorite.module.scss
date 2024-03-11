@@ -1,8 +1,8 @@
 @import '../common.scss';
 
 .mypage_favorite {
-  border: 1px solid red;
   width: $width;
+  height: 5em;
 
   .mypage_favorite_title {
     margin-right: auto;
@@ -11,17 +11,24 @@
   }
 
   .mypage_favorite_content {
-    border: 1px solid purple;
-    width: fit-content;
     @include flex();
     justify-content: start;
-    overflow: scroll;
+    white-space: nowrap; // 요소들이 한 줄로 유지되도록 함.
+    @include scrollbar(); // 스크롤바 안보이게 할건지..?
+
     .mypage_favorite_contentlist {
+      border: 1px solid lightgrey;
+      border-radius: 10px;
+      background-color: white;
       width: fit-content;
       height: 2em;
-      border: 1px solid black;
       margin-left: 0.75em;
+      margin-bottom: 0.75em;
       @include flex();
     }
   }
+}
+
+.margin {
+  margin-top: 0.75em;
 }
