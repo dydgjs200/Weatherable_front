@@ -136,14 +136,15 @@ const LocationWeather: React.FC = () => {
               ▼{Math.round((weatherData?.main.temp_min - 273) * 10) / 10}°C
             </span>{' '}
           </p>
-          <hr />
 
           <div className={styles.temperatureText}>
             <div className={styles.today}>오늘의 날씨</div>
+
             {temperatureText ? (
               <>{getTemperatureDescription(temperatureText)}</>
             ) : null}
           </div>
+          <hr />
         </>
       )}
     </div>
