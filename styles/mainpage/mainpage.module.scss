@@ -8,10 +8,14 @@ $primary-color: rgb(0, 0, 0);
 /* 기본 스타일 */
 .weatherContainer {
   text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 .all {
   width: 100%;
   font-family: 'Roboto Mono', monospace;
+  justify-content: center;
+  align-items: center;
 }
 .weatherIcon img {
   width: 18vh;
@@ -43,13 +47,13 @@ $primary-color: rgb(0, 0, 0);
 }
 
 .Ai {
-  width: 15vh;
-  height: 15vh;
+  width: 16vh;
+  height: 16vh;
 
   border-radius: 1.28vw;
   border: none;
   box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1);
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-image: url('../../public/Ai.JPG');
 }
@@ -59,7 +63,7 @@ $primary-color: rgb(0, 0, 0);
   border: none;
   border-radius: 1.28vw;
   box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1);
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-image: url('../../public/Tshirt.JPG');
 }
@@ -70,7 +74,7 @@ $primary-color: rgb(0, 0, 0);
 
   border-radius: 1.28vw;
   box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1);
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-image: url('../../public/Pants.JPG');
 }
@@ -86,13 +90,13 @@ $primary-color: rgb(0, 0, 0);
   background-image: url('../../public/Outer.JPG');
 }
 .Report {
-  width: 15vh;
-  height: 15vh;
+  width: 16vh;
+  height: 16vh;
   border: none;
 
   border-radius: 1.28vw;
   box-shadow: 0px 0.64vw 1.28vw rgba(0, 0, 0, 0.1);
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-image: url('../../public/codi.JPG');
 }
@@ -110,12 +114,57 @@ $primary-color: rgb(0, 0, 0);
   justify-content: center;
   align-items: center;
 }
-@media (max-width: 520px) {
+@media (max-width: 917px) {
   .weatherContainer {
     .temperatureText {
       font-size: 4.28vw;
       margin-bottom: 0.56vh;
       text-align: center;
+    }
+  }
+  .temperatureText {
+    font-size: 3.28vh; /* 넓이가 넓어질 때 텍스트 크기를 다시 설정합니다. */
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.weatherContainer .temperatureText {
+  font-size: 3.28vh;
+  margin-bottom: 0.56vh;
+  text-align: center;
+  background-color: #f8f8f8;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 70%;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+@media (max-width: 1200px) {
+  .weatherContainer {
+    .temperatureText {
+      font-size: 3.28vw;
+      margin-bottom: 0.56vh;
+      text-align: center;
+    }
+  }
+}
+@media (min-width: 626px) {
+  .weatherContainer {
+    .temperatureText {
+      font-size: 20px;
+      margin-bottom: 0.56vh;
+      text-align: center;
+      background-color: #f8f8f8;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 70%;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
     }
   }
 }
