@@ -10,8 +10,17 @@
     height: 3em;
 
     .mypage_components_info {
-      border-bottom: 1px solid black;
+      width: calc(100% / 3);
+      border-bottom: 1px solid lightgray;
       font-weight: bold;
+      color: lightgray;
+      margin-right: 0.5em;
+      text-align: center;
+
+      &.changedComponent {
+        border-bottom: 3px solid black;
+        color: black;
+      }
     }
   }
   .mypage_underbar {

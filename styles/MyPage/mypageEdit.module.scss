@@ -4,6 +4,7 @@
   border: 1px solid red;
   width: $width;
   max-width: $max-width;
+  @include scrollbar();
 
   .mypageEdit_underbar {
     border-bottom: 1px solid lightgrey;
