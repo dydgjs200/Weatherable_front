@@ -1,10 +1,10 @@
 @import '../common.scss';
 
 .Container {
-  border: 1px solid red;
-  height: calc(100vh - 50px - 14em - 4px);
+  // border: 1px solid red;
+  // height: calc(100vh - 50px - 14em - 4px);
   padding: 0 1em;
-  @include scrollbar();
+  // @include scrollbar();
 
   .title_div {
     @include flex();

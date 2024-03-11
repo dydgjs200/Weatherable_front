@@ -1,8 +1,0 @@
-@import '../common.scss';
-
-.mypage_content_Container {
-  border: 1px solid red;
-  height: calc(
-    100vh - 53px - 14em - 5.75em - 3em
-  ); // 50px : 헤더 // 마이페이지 헤더 // 플룻 // 메뉴 컴포넌트 // 3px는 어디서..?
-}
