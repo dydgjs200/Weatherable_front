@@ -1,20 +1,29 @@
 @import '../common.scss';
 
 .container {
-  border: 1px solid black;
   height: calc(100vh - 50px - 14em - 5em - 3.75em - 2px);
   @include flex();
+  justify-content: space-evenly;
   flex-wrap: wrap;
   @include scrollbar();
 
   .content_Div {
     border: 1px solid red;
+    @include flex();
+    flex-direction: column;
+    justify-content: space-evenly;
     border-radius: 10px;
-    margin: 0 0.5em;
+    margin: 0 1em;
     margin-top: 1em;
-    width: calc(50% - 2em); /* 2개씩 배치되도록 설정 */
-    height: calc(50%);
-    // %센트 말고 em으로 해야할듯..
-    box-sizing: border-box; /* border와 padding을 width에 포함시킵니다. */
+    width: 8em;
+    height: 8em;
+    box-sizing: border-box;
+  }
+
+  @media screen and (min-width: 30em) and (max-width: 100em) {
+    .content_Div {
+      width: 12.5em;
+      height: 12.5em;
+    }
   }
 }

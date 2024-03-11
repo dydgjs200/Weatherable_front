@@ -9,7 +9,9 @@ function MypageHeader() {
           href={'/mypage/edit'}
           className={`${styles.mypage_Profile_edit} ${styles.margin}`}
         >
-          <div>편집</div>
+          <div>
+            <img src="/edit.png" alt="" />
+          </div>
         </Link>
         <div
           className={`${styles.mypage_Profile_image} ${styles.margin}`}
