@@ -4,14 +4,18 @@ import { useState } from 'react';
 import styles from '../../styles/MyPage/mypageEditContent.module.scss';
 
 function MypageEditContent() {
-  const [selectedDiv, setSelectedDiv] = useState('false');
+  // 각 스타일 요소의 상태를 관리하는 배열
+  const [selectedDivs, setSelectedDivs] = useState(Array(8).fill(false));
 
+  // 스타일 요소의 상태를 토글하는 함수
   const handleDivChange = (index) => {
-    setSelectedDiv(selectedDiv === 'true' ? 'false' : 'true');
+    const newSelectedDivs = [...selectedDivs];
+    newSelectedDivs[index] = !newSelectedDivs[index];
+    setSelectedDivs(newSelectedDivs);
   };
 
   // 선호 스타일 배열
-  const likeStyles = ['캐주얼', '미니멀', '포멀', '스포츠'];
+  const likeStyles = ['캐주얼', '미니멀', '포멀', '스포츠', '', '', '', ''];
 
   return (
     <>
@@ -27,7 +31,7 @@ function MypageEditContent() {
             <div
               key={index}
               className={`${styles.like_Style} ${
-                selectedDiv === 'true' ? styles.clicked : ''
+                selectedDivs[index] ? styles.clicked : ''
               }`}
               onClick={() => handleDivChange(index)}
             >
