@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '../../styles/closet/closet.module.scss';
+import styles from '../../../styles/closet/closet.module.scss';
 
 export default function AddToggle() {
   return (

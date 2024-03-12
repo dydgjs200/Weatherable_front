@@ -1,6 +1,7 @@
 import '../styles/global.scss';
 import { Metadata } from 'next';
 import Header from '../components/header';
+import { Providers } from '../Store/provider';
 
 export const metadata: Metadata = {
   title: {
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <Header />
-        <div className="mainContaioner">{children}</div>
+        <Providers>
+          <div className="mainContaioner">{children}</div>
+        </Providers>
       </body>
     </html>
   );
