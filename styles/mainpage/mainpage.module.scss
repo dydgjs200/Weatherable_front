@@ -134,10 +134,15 @@ $primary-color: rgb(0, 0, 0);
       border-radius: 0.5rem;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       max-width: 320px;
-      width: 70%;
+      width: 65%;
       justify-content: center;
       align-items: center;
       margin: 0 auto;
     }
+  }
+}
+@media (min-height: 1150px) {
+  .weatherContainer .temperatureText {
+    font-size: 1.2vh; // 원하는 폰트 크기로 조정해주세요.
   }
 }

@@ -1,0 +1,56 @@
+@import '../common.scss';
+
+.calendar-container {
+  width: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calendar-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.calendar-buttons {
+  display: flex;
+}
+
+.calendar-buttons button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-buttons button:hover {
+  background-color: #eee;
+}
+
+.calendar-body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar-body th {
+  padding: 8px 0;
+  text-align: center;
+}
+
+.calendar-body td {
+  padding: 10px 0;
+  text-align: center;
+}
+
+.calendar-body .empty-cell {
+  visibility: hidden;
+}
