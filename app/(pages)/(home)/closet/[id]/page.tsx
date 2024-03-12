@@ -37,6 +37,10 @@ export default function Closet() {
         <ClothesInfoBox />
         <ClothesInfoBox />
         <ClothesInfoBox />
+        <ClothesInfoBox />
+        <ClothesInfoBox />
+        <ClothesInfoBox />
+        <ClothesInfoBox />
       </div>
       <AddToggleBtn />
     </div>
