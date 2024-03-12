@@ -1,10 +1,7 @@
 @import '../common.scss';
 
 .Container {
-  // border: 1px solid red;
-  // height: calc(100vh - 50px - 14em - 4px);
   padding: 0 1em;
-  // @include scrollbar();
 
   .title_div {
     @include flex();
@@ -21,6 +18,7 @@
     @include flex();
     flex-wrap: wrap;
     justify-content: flex-end;
+    cursor: pointer;
 
     .like_Style {
       width: calc(25% - 0.7em);
@@ -55,7 +53,8 @@
         }
       }
       .icon {
-        width: 3em;
+        width: 2em;
+        @include flex();
       }
     }
     .weight {
@@ -83,6 +82,11 @@
 }
 
 .input {
+  margin-top: 0.2em;
   width: calc(100% - 0.6em);
   height: 3vh;
+}
+
+.clicked {
+  background-color: lightcoral;
 }
