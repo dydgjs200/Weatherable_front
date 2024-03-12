@@ -6,9 +6,12 @@ import styles from '../../styles/MyPage/mypageEditContent.module.scss';
 function MypageEditContent() {
   const [selectedDiv, setSelectedDiv] = useState('false');
 
-  const handleDivChange = () => {
-    setSelectedDiv('true');
+  const handleDivChange = (index) => {
+    setSelectedDiv(selectedDiv === 'true' ? 'false' : 'true');
   };
+
+  // 선호 스타일 배열
+  const likeStyles = ['캐주얼', '미니멀', '포멀', '스포츠'];
 
   return (
     <>
@@ -19,21 +22,18 @@ function MypageEditContent() {
           <div className={styles.title}>선호스타일</div>
         </div>
         <div className={styles.like_Style_div}>
-          <div
-            className={`${styles.like_Style} ${
-              selectedDiv === 'true' ? styles.clicked : ''
-            }`}
-            onClick={() => handleDivChange}
-          >
-            캐주얼
-          </div>
-          <div className={styles.like_Style}>미니멀</div>
-          <div className={styles.like_Style}>포멀</div>
-          <div className={styles.like_Style}>스포츠</div>
-          <div className={styles.like_Style}></div>
-          <div className={styles.like_Style}></div>
-          <div className={styles.like_Style}></div>
-          <div className={styles.like_Style}></div>
+          {/* 각 선호 스타일 요소에 대해 매핑 */}
+          {likeStyles.map((style, index) => (
+            <div
+              key={index}
+              className={`${styles.like_Style} ${
+                selectedDiv === 'true' ? styles.clicked : ''
+              }`}
+              onClick={() => handleDivChange(index)}
+            >
+              {style}
+            </div>
+          ))}
         </div>
         {/* 체형 정보 변경 */}
         <div className={styles.title_div}>
