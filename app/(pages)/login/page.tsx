@@ -29,11 +29,11 @@ function Login() {
           {/* etc */}
           <div className={styles.login_info}>
             <div>아이디 찾기</div>
-            <img src="login_bar.png" alt="" />
+            <img src="bar.png" alt="" />
             <div>비밀번호 찾기</div>
-            <img src="login_bar.png" alt="" />
+            <img src="bar.png" alt="" />
             <Link href={'/signup'}>
-            <div>회원가입</div>
+              <div>회원가입</div>
             </Link>
           </div>
         </div>

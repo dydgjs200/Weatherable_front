@@ -15,10 +15,16 @@ function MypageEditHeader() {
           className={`${styles.mypage_Profile_image} ${styles.margin}`}
         ></div>
         <span>
-          <input type="file" />
+          <label className={styles.label} htmlFor="file">
+            <div className={styles.label_Div}>프로필 변경</div>
+          </label>
+          <input className={styles.input} type="file" id="file" />
         </span>
-        <div className={`${styles.mypage_Profile_nickname} ${styles.margin}`}>
-          닉네임
+        <div className={styles.nick_Div}>
+          <input className={styles.mypage_Profile_nickname} type="text" />
+          <div className={styles.nick_Icon}>
+            <img src="/edit.png" alt="" />
+          </div>
         </div>
       </div>
     </>

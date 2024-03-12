@@ -1,6 +1,6 @@
 import styles from '../../../../../../styles/closet/closet.module.scss';
 
-import AddForm from '../../../../../../components/closet/addForm';
+import AddForm from '../../../../../../components/closet/closet_add/addForm';
 
 export default function AddClothes() {
   return (

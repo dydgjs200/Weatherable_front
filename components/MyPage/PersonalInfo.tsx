@@ -13,12 +13,12 @@ function PersonalInfo() {
           <div>68 kg</div>
         </div>
         <div className={styles.content_Div}>
-          <div>몸무게</div>
-          <div>68 kg</div>
+          <div></div>
+          <div></div>
         </div>
         <div className={styles.content_Div}>
-          <div>몸무게</div>
-          <div>68 kg</div>
+          <div></div>
+          <div></div>
         </div>
       </div>
     </>
