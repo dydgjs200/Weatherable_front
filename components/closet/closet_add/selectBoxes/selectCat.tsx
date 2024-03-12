@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../../../styles/closet/closet.module.scss';
+import styles from '../../../../styles/closet/closet.module.scss';
 
 export default function SelectCat() {
   const categoryArr = {
