@@ -15,8 +15,10 @@
     "@reduxjs/toolkit": "^2.2.1",
     "@types/react-dom": "^18.2.20",
     "axios": "^1.6.7",
+    "date-fns": "^3.4.0",
     "next": "^14.1.2",
     "react": "^18.2.0",
+    "react-datepicker": "^6.3.0",
     "react-dom": "^18.2.0",
     "react-geolocated": "^4.1.2",
     "react-kakao-maps": "^0.0.13",
@@ -27,6 +29,7 @@
   "devDependencies": {
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.63",
+    "@types/react-datepicker": "^6.2.0",
     "typescript": "^5.3.3"
   }
 }
