@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import AddToggle from './addToggle';
-import styles from '../../styles/closet/closet.module.scss';
+import styles from '../../../styles/closet/closet.module.scss';
 
 export default function AddToggleBtn() {
   const [isToggleOpen, setIsToggleOpen] = useState<Boolean>(false);

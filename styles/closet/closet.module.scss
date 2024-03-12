@@ -5,6 +5,7 @@
   flex-direction: column;
   width: 100%;
   height: calc(100vh - 50px);
+  // height: 100%;
   position: relative;
   justify-content: center;
   justify-content: flex-start;
@@ -43,9 +44,10 @@
   background-color: $black;
   width: 50%;
   height: 5%;
-  position: absolute;
+  position: fixed;
   top: 90%;
   left: 25%;
+  bottom: 5%;
   display: flex;
   z-index: 90;
   justify-content: center;
@@ -86,7 +88,7 @@
 
 .selectBox {
   width: 90%;
-  height: 15%;
+  height: 180px;
   background-color: $white;
   margin-top: 1rem;
   border-radius: $radius-s;
@@ -95,21 +97,107 @@
 
 .sortBox {
   width: 90%;
-  background-color: pink;
-  margin-top: 1rem;
-}
-
-.mainInfoBox {
-  background-color: pink;
-  width: 90%;
+  // background-color: pink;
   margin-top: 1rem;
   display: flex;
+  justify-content: end;
+  button {
+    background: none;
+    border: none;
+  }
+  button:hover,
+  active {
+    span {
+      color: blue;
+    }
+  }
+}
+
+.mainInfoBoxDefault {
+  width: 90%;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 5%;
+  row-gap: 2%;
+  justify-content: center;
+  .infoSmallBox {
+    background-color: white;
+    box-shadow: 0px 2px 8px -5px #333;
+    border-radius: $radius-s;
+    width: 100%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    a {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 80%;
+      flex-direction: column;
+      align-items: center;
+      color: #333;
+      div {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        span {
+          font-size: 0.9rem;
+        }
+      }
+    }
+    img {
+      height: 70%;
+    }
+  }
+}
+
+.mainInfoBoxSmall {
+  width: 90%;
+  height: 100%;
+  // height: fit-content;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  .infoSmallBox {
+    box-shadow: 0px 2px 8px -5px #333;
+    border-radius: $radius-s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // background-color: pink;
+    height: 50px;
+    a {
+      display: flex;
+      width: 80%;
+      height: 90%;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      align-items: center;
+      color: #333;
+      div {
+        width: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        span {
+          font-size: 0.9rem;
+        }
+      }
+    }
+    img {
+      height: 10px;
+    }
+  }
 }
 
 .addForm {
   margin-top: 1rem;
   width: 90%;
-  height: 100%;
+  // background-color: pink;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,7 +206,7 @@
     border: 1px solid #a5a5a5;
     border-radius: $radius-m;
     width: 100%;
-    height: 50%;
+    height: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,10 +243,11 @@
     font-size: 0.9rem;
     margin-top: 0.5rem;
   }
+
   .infoBox {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    // height: 100%;
     width: 100%;
     input {
       border: 0.5px solid #878787;
@@ -167,6 +256,22 @@
     }
     select {
       background-color: transparent;
+    }
+    .sizeSelectBox {
+      background-color: white;
+      border: 0.5px solid #878787;
+      border-radius: $radius-s;
+      ul {
+        padding: 0;
+        margin: 0;
+        li {
+          input {
+            background: none;
+            border: none;
+            background: none;
+          }
+        }
+      }
     }
   }
   .thicknessBox {
@@ -193,6 +298,54 @@
       border-radius: 50%;
       width: 2vh;
       background-color: red;
+    }
+  }
+}
+
+.sizeBtn {
+  background: white;
+  width: 100%;
+  border: 0.5px solid #878787;
+  border-radius: $radius-s;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.catBox {
+  display: flex;
+  flex-direction: row;
+  // background-color: pink;
+  justify-content: space-between;
+  .catBox2 {
+    width: 45%;
+  }
+  .sizeBtnS {
+    background: white;
+    width: 100%;
+    border: 0.5px solid #878787;
+    border-radius: $radius-s;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sizeSelectBox2 {
+    width: 100%;
+    background-color: white;
+    border: 0.5px solid #878787;
+    border-radius: $radius-s;
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        input {
+          background: none;
+          border: none;
+          background: none;
+        }
+      }
     }
   }
 }
