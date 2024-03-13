@@ -1,14 +1,17 @@
 @import '../common.scss';
 .gridContainer {
-  height: calc(100vh - 50px - 14em - 5em - 3.75em - 2px);
+  height: calc(100vh - 50px - 15em - 5em - 3.75em - 2px);
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns */
-  grid-template-rows: repeat(2, auto); /* 2 rows */
-  gap: 2rem; /* Gap between grid items */
+  padding: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 30px;
   border: 1px solid red;
+  @include scrollbar();
 }
 
 .gridItem {
-  /* Your individual grid item styles */
   border: 1px solid blue;
+  border-radius: 10px;
+  @include flex();
 }

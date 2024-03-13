@@ -15,7 +15,16 @@ function MypageEditContent() {
   };
 
   // 선호 스타일 배열
-  const likeStyles = ['캐주얼', '미니멀', '포멀', '스포츠', '', '', '', ''];
+  const likeStyles = [
+    '캐주얼',
+    '스포티',
+    '고프고어',
+    '포멀',
+    '레트로',
+    '',
+    '',
+    '',
+  ];
 
   return (
     <>

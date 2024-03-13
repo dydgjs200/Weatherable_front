@@ -1,13 +1,16 @@
+import Link from 'next/link';
 import styles from '../../styles/MyPage/Dimension.module.scss';
 
 function Dimension() {
   return (
     <>
       <div className={styles.gridContainer}>
-        <div className={styles.gridItem}>Item 1</div>
-        <div className={styles.gridItem}>Item 2</div>
-        <div className={styles.gridItem}>Item 3</div>
-        <div className={styles.gridItem}>Item 4</div>
+        <Link href={'/dimension/top'} className={styles.gridItem}>
+          <div>상의</div>
+        </Link>
+        <div className={styles.gridItem}>하의</div>
+        <div className={styles.gridItem}>아우터</div>
+        <div className={styles.gridItem}>신발</div>
       </div>
     </>
   );
