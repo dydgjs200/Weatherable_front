@@ -5,7 +5,7 @@ function Dimension() {
   return (
     <>
       <div className={styles.gridContainer}>
-        <Link href={'/dimension/top'} className={styles.gridItem}>
+        <Link href={'/dimension'} className={styles.gridItem}>
           <div>상의</div>
         </Link>
         <div className={styles.gridItem}>하의</div>
