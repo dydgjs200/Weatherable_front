@@ -4,11 +4,18 @@ import { useState } from 'react';
 import styles from '../../styles/MyPage/mypageEditContent.module.scss';
 
 function MypageEditContent() {
-  const [selectedDiv, setSelectedDiv] = useState('false');
+  // 각 스타일 요소의 상태를 관리하는 배열
+  const [selectedDivs, setSelectedDivs] = useState(Array(8).fill(false));
 
-  const handleDivChange = () => {
-    setSelectedDiv('true');
+  // 스타일 요소의 상태를 토글하는 함수
+  const handleDivChange = (index) => {
+    const newSelectedDivs = [...selectedDivs];
+    newSelectedDivs[index] = !newSelectedDivs[index];
+    setSelectedDivs(newSelectedDivs);
   };
+
+  // 선호 스타일 배열
+  const likeStyles = ['캐주얼', '미니멀', '포멀', '스포츠', '', '', '', ''];
 
   return (
     <>
@@ -19,21 +26,18 @@ function MypageEditContent() {
           <div className={styles.title}>선호스타일</div>
         </div>
         <div className={styles.like_Style_div}>
-          <div
-            className={`${styles.like_Style} ${
-              selectedDiv === 'true' ? styles.clicked : ''
-            }`}
-            onClick={() => handleDivChange}
-          >
-            캐주얼
-          </div>
-          <div className={styles.like_Style}>미니멀</div>
-          <div className={styles.like_Style}>포멀</div>
-          <div className={styles.like_Style}>스포츠</div>
-          <div className={styles.like_Style}></div>
-          <div className={styles.like_Style}></div>
-          <div className={styles.like_Style}></div>
-          <div className={styles.like_Style}></div>
+          {/* 각 선호 스타일 요소에 대해 매핑 */}
+          {likeStyles.map((style, index) => (
+            <div
+              key={index}
+              className={`${styles.like_Style} ${
+                selectedDivs[index] ? styles.clicked : ''
+              }`}
+              onClick={() => handleDivChange(index)}
+            >
+              {style}
+            </div>
+          ))}
         </div>
         {/* 체형 정보 변경 */}
         <div className={styles.title_div}>

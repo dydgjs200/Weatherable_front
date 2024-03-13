@@ -4,6 +4,7 @@
   width: $width;
   max-width: $max-width;
   height: calc(100vh - 52px);
+  @include scrollbar();
 
   .mypage_components {
     @include flex();

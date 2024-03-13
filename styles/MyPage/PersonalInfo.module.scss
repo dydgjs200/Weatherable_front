@@ -5,7 +5,6 @@
   @include flex();
   justify-content: space-evenly;
   flex-wrap: wrap;
-  @include scrollbar();
 
   .content_Div {
     border: 1px solid red;
