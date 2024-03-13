@@ -1,30 +1,47 @@
 'use client';
 import React, { useState } from 'react';
-import styles from '../../../styles/closet/closet.module.scss';
+import styles from '../../../styles/closet/addform.module.scss';
 import SelectCat from './selectBoxes/selectCat';
 import SelectSize from './selectBoxes/selectSize';
 import SelectColor from './selectBoxes/selectColor';
+import SelectThickness from './selectBoxes/selectThickness';
+import SelectWeather from './selectBoxes/selectWeather';
 
 export default function AddForm() {
   const [formData, setFormData] = React.useState({
     big_img: '',
   });
 
+  const [imgPreview, setImgPreview] = useState(null);
   const addInfo = (e) => {
-    // 이름
-    console.log(e.target.value);
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      // reader.onload = (e) => {
+      //   const previewImage = document.getElementById(
+      //     'showIMG'
+      //   ) as HTMLImageElement;
+      //   if (previewImage) {
+      //     previewImage.src = reader.result as string;
+      //   }
+      reader.onloadend = (e) => {
+        setImgPreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
+
   return (
-    <form action="" className={styles.addForm}>
+    <form action="" className={styles.addFormContainer}>
       <div className={styles.imgBox}>
-        <img src={formData.big_img} alt="" />
+        <img src={imgPreview} alt="" />
         <div className={styles.editBtn}>
           <input
             type="file"
             name="editImgBtn"
             id="editImgBtn"
             className=""
-            disabled
             onChange={addInfo}
           />
           <label htmlFor="editImgBtn">
@@ -42,22 +59,20 @@ export default function AddForm() {
         <label htmlFor="">사이즈</label>
         <SelectSize />
 
+        <label htmlFor="">계절</label>
+        <SelectWeather />
+
         <label htmlFor="">두께</label>
-        <div className={styles.thicknessBox}>
-          <input type="button" name="" id="" value={'봄'} />
-          <input type="button" name="" id="" value={'여름'} />
-          <input type="button" name="" id="" value={'가을'} />
-          <input type="button" name="" id="" value={'겨울'} />
-        </div>
+        <SelectThickness />
 
         <label htmlFor="">색</label>
         <SelectColor />
         <label htmlFor="">구매가격</label>
         <input type="number" name="" id="" />
       </div>
-      <div>
-        <button>저장하기</button>
-        <button>임시저장하기</button>
+      <div className={styles.btnBox}>
+        <button className={styles.submit}>저장하기</button>
+        <button className={styles.temSubmit}>임시저장하기</button>
       </div>
     </form>
   );

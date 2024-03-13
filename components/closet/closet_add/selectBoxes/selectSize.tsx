@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import styles from '../../../../styles/closet/closet.module.scss';
+import styles from '../../../../styles/closet/addform.module.scss';
 
 export default function SelectSize() {
   const [isSizeDisabled, setIsSizeDisabled] = useState(false);
 
-  const [size, setSize] = useState();
+  const [size, setSize] = useState('S');
 
   const selectSize = (e) => {
     setSize(e.target.value);
