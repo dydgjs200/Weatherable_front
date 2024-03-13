@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../../../../styles/closet/closet.module.scss';
+import styles from '../../../../styles/closet/addform.module.scss';
 
 export default function SelectCat() {
   const categoryArr = {
@@ -63,10 +63,10 @@ export default function SelectCat() {
   };
 
   return (
-    <div className={styles.catBox}>
-      <section className={styles.catBox2}>
+    <div className={styles.catContainer}>
+      <section className={styles.catBox}>
         <button
-          className={styles.sizeBtnS}
+          className={styles.sizeBtn}
           onClick={(e) => {
             setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
             e.preventDefault();
@@ -92,9 +92,9 @@ export default function SelectCat() {
         )}
       </section>
 
-      <section className={styles.catBox2}>
+      <section className={styles.catBox}>
         <button
-          className={styles.sizeBtnS}
+          className={styles.sizeBtn}
           onClick={(e) => {
             setIsSubCategoryDropdownOpen(!isSubCategoryDropdownOpen);
             e.preventDefault();

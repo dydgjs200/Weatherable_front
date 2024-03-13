@@ -4,12 +4,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(100vh - 50px);
-  // height: 100%;
+  height: 100%;
   position: relative;
   justify-content: center;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .innerHeader {
@@ -88,11 +88,38 @@
 
 .selectBox {
   width: 90%;
-  height: 180px;
+  height: 100px;
   background-color: $white;
   margin-top: 1rem;
   border-radius: $radius-s;
   box-shadow: 0px 2px 8px -5px #333;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .bigCat:hover {
+    color: blue !important;
+    font-weight: 700 !important;
+  }
+
+  .smallCat:hover {
+    color: blue !important;
+    font-weight: 700 !important;
+  }
+
+  .selectUl {
+    width: 100%;
+    height: 40%;
+    margin: 0;
+    padding: 0;
+    @include flex();
+    justify-content: flex-start;
+    li > input {
+      background: none;
+      border: none;
+    }
+  }
 }
 
 .sortBox {
@@ -190,162 +217,6 @@
     }
     img {
       height: 10px;
-    }
-  }
-}
-
-.addForm {
-  margin-top: 1rem;
-  width: 90%;
-  // background-color: pink;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .imgBox {
-    position: relative;
-    border: 1px solid #a5a5a5;
-    border-radius: $radius-m;
-    width: 100%;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    img {
-      width: 100%;
-    }
-    .editBtn {
-      position: absolute;
-      z-index: 80;
-      margin: auto;
-      width: 3rem;
-      height: 3rem;
-
-      input {
-        width: 0;
-        height: 0;
-        padding: 0;
-        display: none;
-      }
-      label {
-        // background-color: red;
-        width: 3rem;
-        height: 3rem;
-        margin: 0;
-        span {
-          font-size: 3rem;
-        }
-      }
-    }
-  }
-
-  label {
-    color: #878787;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-  }
-
-  .infoBox {
-    display: flex;
-    flex-direction: column;
-    // height: 100%;
-    width: 100%;
-    input {
-      border: 0.5px solid #878787;
-      width: 100%;
-      padding: 0;
-    }
-    select {
-      background-color: transparent;
-    }
-    .sizeSelectBox {
-      background-color: white;
-      border: 0.5px solid #878787;
-      border-radius: $radius-s;
-      ul {
-        padding: 0;
-        margin: 0;
-        li {
-          input {
-            background: none;
-            border: none;
-            background: none;
-          }
-        }
-      }
-    }
-  }
-  .thicknessBox {
-    // background-color: blue;
-    display: flex;
-    justify-content: space-between;
-    input {
-      border: 0.5px solid #878787;
-      width: 20%;
-      background: none;
-    }
-    input:hover,
-    active {
-      border: 1px solid blue;
-      color: blue;
-    }
-  }
-  .colorBox {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    height: 5%;
-    input {
-      border-radius: 50%;
-      width: 2vh;
-      background-color: red;
-    }
-  }
-}
-
-.sizeBtn {
-  background: white;
-  width: 100%;
-  border: 0.5px solid #878787;
-  border-radius: $radius-s;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.catBox {
-  display: flex;
-  flex-direction: row;
-  // background-color: pink;
-  justify-content: space-between;
-  .catBox2 {
-    width: 45%;
-  }
-  .sizeBtnS {
-    background: white;
-    width: 100%;
-    border: 0.5px solid #878787;
-    border-radius: $radius-s;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .sizeSelectBox2 {
-    width: 100%;
-    background-color: white;
-    border: 0.5px solid #878787;
-    border-radius: $radius-s;
-    ul {
-      padding: 0;
-      margin: 0;
-      li {
-        input {
-          background: none;
-          border: none;
-          background: none;
-        }
-      }
     }
   }
 }
