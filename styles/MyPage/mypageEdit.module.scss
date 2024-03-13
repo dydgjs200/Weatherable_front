@@ -1,7 +1,6 @@
 @import '../common.scss';
 
 .mypageEdit_Container {
-  border: 1px solid red;
   width: $width;
   max-width: $max-width;
   @include scrollbar();
