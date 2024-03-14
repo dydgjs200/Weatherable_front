@@ -54,20 +54,17 @@
 
 // export default DimensionPage;
 
-// pages/dimension/[item].tsx
-import { useRouter } from 'next/router';
-import TopSize from '../../../components/Dimension/TopSize';
-import BottomSize from '../../../components/Dimension/BottomSize';
-import OuterSize from '../../../components/Dimension/OuterSize';
-import ShoesSize from '../../../components/Dimension/ShoesSize';
+// pages/dimension/[category]
+import TopSize from '../../../../components/Dimension/TopSize';
+import BottomSize from '../../../../components/Dimension/BottomSize';
+import OuterSize from '../../../../components/Dimension/OuterSize';
+import ShoesSize from '../../../../components/Dimension/ShoesSize';
 
-const ItemPage = () => {
-  const router = useRouter();
-  const { category } = router.query;
-  console.log('라우터 확인 > ', category);
+const dimension = ({ params }) => {
+  console.log({ params });
 
   const renderComponent = () => {
-    switch (category) {
+    switch (params.category) {
       case 'top':
         return <TopSize />;
       case 'bottom':
@@ -83,9 +80,9 @@ const ItemPage = () => {
 
   return (
     <>
-      <div>{renderComponent()}</div>;
+      <div>{renderComponent()}</div>
     </>
   );
 };
 
-export default ItemPage;
+export default dimension;
