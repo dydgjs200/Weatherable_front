@@ -1,4 +1,5 @@
 import styles from '../../styles/Dimension/ShoesSize.module.scss';
+import ShoesSizeNum from './ShoesSizeNum';
 
 function ShoesSize() {
   return (
@@ -7,6 +8,7 @@ function ShoesSize() {
         <div className={styles.img_Div}>
           <img src="/shoessize.png" alt="" />
         </div>
+        <ShoesSizeNum />
       </div>
     </>
   );

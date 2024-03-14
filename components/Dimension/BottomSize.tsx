@@ -1,4 +1,5 @@
 import styles from '../../styles/Dimension/BottomSize.module.scss';
+import BottomSizeNum from './BottomSizeNum';
 
 function BottomSize() {
   return (
@@ -7,6 +8,7 @@ function BottomSize() {
         <div className={styles.img_Div}>
           <img src="/bottomsize.png" alt="" />
         </div>
+        <BottomSizeNum />
       </div>
     </>
   );

@@ -1,4 +1,5 @@
 import styles from '../../styles/Dimension/TopSize.module.scss';
+import TopSizeNum from './TopSizeNum';
 
 function TopSize() {
   return (
@@ -7,6 +8,7 @@ function TopSize() {
         <div className={styles.img_Div}>
           <img src="/topsize.png" alt="" />
         </div>
+        <TopSizeNum />
       </div>
     </>
   );

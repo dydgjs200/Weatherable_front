@@ -1,28 +1,20 @@
 @import '../common.scss';
 
 .container {
-  height: calc(100vh - 50px - 14em - 5em - 3.75em - 2px);
-  @include flex();
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  height: calc(100vh - 50px - 15em - 5em - 3.75em - 2px);
+  display: grid;
+  padding: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 30px;
+  border: 1px solid red;
+  @include scrollbar();
 
   .content_Div {
-    border: 1px solid red;
+    border: 1px solid blue;
+    border-radius: 10px;
+    height: 100%;
     @include flex();
     flex-direction: column;
-    justify-content: space-evenly;
-    border-radius: 10px;
-    margin: 0 1em;
-    margin-top: 1em;
-    width: 8em;
-    height: 8em;
-    box-sizing: border-box;
-  }
-
-  @media screen and (min-width: 30em) and (max-width: 100em) {
-    .content_Div {
-      width: 12.5em;
-      height: 12.5em;
-    }
   }
 }
