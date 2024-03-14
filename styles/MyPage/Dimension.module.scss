@@ -8,10 +8,11 @@
   gap: 30px;
   border: 1px solid red;
   @include scrollbar();
-}
 
-.gridItem {
-  border: 1px solid blue;
-  border-radius: 10px;
-  @include flex();
+  .gridItem {
+    border: 1px solid blue;
+    border-radius: 10px;
+    height: 100%;
+    @include flex();
+  }
 }
