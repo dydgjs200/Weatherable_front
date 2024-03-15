@@ -103,7 +103,7 @@ export default function SelectColor() {
             key={index}
             type="button"
             name=""
-            id="red"
+            id=""
             style={{ backgroundColor: `${Object.values(color)[0]}` }}
           />
         ))}

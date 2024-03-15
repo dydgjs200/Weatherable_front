@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { showList } from '../../../Store/showListSlice';
+import { showList } from '../../../Store/closetSlice/showListSlice';
 
 export default function SortBox() {
   const dispatch = useDispatch();
@@ -18,10 +18,10 @@ export default function SortBox() {
   return (
     <>
       <button onClick={smallImg}>
-        <span className="material-symbols-outlined">event_list</span>
+        <span className="material-symbols-outlined">splitscreen</span>
       </button>
       <button onClick={bigImg}>
-        <span className="material-symbols-outlined">widgets</span>
+        <span className="material-symbols-outlined">grid_view</span>
       </button>
     </>
   );

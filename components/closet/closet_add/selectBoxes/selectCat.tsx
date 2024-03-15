@@ -1,5 +1,12 @@
+'use client';
+
 import React, { useState } from 'react';
 import styles from '../../../../styles/closet/addform.module.scss';
+import { useDispatch } from 'react-redux';
+import {
+  selectMajorCategory,
+  selectMiddleCategory,
+} from '../../../../Store/closetSlice/addClothesSlice';
 
 export default function SelectCat() {
   const categoryArr = {
@@ -42,6 +49,8 @@ export default function SelectCat() {
     ],
   };
 
+  const dispatch = useDispatch();
+
   const [category, setCategory] = useState('Top');
   const [subCategory, setSubCategory] = useState('');
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
@@ -55,11 +64,13 @@ export default function SelectCat() {
     setIsSubCategoryDropdownOpen(true);
     setSubCategory('');
     setCategoryInfo(categoryArr[category]);
+    dispatch(selectMajorCategory({ value: category }));
   };
 
   const selectSubCategory = (subcategory) => {
     setSubCategory(subcategory);
     setIsSubCategoryDropdownOpen(false);
+    dispatch(selectMiddleCategory({ value: subcategory }));
   };
 
   return (
@@ -83,7 +94,9 @@ export default function SelectCat() {
                   <input
                     type="button"
                     value={cat}
-                    onClick={() => selectCategory(cat)}
+                    onClick={() => {
+                      selectCategory(cat);
+                    }}
                   />
                 </li>
               ))}
@@ -114,7 +127,9 @@ export default function SelectCat() {
                     value={`${Object.keys(item)[0]}: ${
                       item[Object.keys(item)[0]]
                     }`}
-                    onClick={() => selectSubCategory(Object.keys(item)[0])}
+                    onClick={() => {
+                      selectSubCategory(Object.keys(item)[0]);
+                    }}
                   />
                 </li>
               ))}

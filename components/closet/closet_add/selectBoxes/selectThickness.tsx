@@ -1,11 +1,17 @@
+'use client';
+
 import styles from '../../../../styles/closet/addform.module.scss';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { selectThickness } from '../../../../Store/closetSlice/addClothesSlice';
 
 export default function SelectThickness() {
   const [isClicked, setIsClicked] = useState(null);
+  const dispatch = useDispatch();
 
   const submit = (value) => {
     setIsClicked(value);
+    dispatch(selectThickness({ value: value }));
   };
 
   return (
