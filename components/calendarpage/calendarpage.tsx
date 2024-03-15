@@ -1,7 +1,9 @@
 'use client'; // nextjs에서 useState사용시 작성필
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/calendar/calendar.module.scss';
-
+import Link from 'next/link';
+import { url } from 'inspector';
+import codipage from '../../app/codipage/page';
 const Calendar = () => {
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
@@ -97,9 +99,8 @@ const Calendar = () => {
   };
 
   const upload = () => {
-    console.log('등록하기');
+    window.location.href = '../codipage';
   };
-
   return (
     <div className={styles['calendar-container']}>
       <div className={styles['calendar-header']}>
