@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../../../styles/closet/addform.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectMajorCategory,
   selectMiddleCategory,
 } from '../../../../Store/closetSlice/addClothesSlice';
+import { postAddStyles } from '../../../../service/closetApiService';
 
 export default function SelectCat() {
   const categoryArr = {
@@ -50,8 +51,8 @@ export default function SelectCat() {
   };
 
   interface aiData {
-    img: string;
     major_category: string;
+    img: string;
   }
 
   const dispatch = useDispatch();
@@ -80,11 +81,32 @@ export default function SelectCat() {
 
   // ai용 데이터
   const aiData: aiData = useSelector((state: any) => ({
-    img: state.clothes.clothes.small_img,
     major_category: state.clothes.clothes.major_category,
+    img: state.clothes.clothes.small_img,
   }));
 
-  console.log(aiData);
+  // console.log(aiData.major_category);
+  // console.log(aiData.img);
+
+  const formData = {
+    [aiData.major_category]: aiData.img,
+  };
+
+  // console.log(formData);
+
+  useEffect(() => {
+    const postStyles = async () => {
+      try {
+        await postAddStyles(formData);
+        console.log(formData);
+      } catch (error) {
+        console.error('실패: ', error);
+      }
+    };
+    if (aiData.img && aiData.major_category) {
+      postStyles();
+    }
+  }, [aiData.img, aiData.major_category]);
 
   return (
     <div className={styles.catContainer}>
