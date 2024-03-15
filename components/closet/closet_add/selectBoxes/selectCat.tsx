@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from '../../../../styles/closet/addform.module.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   selectMajorCategory,
   selectMiddleCategory,
@@ -49,6 +49,11 @@ export default function SelectCat() {
     ],
   };
 
+  interface aiData {
+    img: string;
+    major_category: string;
+  }
+
   const dispatch = useDispatch();
 
   const [category, setCategory] = useState('Top');
@@ -72,6 +77,14 @@ export default function SelectCat() {
     setIsSubCategoryDropdownOpen(false);
     dispatch(selectMiddleCategory({ value: subcategory }));
   };
+
+  // ai용 데이터
+  const aiData: aiData = useSelector((state: any) => ({
+    img: state.clothes.clothes.small_img,
+    major_category: state.clothes.clothes.major_category,
+  }));
+
+  console.log(aiData);
 
   return (
     <div className={styles.catContainer}>
