@@ -1,14 +1,21 @@
+'use client';
+
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from '../../../../styles/closet/addform.module.scss';
+import { selectSize as selectSizeAction } from '../../../../Store/closetSlice/addClothesSlice';
 
 export default function SelectSize() {
+  const dispatch = useDispatch();
   const [isSizeDisabled, setIsSizeDisabled] = useState(false);
 
   const [size, setSize] = useState('S');
 
   const selectSize = (e) => {
-    setSize(e.target.value);
+    const selectedSize = e.target.value;
+    setSize(selectedSize);
     setIsSizeDisabled(!isSizeDisabled);
+    dispatch(selectSizeAction({ value: selectedSize }));
   };
 
   return (

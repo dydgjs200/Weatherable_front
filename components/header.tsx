@@ -7,6 +7,8 @@ import { Span } from 'next/dist/trace';
 import SideBar from './sidebar';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import logo from '../public/logo.png';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
@@ -36,7 +38,8 @@ export default function Header() {
         </li>
         <li>
           <Link href="/">
-            <img src="logo.png" alt="로고" />
+            <Image src={logo} alt="로고" />
+            {/* <img src="logo.png" alt="로고" /> */}
           </Link>
         </li>
         <li>

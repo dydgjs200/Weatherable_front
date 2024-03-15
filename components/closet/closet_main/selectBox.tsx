@@ -1,8 +1,23 @@
+'use client';
+
 import styles from '../../../styles/closet/closet.module.scss';
 import { useState } from 'react';
 
 export default function SelectBox() {
   const categoryArr = {
+    // Color: [
+    //   { black: '티셔츠' },
+    //   { white: '반팔 티셔츠' },
+    //   { gray: '긴팔 티셔츠' },
+    //   { red: '티셔츠' },
+    //   { orange: '반팔 티셔츠' },
+    //   { yellow: '긴팔 티셔츠' },
+    //   { green: '후드 티셔츠' },
+    //   { blue: '반팔 티셔츠' },
+    //   { navy: '긴팔 티셔츠' },
+    //   { purple: '후드 티셔츠' },
+    // ],
+    All: [{ All: '전체' }],
     Top: [
       { Shirt: '티셔츠' },
       { Short_T_shirt: '반팔 티셔츠' },
@@ -42,12 +57,14 @@ export default function SelectBox() {
     ],
   };
 
-  const [isCat, setIsCat] = useState('Top');
+  const [isCat, setIsCat] = useState('All');
 
   const selected = (value) => {
     setIsCat(value);
     console.log(value);
   };
+
+  // console.log(categoryArr[isCat][1].Short_T_shirt); // 반팔 티셔츠
 
   return (
     <>

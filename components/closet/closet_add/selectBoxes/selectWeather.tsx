@@ -1,11 +1,17 @@
+'use client';
+
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from '../../../../styles/closet/addform.module.scss';
+import { selectWeather } from '../../../../Store/closetSlice/addClothesSlice';
 
 export default function SelectWeather() {
   const [isClicked, setIsClicked] = useState(null);
+  const dispatch = useDispatch();
 
   const submit = (value) => {
     setIsClicked(value);
+    dispatch(selectWeather({ value: value }));
   };
 
   return (
