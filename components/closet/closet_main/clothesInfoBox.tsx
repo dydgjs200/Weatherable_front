@@ -9,7 +9,7 @@ export default function ClothesInfoBox() {
   };
   return (
     <div className={styles.infoSmallBox}>
-      <Link href="/closet/1">
+      <Link href="/clothes/1">
         <div>
           <span>제품명</span>
           <button onClick={liked}>

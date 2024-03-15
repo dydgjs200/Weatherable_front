@@ -15,6 +15,7 @@ export default function SelectImg() {
       const reader = new FileReader();
       reader.onloadend = () => {
         const imageUrl = reader.result as string;
+        // console.log(imageUrl);
         setImgPreview(imageUrl);
         dispatch(selectImgAction({ value: imageUrl }));
       };
