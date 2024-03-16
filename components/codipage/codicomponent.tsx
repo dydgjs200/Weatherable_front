@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import styles from '../../styles/codi/codi.module.scss';
+import ClosetPage from '../../app/(pages)/(closet)/closet/[id]/page'; // Closet 페이지 컴포넌트 import
 
 export default function Mainpagebutton() {
   const [images, setImages] = useState<Array<string | null>>([
@@ -10,6 +11,7 @@ export default function Mainpagebutton() {
     null, // 하의
     null, // 신발
   ]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 여부 상태
 
   const handleImageUpload =
     (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,99 +28,33 @@ export default function Mainpagebutton() {
       }
     };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.box}>
-        <div className={styles.hat}>
-          {images[0] ? (
-            <img src={images[0]} alt="Hat" className={styles.image} />
-          ) : (
-            <>
-              <span className={styles.placeholder}> Hat</span>
-              <input
-                type="file"
-                id={`file-input-0`}
-                className={styles.fileInput}
-                accept="image/*"
-                onChange={handleImageUpload(0)}
-              />
-            </>
-          )}
-        </div>
-      </div>
+      {/* 모달 버튼 */}
+      <button onClick={openModal}>Upload Hat</button>
+      <button onClick={openModal}>Upload Outer</button>
 
-      <div className={styles.box}>
-        <div className={styles.Outerwear}>
-          {images[1] ? (
-            <img src={images[1]} alt="Outerwear" className={styles.image} />
-          ) : (
-            <>
-              <span className={styles.placeholder}> Outerwear</span>
-              <input
-                type="file"
-                id={`file-input-1`}
-                className={styles.fileInput}
-                accept="image/*"
-                onChange={handleImageUpload(1)}
-              />
-            </>
-          )}
+      <button onClick={openModal}>Upload Top</button>
+      <button onClick={openModal}>Upload Pants</button>
+      <button onClick={openModal}>Upload Shoes</button>
+
+      {/* 모달 */}
+      {isModalOpen && (
+        <div className={styles.modal}>
+          <button onClick={closeModal}>Close Modal</button>
+          <div className={styles.modalContent}>
+            <ClosetPage />
+          </div>
         </div>
-      </div>
-      <div className={styles.box}>
-        <div className={styles.Top}>
-          {images[2] ? (
-            <img src={images[2]} alt="Top" className={styles.image} />
-          ) : (
-            <>
-              <span className={styles.placeholder}> Top</span>
-              <input
-                type="file"
-                id={`file-input-2`}
-                className={styles.fileInput}
-                accept="image/*"
-                onChange={handleImageUpload(2)}
-              />
-            </>
-          )}
-        </div>
-      </div>
-      <div className={styles.box}>
-        <div className={styles.Bottom}>
-          {images[3] ? (
-            <img src={images[3]} alt="Bottom" className={styles.image} />
-          ) : (
-            <>
-              <span className={styles.placeholder}> Bottom</span>
-              <input
-                type="file"
-                id={`file-input-3`}
-                className={styles.fileInput}
-                accept="image/*"
-                onChange={handleImageUpload(3)}
-              />
-            </>
-          )}
-        </div>
-      </div>
-      <div className={styles.box}>
-        <div className={styles.Shoes}>
-          {images[4] ? (
-            <img src={images[4]} alt="Shoes" className={styles.image} />
-          ) : (
-            <>
-              <span className={styles.placeholder}> Shoes</span>
-              <input
-                type="file"
-                id={`file-input-4`}
-                className={styles.fileInput}
-                accept="image/*"
-                onChange={handleImageUpload(4)}
-              />
-            </>
-          )}
-        </div>
-      </div>
+      )}
     </div>
   );
 }
