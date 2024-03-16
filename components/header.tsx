@@ -12,7 +12,6 @@ import logo from '../public/logo.png';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
-
   // 닫기 버튼
   const close = () => {
     setIsOpen(false);
@@ -23,6 +22,8 @@ export default function Header() {
   const back = () => {
     router.back();
   };
+
+  const width = 60;
 
   return (
     <div className={styles.container}>
@@ -50,7 +51,7 @@ export default function Header() {
           </button>
         </li>
       </ul>
-      {isOpen && <SideBar open={isOpen} close={close} />}
+      {isOpen && <SideBar open={isOpen} close={close} width={width} />}
     </div>
   );
 }
