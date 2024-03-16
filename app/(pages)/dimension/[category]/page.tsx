@@ -8,11 +8,17 @@ import BottomSize from '../../../../components/Dimension/BottomSize';
 import OuterSize from '../../../../components/Dimension/OuterSize';
 import ShoesSize from '../../../../components/Dimension/ShoesSize';
 
-const dimension = ({ params }) => {
-  // console.log({ params });
-  const [selectedComponent, setSelectedComponent] = useState('');
+interface DimensionProps {
+  params: {
+    category: string;
+  };
+}
 
-  const handleComponentChange = (component) => {
+const dimension: React.FC<DimensionProps> = ({ params }) => {
+  // console.log({ params });
+  const [selectedComponent, setSelectedComponent] = useState<String>('');
+
+  const handleComponentChange = (component: String) => {
     setSelectedComponent(component);
   };
   const renderComponent = () => {
