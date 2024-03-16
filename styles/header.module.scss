@@ -10,7 +10,6 @@
   top: 0;
   display: flex;
   justify-content: center;
-
   ul {
     list-style: none;
     display: flex;
@@ -49,11 +48,106 @@
 }
 
 .sideBarInnerBox {
-  width: 50%;
+  width: 60%;
   height: 100vh;
   background-color: white;
-  ul {
-    display: flex;
+  @include flex();
+  flex-direction: column;
+  .sideBarContentBox {
+    border-radius: $radius-s;
+    background-color: $bg-gray;
+    width: 93%;
+    height: 98%;
+    @include flex();
+
     flex-direction: column;
+    ul {
+      margin: 0;
+    }
+    .userBox {
+      height: 10%;
+      width: 80%;
+      display: flex;
+      // background-color: pink;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+
+      a {
+        color: #333;
+      }
+      // .loginBtn {
+      //   background-color: #333;
+      //   height: 50%;
+      //   width: 40%;
+      //   border-radius: $radius-m;
+      //   @include flex();
+      //   a {
+      //     color: white;
+      //   }
+      // }
+      // .registerBtn {
+      //   background-color: #333;
+      //   height: 50%;
+      //   width: 40%;
+      //   border-radius: $radius-m;
+      //   @include flex();
+      //   a {
+      //     color: white;
+      //   }
+      // }
+    }
+    .navBox {
+      @include flex();
+      flex-direction: column;
+      height: 60%;
+      width: 100%;
+      border-top: 1.5px solid #cecece;
+      border-bottom: 1.5px solid #cecece;
+      // background-color: $bg-gray;
+      margin: 2rem 0;
+      li {
+        // background-color: pink;
+        width: 100%;
+        // margin-top: 1rem;
+        height: 8%;
+        @include flex();
+        position: relative;
+        a {
+          // background-color: red;
+          margin-left: 2rem;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          color: $black;
+        }
+        a:hover {
+          color: #ff6f61;
+        }
+        .path {
+          position: absolute;
+          left: 0;
+          background-color: #ff6f61;
+          height: 100%;
+          color: #ff6f61;
+          width: 5%;
+          border-radius: 0 $radius-s $radius-s 0;
+        }
+      }
+      .cat {
+        margin-top: 1rem;
+        justify-content: start;
+
+        span {
+          margin-left: 2rem;
+          color: #cecece;
+        }
+      }
+    }
+    .logoutBox {
+      width: 100%;
+      height: 10%;
+      @include flex();
+    }
   }
 }

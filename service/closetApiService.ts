@@ -15,6 +15,8 @@ export const postAddClothes = async (clothesData: any) => {
       clothesData,
       {
         headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
           'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
