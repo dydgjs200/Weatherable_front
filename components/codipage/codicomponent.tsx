@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import styles from '../../styles/codi/codi.module.scss';
-import ClosetPage from '../../app/(pages)/(closet)/closet/[id]/page'; // Closet 페이지 컴포넌트 import
+import ClosetPage from '../../components/uploadcloset/uploadcloset'; // Closet 페이지 컴포넌트 import
 
 export default function Mainpagebutton() {
   const [images, setImages] = useState<Array<string | null>>([
