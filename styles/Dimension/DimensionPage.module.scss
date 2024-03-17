@@ -1,10 +1,11 @@
 @import '../common.scss';
 
 .container {
-  border: 1px solid red;
+  border: 1px solid rgb(32, 230, 197);
   width: $width;
   max-width: $max-width;
   height: calc(100vh - 52px);
+  @include scrollbar();
 
   .components_Div {
     @include flex();
