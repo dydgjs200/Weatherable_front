@@ -44,7 +44,7 @@
     width: 90%;
     height: 10%;
     @include flex();
-    justify-content: start;
+    justify-content: flex-start;
     margin: 1% 0;
     .title {
       width: 30%;
