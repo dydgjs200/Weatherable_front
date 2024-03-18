@@ -17,26 +17,26 @@ import { postAddClothes } from '../../../service/closetApiService';
 
 export default function AddForm() {
   interface TotalData {
-    img: string;
+    image: string;
     productName: string;
-    brandName: string;
-    major_category: string;
-    middle_category: string;
+    brand: string;
+    majorCategory: string;
+    middleCategory: string;
     size: string;
-    weather: string;
+    season: string;
     thickness: string;
     style: string;
     price: string;
   }
 
   const totalData: TotalData = useSelector((state: any) => ({
-    img: state.clothes.clothes.small_img,
+    image: state.clothes.clothes.small_img,
     productName: state.clothes.clothes.product_name,
-    brandName: state.clothes.clothes.brand,
-    major_category: state.clothes.clothes.major_category,
-    middle_category: state.clothes.clothes.middle_category,
+    brand: state.clothes.clothes.brand,
+    majorCategory: state.clothes.clothes.major_category,
+    middleCategory: state.clothes.clothes.middle_category,
     size: state.clothes.clothes.size,
-    weather: state.clothes.clothes.weather,
+    season: state.clothes.clothes.weather,
     thickness: state.clothes.clothes.thickness,
     style: state.clothes.clothes.style,
     price: state.clothes.clothes.price,
