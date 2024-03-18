@@ -7,17 +7,23 @@ import { usePathname } from 'next/navigation';
 interface props {
   open: Boolean;
   close: () => void;
-  width: number;
 }
 
-export default function SideBar({ open, close, width }: props) {
+export default function SideBar({ open, close }: props) {
   const path = usePathname();
   console.log(path);
-  console.log(width);
+
+  const sidebarLeft = open ? '0%' : '-100%';
 
   return (
-    <div className={styles.sideBarContainer}>
-      <div className={styles.sideBarInnerBox}>
+    <div
+      className={styles.sideBarContainer}
+      style={{
+        opacity: open ? '1' : '0',
+        left: sidebarLeft,
+      }}
+    >
+      <div className={styles.sideBarInnerBox} style={{ left: sidebarLeft }}>
         <nav className={styles.sideBarContentBox}>
           {/* <Link href="/">
             <Image src={logo} alt="로고" onClick={close} />
@@ -62,7 +68,8 @@ export default function SideBar({ open, close, width }: props) {
               <span>코디</span>
             </li>
             <li>
-              <Link href={'/'} onClick={close}>
+              <Link href={'/codipage'} onClick={close}>
+                {path == '/codipage' && <div className={styles.path}>-</div>}
                 <span className="material-symbols-outlined">
                   deployed_code_account
                 </span>
@@ -83,7 +90,7 @@ export default function SideBar({ open, close, width }: props) {
           </ul>
         </nav>
       </div>
-      <button onClick={close}>
+      <button onClick={close} className={styles.closeBtn}>
         <span className="material-symbols-outlined">close</span>
       </button>
     </div>

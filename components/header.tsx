@@ -23,8 +23,6 @@ export default function Header() {
     router.back();
   };
 
-  const width = 60;
-
   return (
     <div className={styles.container}>
       <ul>
@@ -51,7 +49,8 @@ export default function Header() {
           </button>
         </li>
       </ul>
-      {isOpen && <SideBar open={isOpen} close={close} width={width} />}
+      {/* {isOpen && <SideBar open={isOpen} close={close} width={width} />} */}
+      <SideBar open={isOpen} close={close} />
     </div>
   );
 }
