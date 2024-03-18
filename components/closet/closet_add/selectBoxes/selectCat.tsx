@@ -23,7 +23,7 @@ export default function SelectCat() {
       { Denim: '청바지' },
       { Slacks: '슬랙스' },
       { Sport_pants: '트레이닝복' },
-      { short_pants: '반바지' },
+      { Short_pants: '반바지' },
     ],
     Outer: [
       { Jacket: '자켓' },
