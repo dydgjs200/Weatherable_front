@@ -8,6 +8,7 @@ export default function SelectName() {
 
   return (
     <>
+      <label htmlFor="productName">제품명</label>
       <input
         type="text"
         name="productName"

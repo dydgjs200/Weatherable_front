@@ -109,69 +109,76 @@ export default function SelectCat() {
   }, [aiData.img, aiData.major_category]);
 
   return (
-    <div className={styles.catContainer}>
-      <section className={styles.catBox}>
-        <button
-          className={styles.sizeBtn}
-          onClick={(e) => {
-            setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
-            e.preventDefault();
-          }}
-        >
-          <span>{category}</span>
-          <span className="material-symbols-outlined">keyboard_arrow_down</span>
-        </button>
-        {isCategoryDropdownOpen && (
-          <section className={styles.sizeSelectBox2}>
-            <ul>
-              {Object.keys(categoryArr).map((cat, index) => (
-                <li key={index}>
-                  <input
-                    type="button"
-                    value={cat}
-                    onClick={() => {
-                      selectCategory(cat);
-                    }}
-                  />
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-      </section>
+    <>
+      <label htmlFor="">카테고리</label>
+      <div className={styles.catContainer}>
+        <section className={styles.catBox}>
+          <button
+            className={styles.sizeBtn}
+            onClick={(e) => {
+              setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
+              e.preventDefault();
+            }}
+          >
+            <span>{category}</span>
+            <span className="material-symbols-outlined">
+              keyboard_arrow_down
+            </span>
+          </button>
+          {isCategoryDropdownOpen && (
+            <section className={styles.sizeSelectBox2}>
+              <ul>
+                {Object.keys(categoryArr).map((cat, index) => (
+                  <li key={index}>
+                    <input
+                      type="button"
+                      value={cat}
+                      onClick={() => {
+                        selectCategory(cat);
+                      }}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </section>
 
-      <section className={styles.catBox}>
-        <button
-          className={styles.sizeBtn}
-          onClick={(e) => {
-            setIsSubCategoryDropdownOpen(!isSubCategoryDropdownOpen);
-            e.preventDefault();
-          }}
-          disabled={!subCategory}
-        >
-          <span>{subCategory || `${subCategory}`}</span>
-          <span className="material-symbols-outlined">keyboard_arrow_down</span>
-        </button>
-        {isSubCategoryDropdownOpen && (
-          <section className={styles.sizeSelectBox2}>
-            <ul>
-              {categoryInfo.map((item, index) => (
-                <li key={index}>
-                  <input
-                    type="button"
-                    value={`${Object.keys(item)[0]}: ${
-                      item[Object.keys(item)[0]]
-                    }`}
-                    onClick={() => {
-                      selectSubCategory(Object.keys(item)[0]);
-                    }}
-                  />
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-      </section>
-    </div>
+        <section className={styles.catBox}>
+          <button
+            className={styles.sizeBtn}
+            onClick={(e) => {
+              setIsSubCategoryDropdownOpen(!isSubCategoryDropdownOpen);
+              e.preventDefault();
+            }}
+            disabled={!subCategory}
+          >
+            <span>{subCategory || `${subCategory}`}</span>
+            <span className="material-symbols-outlined">
+              keyboard_arrow_down
+            </span>
+          </button>
+          {isSubCategoryDropdownOpen && (
+            <section className={styles.sizeSelectBox2}>
+              <ul>
+                {categoryInfo.map((item, index) => (
+                  <li key={index}>
+                    <input
+                      type="button"
+                      value={`${Object.keys(item)[0]}: ${
+                        item[Object.keys(item)[0]]
+                      }`}
+                      onClick={() => {
+                        selectSubCategory(Object.keys(item)[0]);
+                      }}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </section>
+      </div>
+    </>
   );
 }

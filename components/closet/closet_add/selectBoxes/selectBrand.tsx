@@ -8,6 +8,7 @@ export default function SelectBrand() {
 
   return (
     <>
+      <label htmlFor="brand">브랜드</label>
       <input
         type="text"
         name="brand"
