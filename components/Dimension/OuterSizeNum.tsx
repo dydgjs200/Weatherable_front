@@ -11,16 +11,20 @@ function OuterSizeNum() {
 
   return (
     <div className={styles.container}>
-      {dimensions.map((dimension, index) => (
-        <div key={index} className={styles.dimension}>
-          <div className={styles.number}>{dimension.number}</div>
-          <div>{dimension.name}</div>
-          <div className={styles.input_Div}>
-            <input className={styles.input} type="text" />
+      <form>
+        {dimensions.map((dimension, index) => (
+          <div key={index} className={styles.dimension}>
+            <div className={styles.number}>{dimension.number}</div>
+            <div>{dimension.name}</div>
+            <div className={styles.input_Div}>
+              <input className={styles.input} type="text" />
+            </div>
+            <div className={styles.unit}>cm</div>
           </div>
-          <div className={styles.unit}>cm</div>
-        </div>
-      ))}
+        ))}
+      </form>
+
+      <button className={styles.btn}>저장하기</button>
     </div>
   );
 }
