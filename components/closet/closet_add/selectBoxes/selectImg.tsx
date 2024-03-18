@@ -21,7 +21,7 @@ export default function SelectImg() {
         setImgPreview(imageUrl);
         dispatch(selectImgAction({ value: imageUrl }));
         // ai를 위해 이미지 저장
-        imgSend(imageUrl);
+        imgSend(file);
       };
       reader.readAsDataURL(file);
     }

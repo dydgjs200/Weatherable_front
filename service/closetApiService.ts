@@ -2,25 +2,28 @@
 import axios from 'axios';
 
 // ai 이미지 저장
-export const imgSend = async (imgUrl: string) => {
+export const imgSend = async (file: File) => {
   try {
     const formData = new FormData();
-    formData.append('image', imgUrl);
+    formData.append('image', file);
 
-    console.log(imgUrl);
+    console.log(file);
     const response = await axios.post(
-      'http://localhost:8080/closet/imgData',
+      'http://localhost:8080/closet/image',
       formData,
       {
         headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
           'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
       }
     );
+    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log('http://localhost:8080/imgData');
+    console.log('http://localhost:8080/closet/image');
   }
 };
 
