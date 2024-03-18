@@ -1,6 +1,29 @@
 // api 호출 관련 코드 모음
 import axios from 'axios';
 
+// ai 이미지 저장
+export const imgSend = async (imgUrl: string) => {
+  try {
+    const formData = new FormData();
+    formData.append('image', imgUrl);
+
+    console.log(imgUrl);
+    const response = await axios.post(
+      'http://localhost:8080/closet/imgData',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log('http://localhost:8080/imgData');
+  }
+};
+
 // 옷장 등록 폼 전송
 export const postAddClothes = async (clothesData: any) => {
   try {
@@ -67,7 +90,7 @@ export const getAddStyles = async () => {
 export const getCrawlingClothes = async () => {
   try {
     const response = await axios.get(
-      'http://localhost:5000/closet/getCrawlingClothes',
+      'http://localhost:8080/closet/clothesinfo',
       {
         headers: {
           'Content-Type': 'application/json',

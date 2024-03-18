@@ -4,10 +4,12 @@ import React, { useState } from 'react';
 import styles from '../../../../styles/closet/addform.module.scss';
 import { useDispatch } from 'react-redux';
 import { selectImg as selectImgAction } from '../../../../Store/closetSlice/addClothesSlice';
+import { imgSend } from '../../../../service/closetApiService';
 
 export default function SelectImg() {
   const dispatch = useDispatch();
   const [imgPreview, setImgPreview] = useState<string | null>(null);
+
   const addImg = (e) => {
     const file = e.target.files[0];
 
@@ -18,6 +20,8 @@ export default function SelectImg() {
         // console.log(imageUrl);
         setImgPreview(imageUrl);
         dispatch(selectImgAction({ value: imageUrl }));
+        // ai를 위해 이미지 저장
+        imgSend(imageUrl);
       };
       reader.readAsDataURL(file);
     }

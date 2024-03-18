@@ -8,8 +8,13 @@
   margin-top: 3vh;
   border-radius: $radius-m;
   box-shadow: 0px 2px 6px -5px #333;
-  font-weight: 700;
-  font-size: 1.1rem;
+  input {
+    width: 90%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+  }
 }
 
 .imgContainer {
