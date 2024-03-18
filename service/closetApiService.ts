@@ -1,6 +1,5 @@
 // api 호출 관련 코드 모음
 import axios from 'axios';
-import exp from 'constants';
 
 // 옷장 등록 폼 전송
 export const postAddClothes = async (clothesData: any) => {
@@ -60,6 +59,25 @@ export const getAddStyles = async () => {
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error('예상치 못한 오류가 발생했습니다! (게시글 불러오기)');
+    throw new Error('예상치 못한 오류가 발생했습니다! (스타일 불러오기)');
+  }
+};
+
+// 크롤링 옷 데이터 가져오기
+export const getCrawlingClothes = async () => {
+  try {
+    const response = await axios.get(
+      'http://localhost:5000/closet/getCrawlingClothes',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('예상치 못한 오류가 발생했습니다! (크롤링 옷 불러오기)');
   }
 };
