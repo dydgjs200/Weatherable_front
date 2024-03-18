@@ -1,18 +1,26 @@
 'use client';
-import { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import styles from '../../../styles/User/signup.module.scss';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-function SignUp() {
-  console.log('env >>', process.env.NEXT_PUBLIC_DB_HOST);
-  const [userData, setUserData] = useState({
+interface UserData {
+  userid: string;
+  password: string;
+  passwordConfirm: string;
+  nickname: string;
+}
+
+const SignUp: React.FC = () => {
+  const router = useRouter();
+  const [userData, setUserData] = useState<UserData>({
     userid: '',
     password: '',
     passwordConfirm: '',
     nickname: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserData((prevState) => ({
       ...prevState,
@@ -20,7 +28,28 @@ function SignUp() {
     }));
   };
 
-  const handleSignUp = (e) => {
+  const handleBlur = async (e: ChangeEvent<HTMLInputElement>) => {
+    console.log('e >', e.target);
+    // name : userid
+    // value : banana
+
+    const { name, value } = e.target;
+    if (name === 'userid' && value.trim() !== '') {
+      try {
+        const res = await axios.post(
+          `${process.env.NEXT_PUBLIC_DB_HOST}/validation`
+        );
+        if (res.data.exists) {
+          alert('이미 사용 중인 아이디 입니다.');
+        }
+        console.log('res > ', res);
+      } catch (error) {
+        console.error('오류 발생', error);
+      }
+    }
+  };
+
+  const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (userData.password !== userData.passwordConfirm) {
@@ -33,6 +62,7 @@ function SignUp() {
       .then((res) => {
         console.log('회원가입 성공');
         console.log('확인 >>', res);
+        router.push('/login');
       })
       .catch((error) => {
         console.error('오류 발생', error);
@@ -54,6 +84,7 @@ function SignUp() {
                 type="text"
                 name="userid"
                 onChange={handleChange}
+                onBlur={handleBlur}
                 value={userData.userid}
                 placeholder="아이디"
               />
@@ -102,6 +133,6 @@ function SignUp() {
       </div>
     </>
   );
-}
+};
 
 export default SignUp;
