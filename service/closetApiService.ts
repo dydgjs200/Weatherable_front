@@ -34,7 +34,7 @@ export const postAddClothes = async (clothesData: any) => {
 
     const response = await axios.post(
       'http://localhost:8080/closet',
-      clothesData,
+      formData,
       {
         headers: {
           Authorization:
