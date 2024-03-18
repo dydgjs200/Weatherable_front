@@ -59,21 +59,13 @@ export default function AddForm() {
         <SelectImg />
       </div>
       <div className={styles.infoBox}>
-        <label htmlFor="productName">제품명</label>
         <SelectName />
-        <label htmlFor="brand">브랜드</label>
         <SelectBrand />
-        <label htmlFor="">카테고리</label>
         <SelectCat />
-        <label htmlFor="">사이즈</label>
         <SelectSize />
-        <label htmlFor="">계절</label>
         <SelectWeather />
-        <label htmlFor="">두께</label>
         <SelectThickness />
-        <label htmlFor="">스타일</label>
         <SelectStyles />
-        <label htmlFor="">구매가격</label>
         <SelectPrice />
       </div>
       <div className={styles.btnBox}>

@@ -15,31 +15,34 @@ export default function SelectThickness() {
   };
 
   return (
-    <div className={styles.thicknessBox}>
-      <input
-        type="button"
-        name=""
-        id=""
-        value={'얇음'}
-        onClick={() => submit('얇음')}
-        className={`${isClicked === '얇음' && styles.thickClicked}`}
-      />
-      <input
-        type="button"
-        name=""
-        id=""
-        value={'보통'}
-        onClick={() => submit('보통')}
-        className={`${isClicked === '보통' && styles.thickClicked}`}
-      />
-      <input
-        type="button"
-        name=""
-        id=""
-        value={'두꺼움'}
-        onClick={() => submit('두꺼움')}
-        className={`${isClicked === '두꺼움' && styles.thickClicked}`}
-      />
-    </div>
+    <>
+      <label htmlFor="">두께</label>
+      <div className={styles.thicknessBox}>
+        <input
+          type="button"
+          name=""
+          id=""
+          value={'얇음'}
+          onClick={() => submit('얇음')}
+          className={`${isClicked === '얇음' && styles.thickClicked}`}
+        />
+        <input
+          type="button"
+          name=""
+          id=""
+          value={'보통'}
+          onClick={() => submit('보통')}
+          className={`${isClicked === '보통' && styles.thickClicked}`}
+        />
+        <input
+          type="button"
+          name=""
+          id=""
+          value={'두꺼움'}
+          onClick={() => submit('두꺼움')}
+          className={`${isClicked === '두꺼움' && styles.thickClicked}`}
+        />
+      </div>
+    </>
   );
 }

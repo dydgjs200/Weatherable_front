@@ -7,15 +7,18 @@ export default function SelectPrice() {
   const [price, setPrice] = useState('');
 
   return (
-    <input
-      type="text"
-      name=""
-      id=""
-      value={price}
-      onChange={(e) => {
-        setPrice(e.target.value);
-        dispatch(selectPriceAction({ value: e.target.value }));
-      }}
-    />
+    <>
+      <label htmlFor="price">구매가격</label>
+      <input
+        type="text"
+        name="price"
+        id=""
+        value={price}
+        onChange={(e) => {
+          setPrice(e.target.value);
+          dispatch(selectPriceAction({ value: e.target.value }));
+        }}
+      />
+    </>
   );
 }
