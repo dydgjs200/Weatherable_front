@@ -3,7 +3,7 @@ import styles from '../../styles/closet/closet.module.scss';
 import SelectBox from '../../components/closet/closet_main/selectBox';
 import SortBox from '../../components/closet/closet_main/sortBox';
 import ClothesInfoBox from '../../components/uploadcloset/uploadClosetInfoBox';
-import CodiPage from '../codipage/codicomponent';
+import CodiPage from '../codipage/image';
 import { useSelector } from 'react-redux';
 
 const Closet: React.FC = () => {

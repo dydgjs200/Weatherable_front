@@ -1,14 +1,11 @@
 'use client';
-
 import React, { useState } from 'react';
 import styles from '../../styles/codi/codi.module.scss';
 import ClosetPage from '../../components/uploadcloset/uploadcloset';
 
-interface CodiPageProps {
-  imageSrc: string | null; // 이미지가 null일 수도 있으므로 타입 수정
-}
+interface CodiPageProps {}
 
-const CodiPage: React.FC<CodiPageProps> = ({ imageSrc }) => {
+const CodiPage: React.FC<CodiPageProps> = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 변수
 
   const openModal = () => {
@@ -39,8 +36,6 @@ const CodiPage: React.FC<CodiPageProps> = ({ imageSrc }) => {
           </div>
         )}
       </div>
-      {/* 선택한 아이템의 이미지 출력 */}
-      {imageSrc && <img src={imageSrc} alt="Selected Outfit" />}
     </div>
   );
 };
