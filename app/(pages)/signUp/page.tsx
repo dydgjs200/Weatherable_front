@@ -1,14 +1,24 @@
+'use client';
 import { useState } from 'react';
 import styles from '../../../styles/User/signup.module.scss';
 import axios from 'axios';
 
 function SignUp() {
+  console.log('env >>', process.env.NEXT_PUBLIC_DB_HOST);
   const [userData, setUserData] = useState({
     userid: '',
     password: '',
     passwordConfirm: '',
     nickname: '',
   });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -19,7 +29,7 @@ function SignUp() {
     }
 
     axios
-      .post('localhost:8080/signup', userData)
+      .post(`${process.env.NEXT_PUBLIC_DB_HOST}/signup`, userData)
       .then((res) => {
         console.log('회원가입 성공');
         console.log('확인 >>', res);
@@ -43,6 +53,7 @@ function SignUp() {
                 className={styles.signup_input}
                 type="text"
                 name="userid"
+                onChange={handleChange}
                 value={userData.userid}
                 placeholder="아이디"
               />
@@ -54,6 +65,7 @@ function SignUp() {
                 className={styles.signup_input}
                 type="password"
                 name="password"
+                onChange={handleChange}
                 value={userData.password}
                 placeholder="비밀번호"
               />
@@ -65,6 +77,7 @@ function SignUp() {
                 className={styles.signup_input}
                 type="password"
                 name="passwordConfirm"
+                onChange={handleChange}
                 value={userData.passwordConfirm}
                 placeholder="비밀번호 재확인"
               />
@@ -76,6 +89,7 @@ function SignUp() {
                 className={styles.signup_input}
                 type="text"
                 name="nickname"
+                onChange={handleChange}
                 value={userData.nickname}
                 placeholder="닉네임"
               />
