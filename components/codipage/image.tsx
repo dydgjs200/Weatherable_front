@@ -8,12 +8,7 @@ interface Props {
 const MyComponent: React.FC<Props> = ({ imageSrc }) => {
   // 여기에 컴포넌트의 로직을 작성합니다.
 
-  return (
-    <div>
-      <h1>hi</h1>
-      {imageSrc && <img src={imageSrc} alt="Selected Outfit" />}
-    </div>
-  );
+  return <div>{imageSrc && <img src={imageSrc} alt="Selected Outfit" />}</div>;
 };
 
 export default MyComponent;
