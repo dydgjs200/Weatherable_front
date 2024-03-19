@@ -1,0 +1,66 @@
+// codi.module.scss
+
+@import '../common.scss';
+
+// .container {
+//   display: flex;
+//   flex-direction: column; /* 세로로 아이템을 정렬합니다. */
+//   gap: 10px;
+// }
+
+.uploadButtonHat,
+.uploadButtonTop,
+.uploadButtonOuter,
+.uploadButtonPants,
+.uploadButtonShoes {
+  width: 120px;
+  height: 120px;
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #333;
+  margin-bottom: 10px; /* 아이템 간격을 설정합니다. */
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+}
+
+.modalContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.img {
+  width: 124px;
+  height: 124px;
+  object-fit: cover;
+  object-position: center;
+}

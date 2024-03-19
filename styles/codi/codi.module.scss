@@ -102,52 +102,6 @@
   }
 }
 
-.addToggleBtn {
-  background-color: $black;
-  width: 50%;
-  height: 5%;
-  position: fixed;
-  top: 90%;
-  left: 25%;
-  bottom: 5%;
-  display: flex;
-  z-index: 90;
-  justify-content: center;
-  align-items: center;
-  border-radius: $radius-m;
-  button {
-    background: none;
-    border: none;
-    color: $white;
-  }
-}
-
-.addToggle {
-  position: absolute;
-  bottom: 80%;
-  width: 100%;
-  background-color: $black;
-  height: 300%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: $radius-m $radius-m 0 0;
-  ul {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    height: 50%;
-    align-items: center;
-    justify-content: space-between;
-    li {
-      a {
-        color: $white;
-      }
-    }
-  }
-}
-
 .selectBox {
   width: 90%;
   height: 100px;
@@ -195,12 +149,6 @@
   button {
     background: none;
     border: none;
-  }
-  button:hover,
-  active {
-    span {
-      color: blue;
-    }
   }
 }
 

@@ -17,7 +17,7 @@ export default function Mainpagebutton() {
       </div>
       <div className={styles.mainpage__BottomButton}>
         <button className={styles.Ai}></button>
-        <Link href={{ pathname: '../codipage' }}>
+        <Link href={{ pathname: '../calendarpage' }}>
           <button className={styles.Report}></button>
         </Link>
       </div>
