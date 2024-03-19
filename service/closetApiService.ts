@@ -1,7 +1,7 @@
 // api 호출 관련 코드 모음
 import axios from 'axios';
 
-// ai 이미지 저장
+// ai 이미지 저장 (스프링)
 export const imgSend = async (file: File) => {
   try {
     const formData = new FormData();
@@ -9,7 +9,7 @@ export const imgSend = async (file: File) => {
 
     console.log(file);
     const response = await axios.post(
-      'http://localhost:8080/closet/image',
+      process.env.NEXT_PUBLIC_DB_HOST + '/closet/image',
       formData,
       {
         headers: {
@@ -20,10 +20,10 @@ export const imgSend = async (file: File) => {
         withCredentials: true,
       }
     );
-    console.log(response.data);
-    return response.data;
+    console.log(response.data.data);
+    return response.data.data;
   } catch (error) {
-    console.log('http://localhost:8080/closet/image');
+    console.log(process.env.NEXT_PUBLIC_DB_HOST + '/closet/image', error);
   }
 };
 
@@ -53,17 +53,18 @@ export const postAddClothes = async (clothesData: any) => {
   }
 };
 
-//옷장 등록시 스타일 부분 gpt 활용
+//옷장 등록시 스타일 부분 gpt 활용 (파이썬)
 export const postAddStyles = async (data: any) => {
   try {
+    console.log(data);
     const formData = new FormData();
     for (const key in data) {
       formData.append(key, data[key]);
     }
-    console.log(data);
+    console.log(formData);
 
     const response = await axios.post(
-      'http://localhost:5000/postAddStyles',
+      process.env.NEXT_PUBLIC_PYTHON + '/sendmessage',
       formData,
       {
         headers: {
@@ -72,9 +73,10 @@ export const postAddStyles = async (data: any) => {
         withCredentials: true,
       }
     );
-    return response.data;
+    console.log(response);
+    return response;
   } catch (error) {
-    console.log('http://localhost:5000/postAddStyles');
+    console.log(process.env.NEXT_PUBLIC_PYTHON + '/sendmessage', error);
   }
 };
 
@@ -93,7 +95,7 @@ export const getAddStyles = async () => {
 export const getCrawlingClothes = async () => {
   try {
     const response = await axios.get(
-      'http://localhost:8080/closet/clothesinfo',
+      process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothesinfo',
       {
         headers: {
           'Content-Type': 'application/json',

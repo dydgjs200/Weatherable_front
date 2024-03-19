@@ -1,8 +1,21 @@
+'use client';
+
 import styles from '../../../../../styles/closet/addclothes.module.scss';
 import SelectBoxCrawling from '../../../../../components/closet/all_clothes/selectBoxCrawling';
 import ClothesInfoBoxCrawling from '../../../../../components/closet/all_clothes/clothesInfoBoxCrawling';
+import { useEffect } from 'react';
+import { getCrawlingClothes } from '../../../../../service/closetApiService';
 
 export default function AllClothes() {
+  useEffect(() => {
+    const crawlingData = async () => {
+      try {
+        await getCrawlingClothes();
+      } catch (error) {
+        console.log('크롤링 데이터 실페: ', error);
+      }
+    };
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.searchInputBox}>
@@ -20,6 +33,7 @@ export default function AllClothes() {
         <SelectBoxCrawling />
       </div>
       <div className={styles.mainInfoBoxDefault}>
+        <ClothesInfoBoxCrawling />
         <ClothesInfoBoxCrawling />
       </div>
     </div>
