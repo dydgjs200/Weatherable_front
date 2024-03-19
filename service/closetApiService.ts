@@ -92,15 +92,12 @@ export const getAddStyles = async () => {
 // 크롤링 옷 데이터 가져오기
 export const getCrawlingClothes = async () => {
   try {
-    const response = await axios.get(
-      'http://localhost:8080/closet/clothesinfo',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      }
-    );
+    const response = await axios.get('http://localhost:8080/clothinfo', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.error(error);
