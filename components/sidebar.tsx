@@ -25,9 +25,6 @@ export default function SideBar({ open, close }: props) {
     >
       <div className={styles.sideBarInnerBox} style={{ left: sidebarLeft }}>
         <nav className={styles.sideBarContentBox}>
-          {/* <Link href="/">
-            <Image src={logo} alt="로고" onClick={close} />
-          </Link> */}
           <ul className={styles.userBox}>
             <li className={styles.loginBtn}>
               <Link href="/login" onClick={close}>
