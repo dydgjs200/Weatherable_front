@@ -69,9 +69,11 @@ const Login: React.FC = () => {
         `${process.env.NEXT_PUBLIC_DB_HOST}/login`,
         userData
       );
-      console.log('res > ', res.data);
+      console.log('access token > ', res.data.data[1]);
+      // 로그인 성공 후 세션 스토리지에 access token 저장
+      sessionStorage.setItem('accessToken', res.data.data[1]);
       console.log('로그인 성공');
-      // router.push('/mainpage');/
+      // router.push('/mypage');
     } catch (error) {
       console.log('로그인 실패!', error);
       alert(
