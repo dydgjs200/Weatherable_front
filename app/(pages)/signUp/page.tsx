@@ -20,8 +20,19 @@ const SignUp: React.FC = () => {
     nickname: '',
   });
 
+  // 아이디 중복 에러 문자
+  const [useridError, setUseridError] = useState<string | null>(null);
+
+  // 비밀번호 불일치 에러 문자
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    if (name === 'userid' && value.length > 9) {
+      return;
+    }
+
     setUserData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -29,33 +40,42 @@ const SignUp: React.FC = () => {
   };
 
   const handleBlur = async (e: ChangeEvent<HTMLInputElement>) => {
-    console.log('e >', e.target);
+    console.log('e.target >', e.target);
     // name : userid
     // value : banana
 
     const { name, value } = e.target;
+
     if (name === 'userid' && value.trim() !== '') {
-      try {
-        const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_DB_HOST}/validation`
-        );
-        if (res.data.exists) {
-          alert('이미 사용 중인 아이디 입니다.');
+      if (value.length < 4 || value.length > 9) {
+        setUseridError('아이디는 최소 4글자 이상, 최대 9글자 이하여야 합니다.');
+      } else {
+        setUseridError(null);
+        try {
+          const res = await axios.post(
+            `${process.env.NEXT_PUBLIC_DB_HOST}/validation`,
+            userData
+          );
+          console.log('res > ', res);
+          console.log('중복 없음');
+          setUseridError(null);
+        } catch (error) {
+          console.error('오류 발생', error);
+          setUseridError('이미 사용 중인 아이디 입니다.');
         }
-        console.log('res > ', res);
-      } catch (error) {
-        console.error('오류 발생', error);
       }
+    }
+
+    if (userData.password !== userData.passwordConfirm) {
+      setPasswordError('비밀번호가 일치하지 않습니다.');
+      return;
+    } else {
+      setPasswordError(null);
     }
   };
 
   const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (userData.password !== userData.passwordConfirm) {
-      alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
-      return;
-    }
 
     axios
       .post(`${process.env.NEXT_PUBLIC_DB_HOST}/signup`, userData)
@@ -86,8 +106,10 @@ const SignUp: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={userData.userid}
-                placeholder="아이디"
+                placeholder="아이디 (4~9 글자)"
+                maxLength={9}
               />
+              {useridError && <p className={styles.errorMsg}>{useridError}</p>}
             </div>
             {/* password */}
             <div className={styles.signup_Content_Container}>
@@ -109,9 +131,13 @@ const SignUp: React.FC = () => {
                 type="password"
                 name="passwordConfirm"
                 onChange={handleChange}
+                onBlur={handleBlur}
                 value={userData.passwordConfirm}
                 placeholder="비밀번호 재확인"
               />
+              {passwordError && (
+                <p className={styles.errorMsg}>{passwordError}</p>
+              )}
             </div>
             {/* nickname */}
             <div className={styles.signup_Content_Container}>
