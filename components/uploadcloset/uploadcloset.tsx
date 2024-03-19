@@ -3,16 +3,24 @@ import styles from '../../styles/closet/closet.module.scss';
 import SelectBox from '../../components/closet/closet_main/selectBox';
 import SortBox from '../../components/closet/closet_main/sortBox';
 import ClothesInfoBox from '../../components/uploadcloset/uploadClosetInfoBox';
-import CodiPage from '../codipage/image';
+import Mycomponent from '../codipage/image';
 import { useSelector } from 'react-redux';
+import ClothesInfoBox2 from '../../components/uploadcloset/uploadclosetinfo3';
 
-const Closet: React.FC = () => {
+import ClothesInfoBox3 from '../../components/uploadcloset/uploadcloset2';
+
+interface ClosetPageProps {
+  onImageSelect: (imageSrc: string) => void;
+}
+
+const Closet: React.FC<ClosetPageProps> = ({ onImageSelect }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const sortStatus = useSelector((state: any) => state.status.status);
   console.log('sort 상태', sortStatus);
 
   const handleImageSelect = (imageUrl: string) => {
     setSelectedImage(imageUrl);
+    onImageSelect(imageUrl); // 선택된 이미지를 상위 컴포넌트로 전달
   };
 
   return (
@@ -35,20 +43,10 @@ const Closet: React.FC = () => {
         }
       >
         <ClothesInfoBox onImageClick={handleImageSelect} />
-        <ClothesInfoBox onImageClick={handleImageSelect} />
-        <ClothesInfoBox onImageClick={handleImageSelect} />
+        <ClothesInfoBox2 onImageClick={handleImageSelect} />
+        <ClothesInfoBox3 onImageClick={handleImageSelect} />
         <ClothesInfoBox onImageClick={handleImageSelect} />
       </div>
-      {/* sortStatus에 따라 조건부 렌더링 */}
-      {sortStatus ? (
-        <div className={styles.mainInfoBoxDefault}>
-          <CodiPage imageSrc={selectedImage} />
-        </div>
-      ) : (
-        <div className={styles.mainInfoBoxSmall}>
-          <CodiPage imageSrc={selectedImage} />
-        </div>
-      )}
     </div>
   );
 };

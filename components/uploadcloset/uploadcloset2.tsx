@@ -12,7 +12,7 @@ const ClothesInfoBox: React.FC<ClothesInfoBoxProps> = ({ onImageClick }) => {
       className={styles.infoSmallBox}
       onClick={() =>
         onImageClick(
-          'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png'
+          'https://search.pstatic.net/sunny/?src=https%3A%2F%2Fpng.pngtree.com%2Fbackground%2F20230525%2Foriginal%2Fpngtree-golden-retriever-laying-in-the-fall-picture-image_2735273.jpg&type=l340_165'
         )
       }
     >
@@ -20,7 +20,7 @@ const ClothesInfoBox: React.FC<ClothesInfoBoxProps> = ({ onImageClick }) => {
         <span>제품명</span>
       </div>
       <img
-        src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png"
+        src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fpng.pngtree.com%2Fbackground%2F20230525%2Foriginal%2Fpngtree-golden-retriever-laying-in-the-fall-picture-image_2735273.jpg&type=l340_165"
         alt=""
       />
     </div>

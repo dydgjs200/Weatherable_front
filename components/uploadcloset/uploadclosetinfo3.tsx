@@ -12,7 +12,7 @@ const ClothesInfoBox: React.FC<ClothesInfoBoxProps> = ({ onImageClick }) => {
       className={styles.infoSmallBox}
       onClick={() =>
         onImageClick(
-          'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png'
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzA5MTNfMjkx%2FMDAxNjk0NTY5MTYzOTM4.P2wPWdY_PXFURV9XLAwXdrHJb8n0n457cemWOVfTVhcg.GpQI0hRp4JImR2yHCQYzM-AVQJaUv6G8PLi82uk5az8g.JPEG.photostudiohee%2FKJH04886.jpg&type=a340'
         )
       }
     >
@@ -20,7 +20,7 @@ const ClothesInfoBox: React.FC<ClothesInfoBoxProps> = ({ onImageClick }) => {
         <span>제품명</span>
       </div>
       <img
-        src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png"
+        src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzA5MTNfMjkx%2FMDAxNjk0NTY5MTYzOTM4.P2wPWdY_PXFURV9XLAwXdrHJb8n0n457cemWOVfTVhcg.GpQI0hRp4JImR2yHCQYzM-AVQJaUv6G8PLi82uk5az8g.JPEG.photostudiohee%2FKJH04886.jpg&type=a340"
         alt=""
       />
     </div>
