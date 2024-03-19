@@ -3,7 +3,7 @@
   width: $width;
   max-width: $max-width;
   position: relative;
-  
+
   @include scrollbar();
 
   .title {
@@ -43,4 +43,8 @@
     display: block;
     margin: 3em auto;
   }
+}
+
+.errorMsg {
+  color: red;
 }
