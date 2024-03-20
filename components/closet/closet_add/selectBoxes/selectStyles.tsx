@@ -18,7 +18,7 @@ export default function SelectStyles() {
     <>
       <label htmlFor="style">스타일</label>
       <div className={styles.thicknessBox}>
-        <input type="text" name="style" value={'Casual'} />
+        <input type="text" name="style" value={'Casual'} readOnly />
         {/* <input
           type="button"
           name=""

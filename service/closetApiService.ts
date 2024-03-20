@@ -95,13 +95,7 @@ export const getAddStyles = async () => {
 export const getCrawlingClothes = async () => {
   try {
     const response = await axios.get(
-      process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothesinfo',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      }
+      process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothesinfo'
     );
     return response.data;
   } catch (error) {

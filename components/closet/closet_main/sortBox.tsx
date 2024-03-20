@@ -24,7 +24,7 @@ export default function SortBox() {
       <button onClick={smallImg} className={sortStatus ? '' : styles.smallBtn}>
         <span className="material-symbols-outlined">splitscreen</span>
       </button>
-      <button onClick={bigImg} className={sortStatus && styles.bigBtn}>
+      <button onClick={bigImg} className={sortStatus ? styles.bigBtn : ''}>
         <span className="material-symbols-outlined">grid_view</span>
       </button>
     </>

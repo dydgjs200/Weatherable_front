@@ -3,10 +3,11 @@
 import styles from '../../../../../styles/closet/addclothes.module.scss';
 import SelectBoxCrawling from '../../../../../components/closet/all_clothes/selectBoxCrawling';
 import ClothesInfoBoxCrawling from '../../../../../components/closet/all_clothes/clothesInfoBoxCrawling';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getCrawlingClothes } from '../../../../../service/closetApiService';
 
 export default function AllClothes() {
+  // 크롤링 데이터 가져오기
   useEffect(() => {
     const crawlingData = async () => {
       try {
@@ -15,7 +16,11 @@ export default function AllClothes() {
         console.log('크롤링 데이터 실페: ', error);
       }
     };
+    crawlingData();
   }, []);
+
+  const [searchClothes, setSearchClothes] = useState('');
+
   return (
     <div className={styles.container}>
       <div className={styles.searchInputBox}>
@@ -27,6 +32,9 @@ export default function AllClothes() {
           name="search"
           id="search"
           placeholder="검색어를 입력해주세요"
+          onChange={(e) => {
+            setSearchClothes(e.target.value);
+          }}
         />
       </div>
       <div className={styles.selectBox}>
