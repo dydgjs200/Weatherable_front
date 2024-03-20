@@ -1,14 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../../../../styles/closet/addform.module.scss';
 import { useDispatch } from 'react-redux';
 import { selectImg as selectImgAction } from '../../../../Store/closetSlice/addClothesSlice';
+
 import { imgSend } from '../../../../service/closetApiService';
 
 export default function SelectImg() {
   const dispatch = useDispatch();
+
+  // 미리보기
   const [imgPreview, setImgPreview] = useState<string | null>(null);
+
+  const [imgUrl, setImgUrl] = useState('');
 
   const addImg = (e) => {
     const file = e.target.files[0];
@@ -19,13 +24,25 @@ export default function SelectImg() {
         const imageUrl = reader.result as string;
         // console.log(imageUrl);
         setImgPreview(imageUrl);
-        dispatch(selectImgAction({ value: imageUrl }));
+        // dispatch(selectImgAction({ value: imageUrl }));
         // ai를 위해 이미지 저장
-        imgSend(file);
+        const fetchData = async () => {
+          try {
+            // s3 이미지 저장
+            const imgData = await imgSend(file);
+            setImgUrl(imgData);
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        fetchData();
+        console.log('s3저장 경로', imgUrl);
       };
       reader.readAsDataURL(file);
     }
   };
+
+  dispatch(selectImgAction({ value: imgUrl }));
 
   return (
     <>
