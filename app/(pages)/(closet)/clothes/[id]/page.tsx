@@ -77,25 +77,11 @@ export default function Clothes() {
       <div className={clothStyles.infoContainer}>
         <div>
           <span className={clothStyles.title}>브랜드</span>
-          <input
-            type="text"
-            name="brandName"
-            id=""
-            className={clothStyles.desc}
-            value={brandName}
-            onChange={changeValue}
-          />
+          <span>IAB Studio</span>
         </div>
         <div>
           <span className={clothStyles.title}>카테고리</span>
-          {/* <span className={clothStyles.desc}>상의 </span> */}
-
-          <select name="" id="">
-            <option value="">상의</option>
-            <option value="">하의</option>
-            <option value="">상의</option>
-          </select>
-
+          <span className={clothStyles.desc}>상의 </span>
           <span>-</span>
           <span className={clothStyles.desc}>반팔 티셔츠</span>
         </div>

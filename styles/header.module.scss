@@ -67,7 +67,6 @@
     width: 93%;
     height: 98%;
     @include flex();
-
     flex-direction: column;
     ul {
       margin: 0;
@@ -115,11 +114,11 @@
       // background-color: $bg-gray;
       margin: 2rem 0;
       li {
-        // background-color: pink;
         width: 100%;
         // margin-top: 1rem;
         height: 8%;
         @include flex();
+        align-items: center;
         position: relative;
         a {
           // background-color: red;
@@ -128,6 +127,10 @@
           display: flex;
           align-items: center;
           color: $black;
+          p {
+            margin: 0;
+            margin-left: 0.5rem;
+          }
         }
         a:hover {
           color: #ff6f61;
@@ -145,7 +148,6 @@
       .cat {
         margin-top: 1rem;
         justify-content: start;
-
         span {
           margin-left: 2rem;
           color: #cecece;

@@ -4,19 +4,25 @@ import { useState, useEffect } from 'react';
 import styles from '../../../styles/closet/closet.module.scss';
 
 export default function SelectBox() {
-  const [isCat, setIsCat] = useState('All');
+  const [isMajorCat, setIsMajorCat] = useState('All');
+  const [isMiddleCat, setIsMiddleCat] = useState('All');
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const category = queryParams.get('category');
     if (category && category in categoryArr) {
-      setIsCat(category);
+      setIsMajorCat(category);
     }
   }, []);
 
-  const selected = (value) => {
-    setIsCat(value);
-    console.log(value);
+  const majorSelected = (value) => {
+    console.log('대분류', value);
+    setIsMajorCat(value);
+  };
+
+  const midSelected = (value) => {
+    console.log('중분류', value);
+    setIsMiddleCat(value);
   };
 
   const categoryArr = {
@@ -60,6 +66,7 @@ export default function SelectBox() {
     ],
   };
 
+  console.log(Object.values(categoryArr[isMajorCat][0])[0]);
   return (
     <>
       <ul className={styles.selectUl}>
@@ -67,22 +74,58 @@ export default function SelectBox() {
           <li key={index}>
             <input
               type="button"
-              value={cat}
-              className={styles.bigCat}
+              value={
+                cat === 'All'
+                  ? '전체'
+                  : cat === 'Top'
+                  ? '상의'
+                  : cat === 'Pants'
+                  ? '하의'
+                  : cat === 'Outer'
+                  ? '아우터'
+                  : cat === 'Shoes'
+                  ? '신발'
+                  : cat === 'Skirt'
+                  ? '치마'
+                  : cat === 'Onepiece'
+                  ? '원피스'
+                  : cat === 'Accessory'
+                  ? '악세사리'
+                  : cat
+              }
+              className={
+                cat === isMajorCat ? styles.bigCatChecked : styles.bigCat
+              }
               onClick={() => {
-                selected(cat);
+                majorSelected(cat);
               }}
             />
           </li>
         ))}
       </ul>
       <ul className={styles.selectUl}>
-        {Object.keys(categoryArr[isCat]).map((index) => (
+        {/* {Object.keys(categoryArr[isCat]).map((index) => (
           <li key={index}>
             <input
               type="button"
               className={styles.smallCat}
-              value={Object.keys(categoryArr[isCat][index])[0]}
+              value={Object.values(categoryArr[isCat][index])[0]}
+            />
+          </li>
+        ))} */}
+        {categoryArr[isMajorCat].map((category, index) => (
+          <li key={index}>
+            <input
+              type="button"
+              className={
+                Object.keys(category)[0] === isMiddleCat
+                  ? styles.smallCatChecked
+                  : styles.smallCat
+              }
+              value={String(Object.values(category)[0])}
+              onClick={() => {
+                midSelected(Object.keys(category)[0]);
+              }}
             />
           </li>
         ))}
