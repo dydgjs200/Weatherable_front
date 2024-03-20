@@ -5,6 +5,10 @@ import styles from '../../../styles/User/login.module.scss';
 import { FormEvent, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setUserId } from '../../../Store/userSlice/userSlice';
+import { log } from 'console';
+// import { setUserId } from '../path/to/userSlice/userSlice';
 
 interface UserData {
   userid: string;
@@ -12,6 +16,7 @@ interface UserData {
 }
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
 
   // Ref (입력 안할 시 자동 포커스)
@@ -72,6 +77,9 @@ const Login: React.FC = () => {
       console.log('access token > ', res.data.data[1]);
       // 로그인 성공 후 세션 스토리지에 access token 저장
       sessionStorage.setItem('accessToken', res.data.data[1]);
+      console.log('res.data.userid', res.data);
+
+      dispatch(setUserId(res.data.userId));
       console.log('로그인 성공');
       // router.push('/mypage');
     } catch (error) {

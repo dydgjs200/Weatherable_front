@@ -1,3 +1,5 @@
+'use client';
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Status {
@@ -19,6 +21,5 @@ const showListSlice = createSlice({
   },
 });
 
+export const showListReducer = showListSlice.reducer; // reducer를 따로 export
 export default showListSlice;
-
-export const { showList } = showListSlice.actions;
