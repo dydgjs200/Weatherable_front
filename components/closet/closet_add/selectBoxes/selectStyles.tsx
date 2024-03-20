@@ -9,16 +9,17 @@ export default function SelectStyles() {
   const dispatch = useDispatch();
   const [isClicked, setIsClicked] = useState(null);
 
-  const submit = (value) => {
-    setIsClicked(value);
-    dispatch(selectStyleAction({ value: value }));
-  };
+  // const submit = (value) => {
+  //   setIsClicked(value);
+  //   dispatch(selectStyleAction({ value: value }));
+  // };
 
   return (
     <>
-      <label htmlFor="">스타일</label>
+      <label htmlFor="style">스타일</label>
       <div className={styles.thicknessBox}>
-        <input
+        <input type="text" name="style" value={'Casual'} readOnly />
+        {/* <input
           type="button"
           name=""
           id=""
@@ -57,7 +58,7 @@ export default function SelectStyles() {
           value={'Formal'}
           onClick={() => submit('Formal')}
           className={`${isClicked === 'Formal' && styles.thickClicked}`}
-        />
+        /> */}
       </div>
     </>
   );

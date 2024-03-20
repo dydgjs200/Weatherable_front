@@ -6,7 +6,7 @@ import styles from '../../../styles/closet/closet.module.scss';
 
 export default function AddToggleBtn() {
   const [isToggleOpen, setIsToggleOpen] = useState<Boolean>(false);
-  console.log(isToggleOpen);
+  // console.log(isToggleOpen);
 
   return (
     <div className={styles.addToggleBtn}>
@@ -21,7 +21,7 @@ export default function AddToggleBtn() {
           '옷 추가하기'
         )}
       </button>
-      {isToggleOpen && <AddToggle />}
+      {isToggleOpen && <AddToggle open={isToggleOpen} />}
     </div>
   );
 }

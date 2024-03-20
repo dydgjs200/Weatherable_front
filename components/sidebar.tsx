@@ -1,6 +1,5 @@
 import styles from '../styles/header.module.scss';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import logo from '../public/logo.png';
 import { usePathname } from 'next/navigation';
@@ -40,8 +39,8 @@ export default function SideBar({ open, close }: props) {
           <ul className={styles.navBox}>
             <li>
               <Link href="/" onClick={close}>
-                <span className="material-symbols-outlined">psychology</span>
-                <span>AI 옷 추천</span>
+                <span className="material-symbols-outlined ">psychology</span>
+                <p>AI 옷 추천</p>
               </Link>
             </li>
             <li className={styles.cat}>
@@ -52,13 +51,13 @@ export default function SideBar({ open, close }: props) {
               <Link href={`/closet/1`} onClick={close}>
                 {path == '/closet/1' && <div className={styles.path}>-</div>}
                 <span className="material-symbols-outlined">apparel</span>
-                옷장 보기
+                <p>옷장 보기</p>
               </Link>
             </li>
             <li>
               <Link href={`/closet/1`} onClick={close}>
                 <span className="material-symbols-outlined">star</span>
-                즐겨찾기 옷장
+                <p> 즐겨찾기 옷장</p>
               </Link>
             </li>
             <li className={styles.cat}>
@@ -70,13 +69,13 @@ export default function SideBar({ open, close }: props) {
                 <span className="material-symbols-outlined">
                   deployed_code_account
                 </span>
-                내 코디
+                <p>내 코디</p>
               </Link>
             </li>
             <li>
               <Link href="/" onClick={close}>
                 <span className="material-symbols-outlined">star</span>
-                즐겨찾기 코디
+                <p>즐겨찾기 코디</p>
               </Link>
             </li>
           </ul>

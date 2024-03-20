@@ -51,7 +51,6 @@ export default function SelectCat() {
   };
 
   interface aiData {
-    major_category: string;
     img: string;
   }
 
@@ -79,23 +78,25 @@ export default function SelectCat() {
     dispatch(selectMiddleCategory({ value: subcategory }));
   };
 
-  // ai용 데이터
+  // ai용 데이터 (파이썬)
   const aiData: aiData = useSelector((state: any) => ({
-    major_category: state.clothes.clothes.major_category,
     img: state.clothes.clothes.small_img,
   }));
 
-  // console.log(aiData.major_category);
-  // console.log(aiData.img);
+  console.log(category);
+  console.log(aiData.img);
+  // console.log(aiData);
 
   const formData = {
-    [aiData.major_category]: aiData.img,
+    [category]: aiData.img,
   };
-
-  // console.log(formData);
 
   useEffect(() => {
     const postStyles = async () => {
+      // const formData = new FormData();
+      // formData.append(category, aiData.img);
+
+      // console.log(formData);
       try {
         await postAddStyles(formData);
         console.log(formData);
@@ -103,10 +104,14 @@ export default function SelectCat() {
         console.error('실패: ', error);
       }
     };
-    if (aiData.img && aiData.major_category) {
+    if (aiData.img && category) {
       postStyles();
     }
-  }, [aiData.img, aiData.major_category]);
+  }, [category]);
+
+  // const formData = new FormData();
+  // formData.append(category, aiData.img);
+  // console.log(formData);
 
   return (
     <>
@@ -135,6 +140,7 @@ export default function SelectCat() {
                       value={cat}
                       onClick={() => {
                         selectCategory(cat);
+                        postAddStyles(formData);
                       }}
                     />
                   </li>
