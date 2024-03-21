@@ -2,24 +2,31 @@
 
 import styles from '../../../styles/closet/closet.module.scss';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-export default function ClothesInfoBox() {
+export default function ClothesInfoBox(data: any) {
   const liked = () => {
     console.log('좋아요!');
   };
+
+  console.log(data);
+
+  const { imagePath, id, productName } = data.clothes;
+
+  const router = useRouter();
+  const onClick = () => {
+    router.push(`/clothes/${id}`);
+  };
   return (
     <div className={styles.infoSmallBox}>
-      <Link href="/clothes/1">
+      <Link href={`/clothes/${id}`}>
         <div>
-          <span>제품명</span>
+          <span>{productName}</span>
           <button onClick={liked}>
             <span className="material-symbols-outlined">favorite</span>
           </button>
         </div>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png"
-          alt=""
-        />
+        <img src={imagePath} alt="" />
       </Link>
     </div>
   );
