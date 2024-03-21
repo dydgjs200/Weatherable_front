@@ -42,7 +42,7 @@ export const postAddClothes = async (clothesData: any) => {
         headers: {
           Authorization:
             'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
-          'Content-Type': 'multipart/form-data',
+          // 'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
       }
@@ -50,7 +50,7 @@ export const postAddClothes = async (clothesData: any) => {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log('http://localhost:8080/addClothes', error);
+    console.log('http://localhost:8080/closet', error);
   }
 };
 
@@ -62,7 +62,6 @@ export const postAddStyles = async (data: any) => {
     for (const key in data) {
       formData.append(key, data[key]);
     }
-    console.log(formData);
 
     const response = await axios.post(
       process.env.NEXT_PUBLIC_PYTHON + '/sendmessage',

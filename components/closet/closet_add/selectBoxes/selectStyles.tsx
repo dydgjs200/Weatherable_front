@@ -22,6 +22,9 @@ export default function SelectStyles() {
   const [styleState, setStyleState] = useState('');
 
   useEffect(() => {
+    // 초기 렌더링 시에는 아무것도 하지 않음
+    if (aiStyles.style_num === undefined) return;
+
     switch (aiStyles.style_num) {
       case '0':
         setStyleState('Casual');
