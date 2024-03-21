@@ -121,7 +121,6 @@ export default function SelectCat() {
   useEffect(() => {
     const postStyles = async () => {
       try {
-
         console.log('파이썬 전송 카테고리', pythonCategory);
 
         const aiStyle = await postAddStyles(formData);
@@ -243,7 +242,7 @@ export default function SelectCat() {
                       type="button"
                       value={`${item[Object.keys(item)[0]]}`}
                       onClick={() => {
-                        selectSubCategory(Object.values(item)[0]);
+                        selectSubCategory(Object.keys(item)[0]);
                       }}
                     />
                   </li>

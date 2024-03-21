@@ -28,21 +28,16 @@ export const imgSend = async (file: File) => {
 };
 
 // 옷장 등록 폼 전송
-export const postAddClothes = async (clothesData: any) => {
+export const postAddClothes = async (closetDTO: any) => {
   try {
-    const formData = new FormData();
-    for (const key in clothesData) {
-      formData.append(key, clothesData[key]);
-    }
-
     const response = await axios.post(
       'http://localhost:8080/closet',
-      formData,
+      closetDTO,
       {
         headers: {
           Authorization:
             'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
-          // 'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
         },
         withCredentials: true,
       }
