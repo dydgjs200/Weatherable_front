@@ -59,4 +59,20 @@ const addClothesSlice = createSlice({
 });
 
 export const addClothesReducer = addClothesSlice.reducer; // reducer를 따로 export
+
+// export default addClothesSlice;
+
 export default addClothesSlice;
+
+export const {
+  selectImg,
+  selectProductName,
+  selectBrandName,
+  selectMajorCategory,
+  selectMiddleCategory,
+  selectSize,
+  selectWeather,
+  selectThickness,
+  selectStyle,
+  selectPrice,
+} = addClothesSlice.actions;
