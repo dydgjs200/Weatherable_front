@@ -7,6 +7,7 @@ interface UserData {
   userid: string;
   height: number;
   weight: number;
+  favoriteStyles: string[];
 }
 function MypageEditContent() {
   // 각 스타일 요소의 상태를 관리하는 배열
@@ -17,6 +18,7 @@ function MypageEditContent() {
     userid: '',
     height: null,
     weight: null,
+    favoriteStyles: [],
   });
   // 스타일 요소의 상태를 토글하는 함수
   const handleDivChange = (index) => {
@@ -50,10 +52,10 @@ function MypageEditContent() {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_DB_HOST}/user`
         );
-        const { height, weight, userid } = response.data.data; // 서버에서 받은 닉네임
+        const { height, weight, userid, favoriteStyles } = response.data.data;
         console.log(response.data.data);
 
-        setUserData({ height, weight, userid });
+        setUserData({ height, weight, userid, favoriteStyles });
       } catch (error) {
         console.error('유저 데이터를 가져오는 도중 오류 발생', error);
       }
@@ -79,7 +81,7 @@ function MypageEditContent() {
 
   // 키 수정
   const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거
+    const value = e.target.value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거 (숫자만 칠수 있게)
     setUserData({ ...userData, height: value ? parseInt(value) : null });
   };
 
