@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import styles from '../../../../../styles/closet/closet.module.scss';
-import clothStyles from '../../../../../styles/closet/clothes.module.scss';
+import styles from '../../../../../../styles/closet/closet.module.scss';
+import clothStyles from '../../../../../../styles/closet/clothes.module.scss';
 import Image from 'next/image';
 
-export default function Clothes({ params: { id } }) {
+export default function ClothesInfo({ params: { id } }) {
   console.log(id);
   interface clothes {
     img: string;

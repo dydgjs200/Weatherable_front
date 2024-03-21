@@ -86,7 +86,7 @@ export const postAddStyles = async (data: any) => {
 //   }
 // };
 
-// 크롤링 옷 데이터 가져오기
+// 크롤링 옷 데이터 가져오기 (메인)
 export const getCrawlingClothes = async () => {
   try {
     const response = await axios.get(
@@ -101,11 +101,33 @@ export const getCrawlingClothes = async () => {
       }
     );
 
-    console.log(response.data);
-    return response.data;
+    // console.log(response.data.data);
+    return response.data.data;
   } catch (error) {
     console.error(error);
     throw new Error('예상치 못한 오류가 발생했습니다! (크롤링 옷 불러오기)');
+  }
+};
+
+export const getUserClothes = async () => {
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_DB_HOST + '/closet',
+      {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
+    );
+
+    // console.log(response.data.data);
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('예상치 못한 오류가 발생했습니다! (유저 옷 정보 불러오기)');
   }
 };
 

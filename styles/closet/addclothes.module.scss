@@ -92,6 +92,7 @@
 }
 
 .mainInfoBoxDefault {
+  // background-color: pink;
   width: 90%;
   margin-top: 1rem;
   display: grid;
@@ -118,15 +119,31 @@
       color: #333;
       div {
         width: 80%;
+        height: 20%;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        // background-color: blue;
         button {
           background: none;
           border: none;
         }
         span {
           font-size: 0.9rem;
+        }
+        .title {
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          height: fit-content;
+          // white-space: nowrap;
+          line-height: 0.9rem;
+          height: 100%;
+          // background-color: pink;
+          text-align: center;
+          // line-height: 0.9rem;
+          // white-space: nowrap;
+          // background-color: pink;
         }
       }
     }
