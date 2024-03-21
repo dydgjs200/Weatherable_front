@@ -21,5 +21,7 @@ const showListSlice = createSlice({
   },
 });
 
-export const showListReducer = showListSlice.reducer; // reducer를 따로 export
+export const showListReducer = showListSlice.reducer;
+// reducer를 따로 export
 export default showListSlice;
+export const { showList } = showListSlice.actions;
