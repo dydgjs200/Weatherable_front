@@ -114,8 +114,6 @@ export default function SelectCat() {
     }
   }, [category]);
 
-  console.log('파이썬 전송 카테고리', pythonCategory);
-
   let formData = {
     [pythonCategory]: aiData.img,
   };
@@ -123,6 +121,9 @@ export default function SelectCat() {
   useEffect(() => {
     const postStyles = async () => {
       try {
+
+        console.log('파이썬 전송 카테고리', pythonCategory);
+
         const aiStyle = await postAddStyles(formData);
         console.log('실제 전송 데이터', formData);
 
