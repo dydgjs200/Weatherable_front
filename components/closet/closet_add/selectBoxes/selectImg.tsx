@@ -31,6 +31,7 @@ export default function SelectImg() {
             // s3 이미지 저장
             const imgData = await imgSend(file);
             setImgUrl(imgData);
+            // dispatch(selectImgAction({ value: imgUrl }));
           } catch (err) {
             console.log(err);
           }
@@ -42,7 +43,13 @@ export default function SelectImg() {
     }
   };
 
-  dispatch(selectImgAction({ value: imgUrl }));
+  useEffect(() => {
+    if (imgUrl !== '') {
+      dispatch(selectImgAction({ value: imgUrl }));
+    }
+  }, [imgUrl]);
+
+  // dispatch(selectImgAction({ value: imgUrl }));
 
   return (
     <>

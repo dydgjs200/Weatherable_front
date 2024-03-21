@@ -18,6 +18,7 @@ const initialState: clothes = {
     thickness: '',
     Style: '',
     price: '',
+    score: '',
   },
 };
 
@@ -49,11 +50,17 @@ const addClothesSlice = createSlice({
     selectThickness: (state, action: PayloadAction<{ value: string }>) => {
       state.clothes.thickness = action.payload.value;
     },
-    selectStyle: (state, action: PayloadAction<{ value: string }>) => {
-      state.clothes.style = action.payload.value;
+    selectStyle_num: (state, action: PayloadAction<{ value: string }>) => {
+      state.clothes.style_num = action.payload.value;
+    },
+    selectStyle_str: (state, action: PayloadAction<{ value: string }>) => {
+      state.clothes.style_str = action.payload.value;
     },
     selectPrice: (state, action: PayloadAction<{ value: string }>) => {
       state.clothes.price = action.payload.value;
+    },
+    selectScore: (state, action: PayloadAction<{ value: string }>) => {
+      state.clothes.score = action.payload.value;
     },
   },
 });
@@ -73,6 +80,8 @@ export const {
   selectSize,
   selectWeather,
   selectThickness,
-  selectStyle,
+  selectStyle_num,
+  selectStyle_str,
   selectPrice,
+  selectScore,
 } = addClothesSlice.actions;
