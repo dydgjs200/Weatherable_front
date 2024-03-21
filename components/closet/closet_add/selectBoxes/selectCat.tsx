@@ -61,7 +61,7 @@ export default function SelectCat() {
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [isSubCategoryDropdownOpen, setIsSubCategoryDropdownOpen] =
     useState(false);
-  const [categoryInfo, setCategoryInfo] = useState(categoryArr['Top']);
+  const [categoryInfo, setCategoryInfo] = useState([]);
 
   const selectCategory = (category) => {
     setCategory(category);
@@ -93,21 +93,18 @@ export default function SelectCat() {
 
   useEffect(() => {
     const postStyles = async () => {
-      // const formData = new FormData();
-      // formData.append(category, aiData.img);
-
-      // console.log(formData);
       try {
-        await postAddStyles(formData);
-        console.log(formData);
+        if (aiData && category) {
+          const formData = { [category]: aiData };
+          await postAddStyles(formData);
+          console.log(formData);
+        }
       } catch (error) {
         console.error('실패: ', error);
       }
     };
-    if (aiData.img && category) {
-      postStyles();
-    }
-  }, [category]);
+    postStyles();
+  }, [aiData, category]);
 
   // const formData = new FormData();
   // formData.append(category, aiData.img);
