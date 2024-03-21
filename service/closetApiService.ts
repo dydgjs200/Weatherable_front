@@ -109,7 +109,7 @@ export const getCrawlingClothes = async () => {
   }
 };
 
-// 유저 옷 정보
+// 유저 옷 정보 (유저 옷장)
 export const getUserClothes = async () => {
   try {
     const response = await axios.get(
@@ -124,8 +124,8 @@ export const getUserClothes = async () => {
       }
     );
 
-    // console.log(response.data.data);
-    return response.data.data;
+    console.log(response.data.data);
+    return response;
   } catch (error) {
     console.error(error);
     throw new Error('예상치 못한 오류가 발생했습니다! (유저 옷 정보 불러오기)');
