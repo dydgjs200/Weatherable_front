@@ -81,15 +81,15 @@ export const postAddStyles = async (data: any) => {
 };
 
 // 스타일 가져오기
-export const getAddStyles = async () => {
-  try {
-    const response = await axios.get('http://localhost:5000/getAddStyles');
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw new Error('예상치 못한 오류가 발생했습니다! (스타일 불러오기)');
-  }
-};
+// export const getAddStyles = async () => {
+//   try {
+//     const response = await axios.get('http://localhost:5000/getAddStyles');
+//     return response.data;
+//   } catch (error) {
+//     console.error(error);
+//     throw new Error('예상치 못한 오류가 발생했습니다! (스타일 불러오기)');
+//   }
+// };
 
 // 크롤링 옷 데이터 가져오기
 export const getCrawlingClothes = async () => {

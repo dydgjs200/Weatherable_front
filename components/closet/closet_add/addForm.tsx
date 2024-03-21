@@ -25,7 +25,7 @@ export default function AddForm() {
     size: string;
     weather: string;
     thickness: string;
-    style_str: string;
+    style: string;
     price: string;
   }
 
@@ -38,7 +38,7 @@ export default function AddForm() {
     size: state.clothes.clothes.size,
     weather: state.clothes.clothes.weather,
     thickness: state.clothes.clothes.thickness,
-    style_str: state.clothes.clothes.style_str,
+    style: state.clothes.clothes.style_str,
     price: state.clothes.clothes.price,
     score: state.clothes.clothes.score,
   }));
