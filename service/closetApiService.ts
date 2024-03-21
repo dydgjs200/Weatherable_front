@@ -94,7 +94,6 @@ export const getAddStyles = async () => {
 // 크롤링 옷 데이터 가져오기
 export const getCrawlingClothes = async () => {
   try {
-
     const response = await axios.get(
       process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothesinfo'
     );
@@ -105,3 +104,19 @@ export const getCrawlingClothes = async () => {
     throw new Error('예상치 못한 오류가 발생했습니다! (크롤링 옷 불러오기)');
   }
 };
+
+// 크롤링 옷 검색
+export const searchClothesGet = async (wordData: string) => {
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothesinfo/search',
+      { params: { wordData } }
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw new Error('예상치 못한 오류가 발생했습니다! (크롤링 데이터 검색)');
+  }
+};
+
+// 옷 정보 수정

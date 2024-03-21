@@ -171,9 +171,7 @@ export default function SelectCat() {
                   <li key={index}>
                     <input
                       type="button"
-                      value={`${Object.keys(item)[0]}: ${
-                        item[Object.keys(item)[0]]
-                      }`}
+                      value={`${item[Object.keys(item)[0]]}`}
                       onClick={() => {
                         selectSubCategory(Object.keys(item)[0]);
                       }}

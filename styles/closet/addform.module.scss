@@ -177,15 +177,15 @@
 }
 
 .btnBox {
-  //   background-color: pink;
+  // background-color: pink;
   width: 80%;
-  margin-top: 1rem;
-  height: 5vh;
+  margin-top: 2rem;
+  height: 3vh;
   @include flex();
   justify-content: space-between;
   button {
     border: none;
-    border-radius: $radius-s;
+    border-radius: $radius-m;
     height: 100%;
     width: 40%;
     color: white;

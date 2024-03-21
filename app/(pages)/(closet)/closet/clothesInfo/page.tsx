@@ -4,7 +4,10 @@ import styles from '../../../../../styles/closet/addclothes.module.scss';
 import SelectBoxCrawling from '../../../../../components/closet/all_clothes/selectBoxCrawling';
 import ClothesInfoBoxCrawling from '../../../../../components/closet/all_clothes/clothesInfoBoxCrawling';
 import { useEffect, useState } from 'react';
-import { getCrawlingClothes } from '../../../../../service/closetApiService';
+import {
+  getCrawlingClothes,
+  searchClothesGet,
+} from '../../../../../service/closetApiService';
 
 export default function AllClothes() {
   // 크롤링 데이터 가져오기
@@ -19,23 +22,34 @@ export default function AllClothes() {
     crawlingData();
   }, []);
 
-  const [searchClothes, setSearchClothes] = useState('');
+  const [searchData, setSearchData] = useState('');
+
+  const searchClothes = async (e: any) => {
+    e.preventDefault();
+    console.log(searchData);
+
+    const searchResult = await searchClothesGet(searchData);
+
+    console.log(searchResult);
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.searchInputBox}>
-        <label htmlFor="search">
-          <span className="material-symbols-outlined">search</span>
-        </label>
-        <input
-          type="text"
-          name="search"
-          id="search"
-          placeholder="검색어를 입력해주세요"
-          onChange={(e) => {
-            setSearchClothes(e.target.value);
-          }}
-        />
+        <form onSubmit={searchClothes}>
+          <label htmlFor="search">
+            <span className="material-symbols-outlined">search</span>
+          </label>
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="검색어를 입력해주세요"
+            onChange={(e) => {
+              setSearchData(e.target.value);
+            }}
+          />
+        </form>
       </div>
       <div className={styles.selectBox}>
         <SelectBoxCrawling />

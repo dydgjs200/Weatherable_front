@@ -45,6 +45,7 @@ export default function Clothes() {
     price,
   } = clothes;
 
+  // 옷 정보 수정
   const changeValue = (e) => {
     const { value, name } = e.target;
     console.log(value);
@@ -55,9 +56,13 @@ export default function Clothes() {
     }));
   };
 
+  const modifyClothes = () => {
+    console.log(clothes);
+  };
+
   return (
     <div className={styles.container}>
-      <div className={clothStyles.pNameContainer}>
+      <form className={clothStyles.pNameContainer}>
         <input
           type="text"
           name="productName"
@@ -66,7 +71,7 @@ export default function Clothes() {
           value={productName}
           onChange={changeValue}
         />
-      </div>
+      </form>
       <div className={clothStyles.imgContainer}>
         {/* <Image src={} alt="로고" />; */}
         <img
@@ -121,7 +126,7 @@ export default function Clothes() {
         </div>
       </div>
       <div className={clothStyles.btnContainer}>
-        <button>수정하기</button>
+        <button onClick={modifyClothes}>수정하기</button>
         <button>삭제하기</button>
       </div>
     </div>
