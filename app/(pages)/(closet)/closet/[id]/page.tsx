@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 export default function Closet() {
   const sortStatus = useSelector((state: any) => state.status.status);
-  console.log('sort 상태', sortStatus);
+  // console.log('sort 상태', sortStatus);
 
   return (
     <div className={styles.container}>

@@ -10,17 +10,23 @@ import {
 } from '../../../../../service/closetApiService';
 
 export default function AllClothes() {
+  const [crawClothes, setCrawClothes] = useState([]);
   // 크롤링 데이터 가져오기
   useEffect(() => {
     const crawlingData = async () => {
       try {
-        await getCrawlingClothes();
+        const crawlingClothes = await getCrawlingClothes();
+        setCrawClothes(crawlingClothes.slice(0, 10));
       } catch (error) {
         console.log('크롤링 데이터 실페: ', error);
       }
     };
     crawlingData();
   }, []);
+
+  // console.log(crawClothes[0].id);
+
+  // console.log(Object.values(crawClothes));
 
   const [searchData, setSearchData] = useState('');
 
@@ -29,8 +35,6 @@ export default function AllClothes() {
     console.log(searchData);
 
     const searchResult = await searchClothesGet(searchData);
-
-    console.log(searchResult);
   };
 
   return (
@@ -55,8 +59,9 @@ export default function AllClothes() {
         <SelectBoxCrawling />
       </div>
       <div className={styles.mainInfoBoxDefault}>
-        <ClothesInfoBoxCrawling />
-        <ClothesInfoBoxCrawling />
+        {crawClothes.map((clothes) => (
+          <ClothesInfoBoxCrawling data={clothes} key={clothes.id} />
+        ))}
       </div>
     </div>
   );
