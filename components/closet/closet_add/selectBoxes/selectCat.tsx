@@ -58,7 +58,7 @@ export default function SelectCat() {
 
   const dispatch = useDispatch();
 
-  const [category, setCategory] = useState('Top');
+  const [category, setCategory] = useState('');
   const [subCategory, setSubCategory] = useState('');
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [isSubCategoryDropdownOpen, setIsSubCategoryDropdownOpen] =
@@ -123,7 +123,6 @@ export default function SelectCat() {
   useEffect(() => {
     const postStyles = async () => {
       try {
-
         const aiStyle = await postAddStyles(formData);
         console.log('실제 전송 데이터', formData);
 
@@ -140,7 +139,6 @@ export default function SelectCat() {
       postStyles();
     }
   }, [pythonCategory]);
-
 
   // const postStyles = async () => {
   //   try {

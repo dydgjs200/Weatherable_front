@@ -17,7 +17,6 @@ export default function SelectStyles() {
     score: state.clothes.clothes.score,
   }));
 
-  console.log('스타일', aiStyles.style_num);
   // console.log('스코어', aiStyles.score);
 
   const [styleState, setStyleState] = useState('');
@@ -45,6 +44,7 @@ export default function SelectStyles() {
         dispatch(selectStyle_str({ value: 'Formal' }));
         break;
     }
+    console.log('스타일', aiStyles.style_num);
   }, [aiStyles.style_num]);
 
   return (
