@@ -41,12 +41,10 @@ export default function SelectImg() {
         };
         fetchData();
         console.log('s3저장 경로', imgUrl);
-
       };
       reader.readAsDataURL(file);
     }
   };
-
 
   useEffect(() => {
     if (imgUrl !== '') {
