@@ -26,17 +26,35 @@ export default function SelectImg() {
       reader.onloadend = async () => {
         const imageUrl = reader.result as string;
         setImgPreview(imageUrl);
-        try {
-          const imgData = await imgSend(file);
-          setImgUrl(imgData);
-          console.log('s3저장 경로', imgData);
-        } catch (err) {
-          console.log(err);
-        }
+
+        // dispatch(selectImgAction({ value: imageUrl }));
+        // ai를 위해 이미지 저장
+        const fetchData = async () => {
+          try {
+            // s3 이미지 저장
+            const imgData = await imgSend(file);
+            setImgUrl(imgData);
+            // dispatch(selectImgAction({ value: imgUrl }));
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        fetchData();
+        console.log('s3저장 경로', imgUrl);
+
       };
       reader.readAsDataURL(file);
     }
   };
+
+
+  useEffect(() => {
+    if (imgUrl !== '') {
+      dispatch(selectImgAction({ value: imgUrl }));
+    }
+  }, [imgUrl]);
+
+  // dispatch(selectImgAction({ value: imgUrl }));
 
   return (
     <>

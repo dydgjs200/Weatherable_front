@@ -73,8 +73,8 @@ export const postAddStyles = async (data: any) => {
         withCredentials: true,
       }
     );
-    console.log(response);
-    return response;
+    console.log(response.data);
+    return response.data;
   } catch (error) {
     console.log(process.env.NEXT_PUBLIC_PYTHON + '/sendmessage', error);
   }
@@ -95,9 +95,18 @@ export const getAddStyles = async () => {
 export const getCrawlingClothes = async () => {
   try {
     const response = await axios.get(
-      process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothesinfo'
+      process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo',
+      {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
     );
 
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);

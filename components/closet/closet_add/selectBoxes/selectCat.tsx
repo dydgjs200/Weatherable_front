@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectMajorCategory,
   selectMiddleCategory,
+  selectStyle_num,
+  selectScore,
 } from '../../../../Store/closetSlice/addClothesSlice';
 import { postAddStyles } from '../../../../service/closetApiService';
 
@@ -83,32 +85,71 @@ export default function SelectCat() {
     img: state.clothes.clothes.small_img,
   }));
 
-  console.log(category);
-  console.log(aiData.img);
+  // console.log(category);
+  // console.log(aiData.img);
   // console.log(aiData);
 
-  const formData = {
-    [category]: aiData.img,
+  const [pythonCategory, setPythonCategoty] = useState('');
+
+  useEffect(() => {
+    switch (category) {
+      case 'Top':
+        setPythonCategoty('Top');
+        break;
+      case 'Pants':
+        setPythonCategoty('Bottom');
+        break;
+      case 'Outer':
+        setPythonCategoty('Outer');
+        break;
+      case 'Shoes':
+        setPythonCategoty('Shoes');
+        break;
+      case 'Skirt':
+        setPythonCategoty('Bottom');
+        break;
+      case 'Skirt':
+        setPythonCategoty('Bottom');
+        break;
+    }
+  }, [category]);
+
+  console.log('파이썬 전송 카테고리', pythonCategory);
+
+  let formData = {
+    [pythonCategory]: aiData.img,
   };
 
   useEffect(() => {
     const postStyles = async () => {
       try {
-        if (aiData && category) {
-          const formData = { [category]: aiData };
-          await postAddStyles(formData);
-          console.log(formData);
-        }
+
+        const aiStyle = await postAddStyles(formData);
+        console.log('실제 전송 데이터', formData);
+
+        // console.log('스타일', Object.keys(aiStyle)[0]);
+        // console.log('스코어', Object.values(aiStyle)[0]);
+        dispatch(selectStyle_num({ value: Object.keys(aiStyle)[0] as string }));
+        dispatch(selectScore({ value: Object.values(aiStyle)[0] as string }));
       } catch (error) {
         console.error('실패: ', error);
       }
     };
-    postStyles();
-  }, [aiData, category]);
 
-  // const formData = new FormData();
-  // formData.append(category, aiData.img);
-  // console.log(formData);
+    if (aiData.img && category) {
+      postStyles();
+    }
+  }, [pythonCategory]);
+
+
+  // const postStyles = async () => {
+  //   try {
+  //     await postAddStyles(formData);
+  //     console.log('실제 전송 데이터', formData);
+  //   } catch (error) {
+  //     console.error('실패: ', error);
+  //   }
+  // };
 
   return (
     <>
@@ -122,7 +163,23 @@ export default function SelectCat() {
               e.preventDefault();
             }}
           >
-            <span>{category}</span>
+            <span>
+              {category === 'Top'
+                ? '상의'
+                : category === 'Pants'
+                ? '하의'
+                : category === 'Outer'
+                ? '아우터'
+                : category === 'Shoes'
+                ? '신발'
+                : category === 'Skirt'
+                ? '치마'
+                : category === 'Onepiece'
+                ? '원피스'
+                : category === 'Accessory'
+                ? '악세사리'
+                : category}
+            </span>
             <span className="material-symbols-outlined">
               keyboard_arrow_down
             </span>
@@ -134,10 +191,27 @@ export default function SelectCat() {
                   <li key={index}>
                     <input
                       type="button"
-                      value={cat}
+                      value={
+                        cat === 'Top'
+                          ? '상의'
+                          : cat === 'Pants'
+                          ? '하의'
+                          : cat === 'Outer'
+                          ? '아우터'
+                          : cat === 'Shoes'
+                          ? '신발'
+                          : cat === 'Skirt'
+                          ? '치마'
+                          : cat === 'Onepiece'
+                          ? '원피스'
+                          : cat === 'Accessory'
+                          ? '악세사리'
+                          : cat
+                      }
                       onClick={() => {
                         selectCategory(cat);
-                        postAddStyles(formData);
+                        // postAddStyles(formData);
+                        // postStyles();
                       }}
                     />
                   </li>
@@ -170,7 +244,7 @@ export default function SelectCat() {
                       type="button"
                       value={`${item[Object.keys(item)[0]]}`}
                       onClick={() => {
-                        selectSubCategory(Object.keys(item)[0]);
+                        selectSubCategory(Object.values(item)[0]);
                       }}
                     />
                   </li>
