@@ -47,9 +47,10 @@ export const postAddClothes = async (clothesData: any) => {
         withCredentials: true,
       }
     );
+    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log('http://localhost:8080/addClothes');
+    console.log('http://localhost:8080/addClothes', error);
   }
 };
 
