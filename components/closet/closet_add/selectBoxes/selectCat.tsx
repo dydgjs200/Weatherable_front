@@ -63,7 +63,7 @@ export default function SelectCat() {
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [isSubCategoryDropdownOpen, setIsSubCategoryDropdownOpen] =
     useState(false);
-  const [categoryInfo, setCategoryInfo] = useState(categoryArr['Top']);
+  const [categoryInfo, setCategoryInfo] = useState([]);
 
   const selectCategory = (category) => {
     setCategory(category);
@@ -123,6 +123,7 @@ export default function SelectCat() {
   useEffect(() => {
     const postStyles = async () => {
       try {
+
         const aiStyle = await postAddStyles(formData);
         console.log('실제 전송 데이터', formData);
 
@@ -134,10 +135,12 @@ export default function SelectCat() {
         console.error('실패: ', error);
       }
     };
+
     if (aiData.img && category) {
       postStyles();
     }
   }, [pythonCategory]);
+
 
   // const postStyles = async () => {
   //   try {
