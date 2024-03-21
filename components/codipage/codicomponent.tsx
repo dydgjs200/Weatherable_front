@@ -1,15 +1,26 @@
 'use client';
-// CodiPage 컴포넌트
-// CodiPage 컴포넌트
 import React, { useState } from 'react';
 import styles from '../../styles/codi/codi.module.scss';
+import styles2 from '../../styles/codi/codi2.module.scss';
+import Cookies from 'js-cookie';
+
 import ClosetPage from '../../components/uploadcloset/uploadcloset';
 import MyComponent from '../codipage/image';
 
 interface CodiPageProps {}
 
-const CodiPage: React.FC<CodiPageProps> = ({}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 변수
+const CodiPage: React.FC<CodiPageProps> = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedIndexes, setSelectedIndexes] = useState<{
+    [key: string]: number | null;
+  }>({
+    모자: null,
+    상의: null,
+    겉옷: null,
+    하의: null,
+    신발: null,
+  });
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedImages, setSelectedImages] = useState<{
     [key: string]: string | null;
   }>({
@@ -18,10 +29,10 @@ const CodiPage: React.FC<CodiPageProps> = ({}) => {
     겉옷: null,
     하의: null,
     신발: null,
-  }); // 각 부위에 대한 선택된 이미지 상태 변수
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null); // 선택된 부위 상태 변수
+  });
 
-  const openModal = () => {
+  const openModal = (category: string) => {
+    setSelectedCategory(category);
     setIsModalOpen(true);
   };
 
@@ -29,86 +40,111 @@ const CodiPage: React.FC<CodiPageProps> = ({}) => {
     setIsModalOpen(false);
   };
 
-  // 이미지 선택 시 처리 함수
-  const handleImageSelect = (imageSrc: string) => {
-    const updatedSelectedImages = { ...selectedImages };
-    updatedSelectedImages[selectedCategory!] = imageSrc;
-    setSelectedImages(updatedSelectedImages);
-    closeModal(); // 이미지를 선택하면 모달을 닫음
+  const handleImageSelect = (imageSrc: string, index: number) => {
+    const updatedSelectedIndexes = { ...selectedIndexes };
+    updatedSelectedIndexes[selectedCategory!] = index;
+    setSelectedIndexes(updatedSelectedIndexes);
+    setSelectedImages({ ...selectedImages, [selectedCategory!]: imageSrc });
+    closeModal();
   };
 
-  const selectCategory = (category: string) => {
-    setSelectedCategory(category);
-    openModal(); // 선택한 부위에 따라 모달을 열음
+  const handleRegister = () => {
+    // 등록하기 버튼 클릭 시 쿠키에 선택된 인덱스만 저장
+    Cookies.set('selectedIndexes', JSON.stringify(selectedIndexes));
+    alert('등록되었습니다.');
   };
 
   return (
     <div>
-      {/* CodiPage 컴포넌트의 내용 */}
-      <div className={styles.container}>
-        {/* 모달 버튼 */}
+      <div className={styles2.container}>
         <div
-          className={styles.uploadButton}
-          onClick={() => selectCategory('모자')}
+          className={styles2.uploadButtonHat}
+          onClick={() => openModal('모자')}
         >
-          모자
+          {' '}
+          {selectedIndexes['모자'] !== null ? (
+            <MyComponent
+              // imageindex={`${selectedIndexes['모자']}`}
+              imageSrc={`${selectedImages['모자']}`}
+              onClick={() => openModal('모자')} // onClick prop을 전달합니다.
+            />
+          ) : (
+            '모자'
+          )}
         </div>
-        {selectedCategory === '모자' && selectedImages['모자'] && (
-          <MyComponent imageSrc={selectedImages['모자']} />
-        )}
-
         <div
-          className={styles.uploadButton}
-          onClick={() => selectCategory('상의')}
+          className={styles2.uploadButtonHat}
+          onClick={() => openModal('상의')}
         >
-          상의
+          {' '}
+          {selectedIndexes['상의'] !== null ? (
+            <MyComponent
+              // imageindex={`${selectedIndexes['모자']}`}
+              imageSrc={`${selectedImages['상의']}`}
+              onClick={() => openModal('상의')} // onClick prop을 전달합니다.
+            />
+          ) : (
+            '상의'
+          )}
         </div>
-        {selectedCategory === '상의' && selectedImages['상의'] && (
-          <MyComponent imageSrc={selectedImages['상의']} />
-        )}
-
         <div
-          className={styles.uploadButton}
-          onClick={() => selectCategory('겉옷')}
+          className={styles2.uploadButtonHat}
+          onClick={() => openModal('겉옷')}
         >
-          겉옷
+          {' '}
+          {selectedIndexes['겉옷'] !== null ? (
+            <MyComponent
+              // imageindex={`${selectedIndexes['모자']}`}
+              imageSrc={`${selectedImages['겉옷']}`}
+              onClick={() => openModal('겉옷')} // onClick prop을 전달합니다.
+            />
+          ) : (
+            '겉옷'
+          )}
         </div>
-        {selectedCategory === '겉옷' && selectedImages['겉옷'] && (
-          <MyComponent imageSrc={selectedImages['겉옷']} />
-        )}
-
         <div
-          className={styles.uploadButton}
-          onClick={() => selectCategory('하의')}
+          className={styles2.uploadButtonHat}
+          onClick={() => openModal('하의')}
         >
-          하의
+          {' '}
+          {selectedIndexes['하의'] !== null ? (
+            <MyComponent
+              // imageindex={`${selectedIndexes['모자']}`}
+              imageSrc={`${selectedImages['하의']}`}
+              onClick={() => openModal('하의')} // onClick prop을 전달합니다.
+            />
+          ) : (
+            '하의'
+          )}
         </div>
-        {selectedCategory === '하의' && selectedImages['하의'] && (
-          <MyComponent imageSrc={selectedImages['하의']} />
-        )}
-
         <div
-          className={styles.uploadButton}
-          onClick={() => selectCategory('신발')}
+          className={styles2.uploadButtonHat}
+          onClick={() => openModal('신발')}
         >
-          신발
+          {' '}
+          {selectedIndexes['신발'] !== null ? (
+            <MyComponent
+              // imageindex={`${selectedIndexes['모자']}`}
+              imageSrc={`${selectedImages['신발']}`}
+              onClick={() => openModal('신발')} // onClick prop을 전달합니다.
+            />
+          ) : (
+            '신발'
+          )}
         </div>
-        {selectedCategory === '신발' && selectedImages['신발'] && (
-          <MyComponent imageSrc={selectedImages['신발']} />
-        )}
       </div>
 
-      {/* 모달 */}
       {isModalOpen && (
         <div className={styles.modal}>
           <button onClick={closeModal}>Close Modal</button>
           <div className={styles.modalContent}>
-            {/* ClosetPage에 이미지 선택 핸들러 전달 */}
             <ClosetPage onImageSelect={handleImageSelect} />
-            {/* 선택된 이미지가 있을 때만 보여줌 */}
           </div>
         </div>
       )}
+      <div>
+        <button onClick={handleRegister}>등록하기</button>
+      </div>
     </div>
   );
 };

@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
-
-interface Props {
-  // 여기에 컴포넌트의 Props 인터페이스를 정의합니다
-  imageSrc: string | null;
+// MyComponent.tsx
+import React from 'react';
+import styles2 from '../../styles/codi/codi2.module.scss';
+interface MyComponentProps {
+  imageSrc: string;
+  onClick: () => void;
 }
 
-const MyComponent: React.FC<Props> = ({ imageSrc }) => {
-  // 여기에 컴포넌트의 로직을 작성합니다.
-
-  return <div>{imageSrc && <img src={imageSrc} alt="Selected Outfit" />}</div>;
+const MyComponent: React.FC<MyComponentProps> = ({ imageSrc, onClick }) => {
+  return (
+    <div>
+      <img
+        className={styles2.img}
+        src={imageSrc}
+        alt="Image"
+        onClick={onClick}
+      />
+    </div>
+  );
 };
 
 export default MyComponent;
