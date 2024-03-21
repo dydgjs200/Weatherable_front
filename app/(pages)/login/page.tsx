@@ -7,8 +7,6 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setUserId } from '../../../Store/userSlice/userSlice';
-import { log } from 'console';
-// import { setUserId } from '../path/to/userSlice/userSlice';
 
 interface UserData {
   userid: string;
@@ -74,12 +72,12 @@ const Login: React.FC = () => {
         `${process.env.NEXT_PUBLIC_DB_HOST}/login`,
         userData
       );
-      console.log('access token > ', res.data.data[1]);
-      // 로그인 성공 후 세션 스토리지에 access token 저장
+      // 로그인 성공 후 세션 스토리지에 access token 저장 , refreshToken 저장
+      sessionStorage.setItem('refreshToken', res.data.data[0]);
       sessionStorage.setItem('accessToken', res.data.data[1]);
-      console.log('res.data.userid', res.data);
+      // console.log('res.data.userid', res.data);
 
-      dispatch(setUserId(res.data.userId));
+      dispatch(setUserId(userData.userid));
       console.log('로그인 성공');
       // router.push('/mypage');
     } catch (error) {
