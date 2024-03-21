@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../../styles/closet/addform.module.scss';
 import SelectCat from './selectBoxes/selectCat';
 import SelectSize from './selectBoxes/selectSize';
-import SelectColor from './selectBoxes/selectColor';
 import SelectThickness from './selectBoxes/selectThickness';
 import SelectWeather from './selectBoxes/selectWeather';
 import SelectStyles from './selectBoxes/selectStyles';
@@ -27,6 +26,7 @@ export default function AddForm() {
     thickness: string;
     style: string;
     price: string;
+    score: string;
   }
 
   const totalData: TotalData = useSelector((state: any) => ({
@@ -43,12 +43,30 @@ export default function AddForm() {
     score: state.clothes.clothes.score,
   }));
 
+  const convertToClosetDTO = (data: TotalData): any => {
+    return {
+      score: parseFloat(data.score),
+      brand: data.brand,
+      majorCategory: data.major_category,
+      middleCategory: data.middle_category,
+      price: parseInt(data.price),
+      size: data.size,
+      thickness: data.thickness,
+      productName: data.product_name,
+      imagePath: data.small_img,
+      style: data.style,
+      season: data.weather,
+      createdAt: new Date().toISOString(),
+    };
+  };
+
   const addClothes = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await postAddClothes(totalData);
+      const closetDTO = convertToClosetDTO(totalData);
+      await postAddClothes(closetDTO);
       console.log('post 완료');
-      console.log(totalData);
+      console.log(closetDTO);
     } catch (error) {
       console.error('실패: ', error);
     }
