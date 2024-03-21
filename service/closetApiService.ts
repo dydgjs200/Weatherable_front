@@ -109,6 +109,7 @@ export const getCrawlingClothes = async () => {
   }
 };
 
+// 유저 옷 정보
 export const getUserClothes = async () => {
   try {
     const response = await axios.get(
