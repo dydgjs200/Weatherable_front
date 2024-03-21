@@ -24,13 +24,14 @@ const MypageEditHeader: React.FC = () => {
           'Authorization'
         ] = `Bearer ${accessToken}`;
 
+        // 유저 정보 받아오기
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_DB_HOST}/user`
         );
         const { nickname } = response.data.data; // 서버에서 받은 닉네임
-        console.log(response.data.data.nickname);
+        // console.log(response.data.data.nickname);
 
-        console.log(response.data.data);
+        // console.log(response.data.data);
 
         setUserData({ ...userData, nickname });
       } catch (error) {

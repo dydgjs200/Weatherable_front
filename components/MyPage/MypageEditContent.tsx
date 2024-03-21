@@ -1,12 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../../styles/MyPage/mypageEditContent.module.scss';
-
+import axios from 'axios';
+interface UserData {
+  userid: string;
+  height: number;
+  weight: number;
+}
 function MypageEditContent() {
   // 각 스타일 요소의 상태를 관리하는 배열
   const [selectedDivs, setSelectedDivs] = useState(Array(8).fill(false));
-
+  const [editableHeight, setEditableHeight] = useState<boolean>(false); // 키 수정 가능 여부 상태
+  const [editableWeight, setEditableWeight] = useState<boolean>(false); // 몸무게 수정 가능 여부 상태
+  const [userData, setUserData] = useState<UserData>({
+    userid: '',
+    height: null,
+    weight: null,
+  });
   // 스타일 요소의 상태를 토글하는 함수
   const handleDivChange = (index) => {
     const newSelectedDivs = [...selectedDivs];
@@ -25,6 +36,66 @@ function MypageEditContent() {
     '',
     '',
   ];
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const accessToken = sessionStorage.getItem('accessToken');
+        // 헤더에 액세스 토큰 및 사용자 ID 설정
+        axios.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${accessToken}`;
+
+        // 유저 정보 받아오기
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_DB_HOST}/user`
+        );
+        const { height, weight, userid } = response.data.data; // 서버에서 받은 닉네임
+        console.log(response.data.data);
+
+        setUserData({ height, weight, userid });
+      } catch (error) {
+        console.error('유저 데이터를 가져오는 도중 오류 발생', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  // 수정 데이터 저장
+  const saveUserData = async () => {
+    try {
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_DB_HOST}/user/physical`,
+        userData
+      );
+      console.log('저장 완료', response);
+      setEditableHeight(false); // 저장 시 다시 readonly 상태로
+      setEditableWeight(false);
+    } catch (error) {
+      console.error('오류 발생', error);
+    }
+  };
+
+  // 키 수정
+  const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거
+    setUserData({ ...userData, height: value ? parseInt(value) : null });
+  };
+
+  const handleHeightEditClick = () => {
+    setEditableHeight(true);
+  };
+
+  // 몸무게 수정
+  const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/[^0-9]/g, '');
+    setUserData({ ...userData, weight: value ? parseInt(value) : null });
+  };
+
+  const handleWeightEditClick = () => {
+    setEditableWeight(true);
+  };
 
   return (
     <>
@@ -58,22 +129,40 @@ function MypageEditContent() {
           <div className={styles.height}>
             <div className={styles.height_title}>키 (cm)</div>
             <div className={styles.height_input_div}>
-              <input className={styles.height_input} type="text" readOnly />
+              <input
+                className={styles.height_input}
+                value={userData.height !== null ? userData.height : ''}
+                type="text"
+                placeholder="수치를 입력해주세요."
+                readOnly={!editableHeight}
+                onChange={handleHeightChange}
+              />
             </div>
-            <div className={styles.icon}>
-              <img src="/edit.png" alt="" />
-            </div>
+            {!editableHeight && (
+              <div className={styles.nick_Icon} onClick={handleHeightEditClick}>
+                <img src="/edit.png" alt="" />
+              </div>
+            )}
           </div>
           <br />
           {/* 몸무게 */}
           <div className={styles.weight}>
             <div className={styles.weight_title}>몸무게 (kg)</div>
             <div className={styles.weight_input_div}>
-              <input className={styles.weight_input} type="text" readOnly />
+              <input
+                className={styles.weight_input}
+                type="text"
+                value={userData.weight !== null ? userData.weight : ''}
+                placeholder="수치를 입력해주세요."
+                readOnly={!editableWeight}
+                onChange={handleWeightChange}
+              />
             </div>
-            <div className={styles.icon}>
-              <img src="/edit.png" alt="" />
-            </div>
+            {!editableWeight && (
+              <div className={styles.nick_Icon} onClick={handleWeightEditClick}>
+                <img src="/edit.png" alt="" />
+              </div>
+            )}
           </div>
         </div>
         {/* 아이디 변경 */}
@@ -82,7 +171,12 @@ function MypageEditContent() {
           <div className={styles.title}>아이디</div>
         </div>
         <div>
-          <input className={styles.input} type="text" readOnly />
+          <input
+            className={styles.input}
+            type="text"
+            value={userData.userid}
+            readOnly
+          />
         </div>
         {/* 비밀번호 변경 */}
         <div className={styles.title_div}>
@@ -101,7 +195,9 @@ function MypageEditContent() {
           <input className={styles.input} type="text" />
         </div>
         {/* 저장하기 버튼 */}
-        <button className={styles.Btn}>저장하기</button>
+        <button className={styles.Btn} onClick={saveUserData}>
+          저장하기
+        </button>
       </div>
     </>
   );
