@@ -65,7 +65,6 @@ const dimension: React.FC<DimensionProps> = ({ params }) => {
             신발
           </div>
         </div>
-        <div>안녕</div>
         {/* 이 부분 체크 */}
         {!selectedComponent && <div>{renderComponent()}</div>}
         {selectedComponent === '상의' && <TopSize />}

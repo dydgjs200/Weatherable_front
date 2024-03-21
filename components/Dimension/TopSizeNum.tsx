@@ -1,3 +1,5 @@
+// before
+
 // import styles from '../../styles/Dimension/TopSizeNum.module.scss';
 
 // function TopSizeNum() {
@@ -67,8 +69,8 @@ function TopSizeNum() {
             <div className={styles.unit}>cm</div>
           </div>
         ))}
+        <button className={styles.btn}>저장하기</button>
       </form>
-      <button className={styles.btn}>저장하기</button>
     </div>
   );
 }
