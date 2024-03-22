@@ -24,7 +24,7 @@
     left: 90%;
     top: 15%;
     span {
-      color: #a5a5a5;
+      color: $lightgray;
     }
   }
   form {
@@ -60,12 +60,12 @@
   align-items: center;
   justify-content: center;
   .bigCatChecked {
-    color: blue !important;
+    color: $theme-blue-5 !important;
     font-weight: 700 !important;
     font-size: 1rem;
   }
   .smallCatChecked {
-    color: blue !important;
+    color: $theme-blue-3 !important;
     font-weight: 700 !important;
     font-size: 0.9rem;
   }
@@ -73,7 +73,7 @@
     font-size: 1rem;
   }
   .smallCat {
-    color: #a5a5a5;
+    color: $lightgray;
     font-size: 0.9rem;
   }
   .selectUl {
@@ -130,6 +130,7 @@
         }
         span {
           font-size: 0.9rem;
+          color: $lightgray;
         }
         .title {
           display: inline-block;
@@ -141,6 +142,7 @@
           height: 100%;
           // background-color: pink;
           text-align: center;
+          color: $black;
           // line-height: 0.9rem;
           // white-space: nowrap;
           // background-color: pink;

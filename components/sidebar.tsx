@@ -94,8 +94,10 @@ export default function SideBar({ open, close }: props) {
             </li>
 
             <li>
-              <Link href={`/closet/1`} onClick={close}>
-                {path == '/closet/1' && <div className={styles.path}>-</div>}
+              <Link href={`/closet/${userId}`} onClick={close}>
+                {path == `/closet/${userId}` && (
+                  <div className={styles.path}>-</div>
+                )}
                 <span className="material-symbols-outlined">apparel</span>
                 <p>옷장 보기</p>
               </Link>
