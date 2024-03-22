@@ -69,7 +69,8 @@ export default function AddForm() {
       await postAddClothes(closetDTO);
       console.log('post 완료');
       console.log(closetDTO);
-      // router.back();
+      alert('옷 추가 완료!');
+      router.back();
     } catch (error) {
       console.error('실패: ', error);
     }
@@ -77,9 +78,7 @@ export default function AddForm() {
 
   return (
     <form action="" className={styles.addFormContainer} onSubmit={addClothes}>
-      <div className={styles.imgBox}>
-        <SelectImg />
-      </div>
+      <SelectImg />
       <div className={styles.infoBox}>
         <SelectName />
         <SelectBrand />
@@ -92,7 +91,7 @@ export default function AddForm() {
       </div>
       <div className={styles.btnBox}>
         <button className={styles.submit}>저장하기</button>
-        <button className={styles.temSubmit}>임시저장하기</button>
+        {/* <button className={styles.temSubmit}>임시저장하기</button> */}
       </div>
     </form>
   );

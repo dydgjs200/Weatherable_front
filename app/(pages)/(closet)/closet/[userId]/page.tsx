@@ -31,11 +31,13 @@ interface clothes {
   userid: string;
 }
 
-export default function Closet() {
+export default function Closet({ params: { userId } }) {
   const sortStatus = useSelector((state: any) => state.status.status);
   // console.log('sort 상태', sortStatus);
-  const userId = useSelector((state: RootState) => state.user.userId);
-  console.log('userId > ', userId);
+  const getUserId = useSelector((state: RootState) => state.user.userId);
+  // console.log('userId > ', userId);
+
+  console.log('아이디', userId);
 
   const [userClothesData, setUserClothesData] = useState<clothes[]>([]);
 
@@ -45,7 +47,7 @@ export default function Closet() {
         const userClothesData = await getUserClothes();
         setUserClothesData(userClothesData);
       } catch (error) {
-        console.log(error, '유저 데이터 가져오기 오류');
+        console.log(error, '유저 옷장 데이터 가져오기 오류');
       }
     };
     userClothesData();
@@ -56,7 +58,9 @@ export default function Closet() {
   return (
     <div className={styles.container}>
       <div className={styles.innerHeader}>
-        <p>최진님의 옷장</p>
+        <p>
+          <span>{getUserId}</span>님의 옷장
+        </p>
         <div>
           <button>
             <span className="material-symbols-outlined">bookmark</span>

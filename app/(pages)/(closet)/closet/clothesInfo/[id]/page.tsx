@@ -4,15 +4,43 @@ import { useState, useEffect } from 'react';
 import styles from '../../../../../../styles/closet/closet.module.scss';
 import clothStyles from '../../../../../../styles/closet/clothes.module.scss';
 import Image from 'next/image';
-import { getCrawlingClothesById } from '../../../../../../service/closetApiService';
+import {
+  getCrawlingClothesById,
+  postAddClothes,
+} from '../../../../../../service/closetApiService';
+
+interface clothes {
+  image_path: string;
+  productName: string;
+  brand: string;
+  majorCategory: string;
+  middleCategory: string;
+  size: string;
+  season: string;
+  thickness: string;
+  style: string;
+  price: string;
+}
 
 export default function ClothesInfo({ params: { id } }) {
-  console.log(typeof id);
+  const [clothes, setClothes] = useState<clothes>({
+    image_path: '',
+    productName: '',
+    brand: '',
+    majorCategory: '',
+    middleCategory: '',
+    size: '',
+    season: '',
+    thickness: '',
+    style: '',
+    price: '',
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const crawlingClothes = await getCrawlingClothesById(id);
+        setClothes(crawlingClothes);
       } catch (error) {
         console.log('크롤링 옷 상세 정보 가져오기 실패: ', error);
       }
@@ -20,40 +48,14 @@ export default function ClothesInfo({ params: { id } }) {
     fetchData();
   }, []);
 
-  interface clothes {
-    img: string;
-    productName: string;
-    brandName: string;
-    major_category: string;
-    middle_category: string;
-    size: string;
-    weather: string;
-    thickness: string;
-    style: string;
-    price: string;
-  }
-
-  const [clothes, setClothes] = useState<clothes>({
-    img: '',
-    productName: 'IAB 10주년 반팔 티셔츠 (Black)',
-    brandName: 'IAB Studio',
-    major_category: '',
-    middle_category: '',
-    size: 'M',
-    weather: '',
-    thickness: '',
-    style: '',
-    price: '10000',
-  });
-
   const {
-    img,
+    image_path,
     productName,
-    brandName,
-    major_category,
-    middle_category,
+    brand,
+    majorCategory,
+    middleCategory,
     size,
-    weather,
+    season,
     thickness,
     style,
     price,
@@ -70,8 +72,14 @@ export default function ClothesInfo({ params: { id } }) {
     }));
   };
 
-  const modifyClothes = () => {
+  const addCloth = async () => {
     console.log(clothes);
+    try {
+      await postAddClothes(clothes);
+      console.log('완료');
+    } catch (error) {
+      console.log('옷 저장 오류', error);
+    }
   };
 
   return (
@@ -88,21 +96,19 @@ export default function ClothesInfo({ params: { id } }) {
       </form>
       <div className={clothStyles.imgContainer}>
         {/* <Image src={} alt="로고" />; */}
-        <img
-          src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png"
-          alt=""
-        />
+        <img src={image_path} alt="" />
       </div>
       <div className={clothStyles.infoContainer}>
         <div>
           <span className={clothStyles.title}>브랜드</span>
-          <span>IAB Studio</span>
+          <span>{brand}</span>
         </div>
         <div>
           <span className={clothStyles.title}>카테고리</span>
-          <span className={clothStyles.desc}>상의 </span>
-          <span>-</span>
-          <span className={clothStyles.desc}>반팔 티셔츠</span>
+          <span className={clothStyles.desc}>
+            {majorCategory} <span>-</span>
+            <span> {middleCategory}</span>
+          </span>
         </div>
         <div>
           <span className={clothStyles.title}>사이즈</span>
@@ -117,15 +123,21 @@ export default function ClothesInfo({ params: { id } }) {
         </div>
         <div>
           <span className={clothStyles.title}>계절</span>
-          <span className={clothStyles.desc}>여름</span>
+          <span className={clothStyles.desc}>
+            {season == '' ? '-' : season}
+          </span>
         </div>
         <div>
           <span className={clothStyles.title}>두께</span>
-          <span className={clothStyles.desc}>얇음</span>
+          <span className={clothStyles.desc}>
+            {thickness == null ? '-' : thickness}
+          </span>
         </div>
         <div>
           <span className={clothStyles.title}>스타일</span>
-          <span className={clothStyles.desc}>캐주얼</span>
+          <span className={clothStyles.desc}>
+            {style == null ? '-' : style}
+          </span>
         </div>
         <div>
           <span className={clothStyles.title}>구매가격</span>
@@ -140,8 +152,7 @@ export default function ClothesInfo({ params: { id } }) {
         </div>
       </div>
       <div className={clothStyles.btnContainer}>
-        <button onClick={modifyClothes}>저장하기</button>
-        <button>삭제하기</button>
+        <button onClick={addCloth}>저장하기</button>
       </div>
     </div>
   );

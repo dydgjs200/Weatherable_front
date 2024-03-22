@@ -56,11 +56,32 @@ export default function SelectImg() {
   // dispatch(selectImgAction({ value: imgUrl }));
 
   return (
-    <>
+    <div
+      className={styles.imgBox}
+      style={
+        imgPreview == null
+          ? { backgroundColor: 'white' }
+          : { backgroundColor: 'none' }
+      }
+    >
       <img src={imgPreview} alt="" />
       <div className={styles.editBtn}>
         <label htmlFor="editImgBtn">
-          <span className="material-symbols-outlined">edit</span>
+          {imgPreview == null ? (
+            <span
+              className="material-symbols-outlined"
+              style={{ opacity: '1' }}
+            >
+              edit
+            </span>
+          ) : (
+            <span
+              className="material-symbols-outlined"
+              style={{ opacity: '0' }}
+            >
+              edit
+            </span>
+          )}
         </label>
         <input
           type="file"
@@ -70,6 +91,6 @@ export default function SelectImg() {
           onChange={addImg}
         />
       </div>
-    </>
+    </div>
   );
 }
