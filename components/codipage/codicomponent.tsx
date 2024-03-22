@@ -81,7 +81,7 @@ const CodiPage: React.FC<{}> = () => {
   const handleRegister = () => {
     try {
       // 쿠키에서 데이터 가져오기
-      const selectedDataString = Cookies.get('selectedData');
+      const selectedDataString = Cookies.get('selectedIndexes');
       if (!selectedDataString) {
         throw new Error('쿠키에서 데이터를 가져올 수 없습니다.');
       }
