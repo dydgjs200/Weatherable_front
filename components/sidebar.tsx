@@ -48,6 +48,7 @@ export default function SideBar({ open, close }: props) {
         opacity: open ? '1' : '0',
         left: sidebarLeft,
       }}
+      onClick={close}
     >
       <div className={styles.sideBarInnerBox} style={{ left: sidebarLeft }}>
         <nav className={styles.sideBarContentBox}>
@@ -121,7 +122,13 @@ export default function SideBar({ open, close }: props) {
           </ul>
         </nav>
       </div>
-      <button onClick={close} className={styles.closeBtn}>
+      <button
+        onClick={close}
+        className={styles.closeBtn}
+        style={{
+          opacity: open ? '1' : '0',
+        }}
+      >
         <span className="material-symbols-outlined">close</span>
       </button>
     </div>
