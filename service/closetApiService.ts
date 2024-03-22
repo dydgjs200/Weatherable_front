@@ -136,7 +136,7 @@ export const getUserClothes = async () => {
 export const getMyClosetById = async (id: string) => {
   try {
     const response = await axios.get(
-      process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothes',
+      process.env.NEXT_PUBLIC_DB_HOST + '/closet/cloth',
 
       {
         params: { id },
@@ -160,7 +160,7 @@ export const getMyClosetById = async (id: string) => {
 export const getCrawlingClothesById = async (id: string) => {
   try {
     const response = await axios.get(
-      process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo/clothes',
+      process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo/cloth',
       {
         params: { id },
         headers: {
