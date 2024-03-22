@@ -1,9 +1,8 @@
-'use client'; // nextjs에서 useState사용시 작성필
+'use client';
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/calendar/calendar.module.scss';
 import Link from 'next/link';
-import { url } from 'inspector';
-import codipage from '../../app/codipage/page';
+
 const Calendar = () => {
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
@@ -37,10 +36,10 @@ const Calendar = () => {
   };
 
   const getFormattedDate = (date: Date): string => {
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    return `${year}년 ${month}월 ${day}일`;
+    const yyyy = date.getFullYear();
+    const mm = date.getMonth() + 1;
+    const dd = date.getDate();
+    return `${yyyy}년 ${mm}월 ${dd}일`;
   };
 
   const renderCalendar = () => {
@@ -87,20 +86,28 @@ const Calendar = () => {
   };
 
   const renderUploadButton = () => {
-    const today = new Date();
-    const selectedDay = selectedDate
-      ? parseInt(selectedDate.split(' ')[2].replace('일', ''), 10)
-      : null;
+    if (selectedDate) {
+      const selectedDay = parseInt(
+        selectedDate.split(' ')[2].replace('일', '')
+      );
+      const today = new Date().getDate();
 
-    if (selectedDay && Math.abs(selectedDay - today.getDate()) <= 1) {
-      return <button onClick={upload}>등록하기</button>;
+      // 선택한 날짜가 오늘 날짜 또는 내일 날짜인 경우에만 버튼을 보여줌
+      if (selectedDay === today || Math.abs(selectedDay - today) <= 1) {
+        const formattedDate = encodeURIComponent(selectedDate);
+        console.log('인코딩값', formattedDate);
+        console.log('디코딩값', decodeURIComponent(formattedDate));
+        const path = `/codipage?selectedDate=${formattedDate}`;
+        return (
+          <a href={path}>
+            <button>등록하기</button>
+          </a>
+        );
+      }
     }
     return null;
   };
 
-  const upload = () => {
-    window.location.href = '../codipage';
-  };
   return (
     <div className={styles['calendar-container']}>
       <div className={styles['calendar-header']}>
