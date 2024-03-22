@@ -1,31 +1,32 @@
+// codiApiservice.js 파일
+
 import axios from 'axios';
 
-// 선택된 이미지 정보를 백엔드로 전송하는 함수
-export const postAddClothes = async (selectedImages) => {
+// 쿠키에 저장된 데이터를 백엔드로 전송하는 함수
+export const cookiesend = async (codiDTO) => {
+  const accessToken = sessionStorage.getItem('accessToken');
+  // 프론트(코드 페이지)에서 코디명 입력받아야함 (DB 필수값) 변경 부탁드립니다
+
+  // 코디 저장 시점 저장 (변경 필요 X)
+  codiDTO['createdAt'] = new Date().toISOString();
+  console.log(codiDTO);
+
   try {
-    const formData = new FormData();
-
-    // 선택된 이미지 정보를 FormData에 추가
-    for (const category in selectedImages) {
-      formData.append(category, selectedImages[category]);
-    }
-
-    // POST 요청 보내기
     const response = await axios.post(
-      'http://localhost:8080/closet/index',
-      formData,
+      process.env.NEXT_PUBLIC_DB_HOST + '/codi',
+      codiDTO,
       {
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA5MDI1NDMsImV4cCI6MTcxMjExMjE0Mywic3ViIjoiYmJiYiIsInNjb3BlIjoiUk9MRV9VU0VSIn0.hSMtuJespK65_Glnu8kewEHIPd5nvsLiBu56NVC1xsk', //
-          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
         },
         withCredentials: true,
       }
     );
-
-    return response.data; // 성공적으로 처리된 경우에는 응답 데이터 반환
+    console.log(response.data);
+    return response.data;
   } catch (error) {
-    throw new Error('이미지 정보를 전송하는 중에 오류가 발생했습니다.'); // 오류 처리
+    console.error('데이터 전송 실패: ', error);
+    throw new Error('데이터 전송에 실패했습니다.');
   }
 };
