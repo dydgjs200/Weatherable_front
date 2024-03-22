@@ -139,10 +139,9 @@ export const getMyClosetById = async (id: string) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.get(
-      process.env.NEXT_PUBLIC_DB_HOST + '/closet/cloth',
+      process.env.NEXT_PUBLIC_DB_HOST + '/closet/cloth/' + id,
 
       {
-        params: { id },
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'multipart/form-data',
@@ -163,9 +162,8 @@ export const getCrawlingClothesById = async (id: string) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.get(
-      process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo/cloth',
+      process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo/cloth/' + id,
       {
-        params: { id },
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'multipart/form-data',
@@ -173,6 +171,7 @@ export const getCrawlingClothesById = async (id: string) => {
         withCredentials: true,
       }
     );
+    console.log(response.data);
   } catch (error) {
     console.log(error);
     throw new Error(
@@ -188,6 +187,7 @@ export const searchClothesGet = async (wordData: string) => {
       process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothesinfo/search',
       { params: { wordData } }
     );
+
     return response;
   } catch (error) {
     console.error(error);
