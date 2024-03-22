@@ -149,6 +149,7 @@ export const getMyClosetById = async (id: string) => {
         withCredentials: true,
       }
     );
+    console.log(response.data);
   } catch (error) {
     console.log(error);
     throw new Error(
