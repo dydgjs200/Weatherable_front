@@ -20,6 +20,7 @@ export default function SelectImg() {
 
   const addImg = (e) => {
     const file = e.target.files[0];
+    console.log(file);
 
     if (file) {
       const reader = new FileReader();
@@ -58,6 +59,9 @@ export default function SelectImg() {
     <>
       <img src={imgPreview} alt="" />
       <div className={styles.editBtn}>
+        <label htmlFor="editImgBtn">
+          <span className="material-symbols-outlined">edit</span>
+        </label>
         <input
           type="file"
           name="editImgBtn"
@@ -65,9 +69,6 @@ export default function SelectImg() {
           className=""
           onChange={addImg}
         />
-        <label htmlFor="editImgBtn">
-          <span className="material-symbols-outlined">edit</span>
-        </label>
       </div>
     </>
   );

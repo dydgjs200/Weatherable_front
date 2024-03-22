@@ -12,6 +12,7 @@ import SelectName from './selectBoxes/selectName';
 import SelectBrand from './selectBoxes/selectBrand';
 import SelectPrice from './selectBoxes/selectPrice';
 
+import { useRouter } from 'next/navigation';
 import { postAddClothes } from '../../../service/closetApiService';
 
 export default function AddForm() {
@@ -60,6 +61,7 @@ export default function AddForm() {
     };
   };
 
+  const router = useRouter();
   const addClothes = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -67,6 +69,7 @@ export default function AddForm() {
       await postAddClothes(closetDTO);
       console.log('post 완료');
       console.log(closetDTO);
+      // router.back();
     } catch (error) {
       console.error('실패: ', error);
     }

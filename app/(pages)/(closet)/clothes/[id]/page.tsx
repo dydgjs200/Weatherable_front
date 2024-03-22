@@ -1,12 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../../../../../styles/closet/closet.module.scss';
 import clothStyles from '../../../../../styles/closet/clothes.module.scss';
 import Image from 'next/image';
+import { getMyClosetById } from '../../../../../service/closetApiService';
 
 export default function Clothes({ params: { id } }) {
-  console.log(id);
+  console.log(typeof id);
+
+  // id 기반 옷 정보 가져오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const crawlingClothes = await getMyClosetById(id);
+      } catch (error) {
+        console.log('내 옷장 상세 정보가져오기 실패: ', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   interface clothes {
     img: string;
     productName: string;

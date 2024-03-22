@@ -16,12 +16,12 @@ export default function SelectWeather() {
 
   return (
     <>
-      <label htmlFor="">계절</label>
+      <label htmlFor="weather">계절</label>
       <div className={styles.weatherBox}>
         <input
           type="button"
           name=""
-          id=""
+          id="weatherSpring"
           value={'봄'}
           onClick={() => submit('봄')}
           className={`${isClicked === '봄' && styles.weatherClicked}`}
@@ -29,7 +29,7 @@ export default function SelectWeather() {
         <input
           type="button"
           name=""
-          id=""
+          id="weatherSummer"
           value={'여름'}
           onClick={() => submit('여름')}
           className={`${isClicked === '여름' && styles.weatherClicked}`}
@@ -37,7 +37,7 @@ export default function SelectWeather() {
         <input
           type="button"
           name=""
-          id=""
+          id="weatherAuthum"
           value={'가을'}
           onClick={() => submit('가을')}
           className={`${isClicked === '가을' && styles.weatherClicked}`}
@@ -45,7 +45,7 @@ export default function SelectWeather() {
         <input
           type="button"
           name=""
-          id=""
+          id="weatherWinter"
           value={'겨울'}
           onClick={() => submit('겨울')}
           className={`${isClicked === '겨울' && styles.weatherClicked}`}
