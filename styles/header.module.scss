@@ -39,6 +39,7 @@
   z-index: 99;
   transition: opacity 0.4s ease;
   .closeBtn {
+    transition: opacity 0.4s ease;
     background: none;
     border: none;
     width: fit-content;
