@@ -109,7 +109,7 @@ export const getCrawlingClothes = async () => {
   }
 };
 
-// 유저 옷 정보 (유저 옷장)
+// 유저 옷 정보 (유저 옷장 전체)
 export const getUserClothes = async () => {
   try {
     const response = await axios.get(
@@ -129,6 +129,53 @@ export const getUserClothes = async () => {
   } catch (error) {
     console.error(error);
     throw new Error('예상치 못한 오류가 발생했습니다! (유저 옷 정보 불러오기)');
+  }
+};
+
+// 내 옷장 옷 검색 id 기반
+export const getMyClosetById = async (id: string) => {
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothes',
+
+      {
+        params: { id },
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    throw new Error(
+      '예상치 못한 오류가 발생했습니다! (id기반 옷 정보 불러오기)'
+    );
+  }
+};
+
+// 크롤링 옷 정보 가져오기
+export const getCrawlingClothesById = async (id: string) => {
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo/clothes',
+      {
+        params: { id },
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    throw new Error(
+      '예상치 못한 오류가 발생했습니다! (id기반 크롤링 옷 정보 불러오기)'
+    );
   }
 };
 

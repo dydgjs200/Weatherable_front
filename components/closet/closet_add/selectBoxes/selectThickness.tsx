@@ -16,12 +16,12 @@ export default function SelectThickness() {
 
   return (
     <>
-      <label htmlFor="">두께</label>
+      <label htmlFor="thickNess">두께</label>
       <div className={styles.thicknessBox}>
         <input
           type="button"
           name=""
-          id=""
+          id="thickNess1"
           value={'얇음'}
           onClick={() => submit('얇음')}
           className={`${isClicked === '얇음' && styles.thickClicked}`}
@@ -29,7 +29,7 @@ export default function SelectThickness() {
         <input
           type="button"
           name=""
-          id=""
+          id="thickNess2"
           value={'보통'}
           onClick={() => submit('보통')}
           className={`${isClicked === '보통' && styles.thickClicked}`}
@@ -37,7 +37,7 @@ export default function SelectThickness() {
         <input
           type="button"
           name=""
-          id=""
+          id="thickNess3"
           value={'두꺼움'}
           onClick={() => submit('두꺼움')}
           className={`${isClicked === '두꺼움' && styles.thickClicked}`}

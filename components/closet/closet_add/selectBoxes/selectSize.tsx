@@ -20,7 +20,7 @@ export default function SelectSize() {
 
   return (
     <>
-      <label htmlFor="">사이즈</label>
+      <label htmlFor="Size">사이즈</label>
       <section>
         <button
           className={styles.sizeBtn}
@@ -39,7 +39,7 @@ export default function SelectSize() {
                 <input
                   type="button"
                   name=""
-                  id=""
+                  id="sizeS"
                   className="sizeInput"
                   value="S"
                   onClick={selectSize}
@@ -49,7 +49,7 @@ export default function SelectSize() {
                 <input
                   type="button"
                   name=""
-                  id=""
+                  id="sizeM"
                   className="sizeInput"
                   value="M"
                   onClick={selectSize}
@@ -59,7 +59,7 @@ export default function SelectSize() {
                 <input
                   type="button"
                   name=""
-                  id=""
+                  id="sizeL"
                   className="sizeInput"
                   value="L"
                   onClick={selectSize}
@@ -69,7 +69,7 @@ export default function SelectSize() {
                 <input
                   type="button"
                   name=""
-                  id=""
+                  id="sizeXL"
                   className="sizeInput"
                   value="XL"
                   onClick={selectSize}
@@ -79,7 +79,7 @@ export default function SelectSize() {
                 <input
                   type="button"
                   name=""
-                  id=""
+                  id="xizeXXL"
                   className="sizeInput"
                   value="XXL"
                   onClick={selectSize}

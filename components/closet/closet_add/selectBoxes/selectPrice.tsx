@@ -12,7 +12,7 @@ export default function SelectPrice() {
       <input
         type="text"
         name="price"
-        id=""
+        id="price"
         value={price}
         onChange={(e) => {
           setPrice(e.target.value);

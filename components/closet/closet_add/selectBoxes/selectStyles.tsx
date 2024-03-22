@@ -54,7 +54,13 @@ export default function SelectStyles() {
     <>
       <label htmlFor="style">스타일</label>
       <div className={styles.thicknessBox}>
-        <input type="text" name="style" value={styleState} readOnly />
+        <input
+          type="text"
+          name="style"
+          id="style"
+          value={styleState}
+          readOnly
+        />
       </div>
     </>
   );

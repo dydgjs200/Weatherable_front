@@ -12,7 +12,7 @@ export default function SelectBrand() {
       <input
         type="text"
         name="brand"
-        id=""
+        id="brand"
         value={brandName}
         onChange={(e) => {
           setBrandName(e.target.value);

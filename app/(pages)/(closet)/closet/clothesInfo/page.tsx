@@ -18,7 +18,7 @@ export default function AllClothes() {
         const crawlingClothes = await getCrawlingClothes();
         setCrawClothes(crawlingClothes.slice(0, 10));
       } catch (error) {
-        console.log('크롤링 데이터 실페: ', error);
+        console.log('크롤링 데이터 실패: ', error);
       }
     };
     crawlingData();

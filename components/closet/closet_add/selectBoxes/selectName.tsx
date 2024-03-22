@@ -12,7 +12,7 @@ export default function SelectName() {
       <input
         type="text"
         name="productName"
-        id=""
+        id="productName"
         value={productName}
         onChange={(e) => {
           setProductName(e.target.value);
