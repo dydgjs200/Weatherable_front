@@ -9,7 +9,7 @@ export default function SelectSize() {
   const dispatch = useDispatch();
   const [isSizeDisabled, setIsSizeDisabled] = useState(false);
 
-  const [size, setSize] = useState('S');
+  const [size, setSize] = useState('');
 
   const selectSize = (e) => {
     const selectedSize = e.target.value;

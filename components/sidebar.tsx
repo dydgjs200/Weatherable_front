@@ -57,6 +57,11 @@ export default function SideBar({ open, close }: props) {
             {loggedin ? (
               <ul className={styles.logoutBox}>
                 <li>
+                  <Link href={'/mypage'} onClick={logOut}>
+                    <span>마이페이지</span>
+                  </Link>
+                </li>
+                <li>
                   <Link href={'/login'} onClick={logOut}>
                     <span>로그아웃</span>
                   </Link>
