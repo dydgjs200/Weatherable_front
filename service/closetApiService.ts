@@ -187,6 +187,7 @@ export const searchClothesGet = async (wordData: string) => {
       process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothesinfo/search',
       { params: { wordData } }
     );
+
     return response;
   } catch (error) {
     console.error(error);
