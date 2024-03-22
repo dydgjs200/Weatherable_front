@@ -8,6 +8,7 @@ import SortBox from '../../../../../components/closet/closet_main/sortBox';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getUserClothes } from '../../../../../service/closetApiService';
+import { RootState } from '../../../../../Store/Store';
 
 interface clothes {
   brand: string;
@@ -33,6 +34,8 @@ interface clothes {
 export default function Closet() {
   const sortStatus = useSelector((state: any) => state.status.status);
   // console.log('sort 상태', sortStatus);
+  const userId = useSelector((state: RootState) => state.user.userId);
+  console.log('userId > ', userId);
 
   const [userClothesData, setUserClothesData] = useState<clothes[]>([]);
 
