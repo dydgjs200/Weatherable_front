@@ -6,7 +6,7 @@ import axios from 'axios';
 export const cookiesend = async (codiDTO) => {
   const accessToken = sessionStorage.getItem('accessToken');
   // 프론트(코드 페이지)에서 코디명 입력받아야함 (DB 필수값) 변경 부탁드립니다
-  codiDTO['codiName'] = '캐주얼남친룩';
+
   // 코디 저장 시점 저장 (변경 필요 X)
   codiDTO['createdAt'] = new Date().toISOString();
   console.log(codiDTO);
