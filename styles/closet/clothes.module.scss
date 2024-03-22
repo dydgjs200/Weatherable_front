@@ -67,7 +67,7 @@
 .btnContainer {
   @include flex();
   margin-top: 3vh;
-  width: 30%;
+  width: fit-content;
   justify-content: space-between;
 
   button {

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // ai 이미지 저장 (스프링)
 export const imgSend = async (file: File) => {
+  const accessToken = sessionStorage.getItem('accessToken');
   try {
     const formData = new FormData();
     formData.append('image', file);
@@ -13,8 +14,7 @@ export const imgSend = async (file: File) => {
       formData,
       {
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
@@ -29,14 +29,14 @@ export const imgSend = async (file: File) => {
 
 // 옷장 등록 폼 전송
 export const postAddClothes = async (closetDTO: any) => {
+  const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.post(
       'http://localhost:8080/closet',
       closetDTO,
       {
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
         withCredentials: true,
@@ -88,13 +88,15 @@ export const postAddStyles = async (data: any) => {
 
 // 크롤링 옷 데이터 가져오기 (메인)
 export const getCrawlingClothes = async () => {
+  const accessToken = sessionStorage.getItem('accessToken');
+  // 헤더에 액세스 토큰 및 사용자 ID 설정
+  console.log(accessToken);
   try {
     const response = await axios.get(
       process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo',
       {
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
@@ -111,13 +113,13 @@ export const getCrawlingClothes = async () => {
 
 // 유저 옷 정보 (유저 옷장 전체)
 export const getUserClothes = async () => {
+  const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.get(
       process.env.NEXT_PUBLIC_DB_HOST + '/closet',
       {
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
@@ -134,6 +136,7 @@ export const getUserClothes = async () => {
 
 // 내 옷장 옷 검색 id 기반
 export const getMyClosetById = async (id: string) => {
+  const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.get(
       process.env.NEXT_PUBLIC_DB_HOST + '/closet/cloth',
@@ -141,8 +144,7 @@ export const getMyClosetById = async (id: string) => {
       {
         params: { id },
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
@@ -158,14 +160,14 @@ export const getMyClosetById = async (id: string) => {
 
 // 크롤링 옷 정보 가져오기
 export const getCrawlingClothesById = async (id: string) => {
+  const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.get(
       process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo/cloth',
       {
         params: { id },
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2Nlc3MiLCJpYXQiOjE3MTA1NjQwMzUsImV4cCI6MTcxMTc3MzYzNSwic3ViIjoiYWFhYSIsInNjb3BlIjoiUk9MRV9VU0VSIn0.2IvUS0NLvrkL223QlhnWd7JO-o9kpLAakYC_cpjV8KU',
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
