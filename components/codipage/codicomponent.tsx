@@ -57,7 +57,7 @@ const CodiPage: React.FC<{}> = () => {
     accessoryIndex: null,
   });
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-
+  const [codiName, setCodiName] = useState<string>('');
   useEffect(() => {
     const extractedDate = extractSelectedDateFromURL();
     setSelectedDate(extractedDate);
@@ -92,7 +92,8 @@ const CodiPage: React.FC<{}> = () => {
       // const codiDTO = JSON.parse(selectedDataString);
 
       // 쿠키에 저장된 데이터를 백엔드로 전송
-      await cookiesend(selectedIndexes);
+      const codiDTO = { ...selectedIndexes, codiName, selectedDate };
+      await cookiesend(codiDTO);
 
       alert('등록되었습니다.');
     } catch (error) {
@@ -205,6 +206,12 @@ const CodiPage: React.FC<{}> = () => {
           </div>
         </div>
       )}
+      <input
+        type="text"
+        value={codiName}
+        onChange={(e) => setCodiName(e.target.value)}
+        placeholder="코디 이름을 입력하세요."
+      />
       <div>
         <button onClick={handleRegister}>등록하기</button>
       </div>
