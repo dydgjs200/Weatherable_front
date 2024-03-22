@@ -3,7 +3,7 @@
 .mypage_Container {
   width: $width;
   max-width: $max-width;
-  height: calc(100vh - 52px);
+  // height: calc(100vh - 50px);
   @include scrollbar();
 
   .mypage_components {

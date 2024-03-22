@@ -45,6 +45,8 @@ const userPersistConfig = {
   storage,
 };
 
+export type RootState = ReturnType<typeof rootReducer>;
+
 const rootReducer = combineReducers({
   user: persistReducer(userPersistConfig, userReducer),
   status: showListReducer,

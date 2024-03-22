@@ -3,13 +3,40 @@ import Link from 'next/link';
 import Image from 'next/image';
 import logo from '../public/logo.png';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserId } from '../Store/userSlice/userSlice';
+import { RootState } from '../Store/Store';
 interface props {
   open: Boolean;
   close: () => void;
 }
 
 export default function SideBar({ open, close }: props) {
+  const dispatch = useDispatch();
   const path = usePathname();
+
+  // Redux에서 userid 상태 가져오기. (RootState 타입 지정)
+  const userId = useSelector((state: RootState) => state.user.userId);
+  console.log('userId > ', userId); // userId 값 가져오는 확인.
+
+  // 로그인 상태 state
+  const [loggedin, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setLoggedIn(!!userId); // 사용자 ID가 있으면 로그인 상태로 설정해주기.
+  }, [userId]); // userId가 변경 될 때마다 useEffect 실행.
+
+  const logOut = () => {
+    // 로그아웃 시 userId 상태 초기화
+    dispatch(setUserId(''));
+    sessionStorage.clear(); // 세션 스토리지의 모든 값 제거. (2개 토큰 - R.T , A.T) 제거.
+
+    // 로그아웃 시 UI 갱신
+    setLoggedIn(false);
+    close();
+  };
+
   console.log(path);
 
   const sidebarLeft = open ? '0%' : '-100%';
@@ -25,16 +52,29 @@ export default function SideBar({ open, close }: props) {
       <div className={styles.sideBarInnerBox} style={{ left: sidebarLeft }}>
         <nav className={styles.sideBarContentBox}>
           <ul className={styles.userBox}>
-            <li className={styles.loginBtn}>
-              <Link href="/login" onClick={close}>
-                로그인
-              </Link>
-            </li>
-            <li className={styles.registerBtn}>
-              <Link href="/login" onClick={close}>
-                회원가입
-              </Link>
-            </li>
+            {/* 삼항 연산자로 로그인 / 회원가입 / 로그아웃 변경 */}
+            {loggedin ? (
+              <ul className={styles.logoutBox}>
+                <li>
+                  <Link href={'/login'} onClick={logOut}>
+                    <span>로그아웃</span>
+                  </Link>
+                </li>
+              </ul>
+            ) : (
+              <>
+                <li className={styles.loginBtn}>
+                  <Link href="/login" onClick={close}>
+                    로그인
+                  </Link>
+                </li>
+                <li className={styles.registerBtn}>
+                  <Link href="/signup" onClick={close}>
+                    회원가입
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
           <ul className={styles.navBox}>
             <li>
@@ -77,11 +117,6 @@ export default function SideBar({ open, close }: props) {
                 <span className="material-symbols-outlined">star</span>
                 <p>즐겨찾기 코디</p>
               </Link>
-            </li>
-          </ul>
-          <ul className={styles.logoutBox}>
-            <li>
-              <span>로그아웃</span>
             </li>
           </ul>
         </nav>
