@@ -81,6 +81,7 @@ const CodiPage: React.FC<{}> = () => {
   const handleRegister = async () => {
     try {
       const codiDTO = { ...selectedIndexes, codiName, selectedDate, userId };
+      codiDTO['codiDate'] = new Date(codiDTO['selectedDate']).toISOString();
       await cookiesend(codiDTO);
       alert('등록되었습니다.');
     } catch (error) {
