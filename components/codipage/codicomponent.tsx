@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styles from '../../styles/codi/codi.module.scss';
 import styles2 from '../../styles/codi/codi2.module.scss';
 import Cookies from 'js-cookie';
@@ -7,21 +8,16 @@ import axios from 'axios';
 import { cookiesend } from '../../service/codiApiservice';
 import ClosetPage from '../../components/uploadcloset/uploadcloset';
 import MyComponent from '../codipage/image';
-
+import { RootState } from '../../Store/Store';
 // 선택된 날짜를 URL에서 추출하는 함수
 function extractSelectedDateFromURL() {
-  // window 객체의 존재 여부 확인
   if (typeof window !== 'undefined') {
-    const url = window.location.href; // 현재 페이지의 URL을 가져옴
-
-    // URL에서 '?' 다음의 문자열을 추출
+    const url = window.location.href;
     const queryString = url.split('?')[1];
-    if (!queryString) return null; // '?' 이후의 문자열이 없으면 null 반환
+    if (!queryString) return null;
 
-    // queryString을 '&' 기준으로 나누어 배열로 변환
     const queryParams = queryString.split('&');
 
-    // queryParams에서 selectedDate 부분을 찾아 반환
     for (const param of queryParams) {
       if (param.startsWith('selectedDate=')) {
         const selectedDate = param.split('=')[1];
@@ -30,7 +26,7 @@ function extractSelectedDateFromURL() {
     }
   }
 
-  return null; // window 객체가 없거나 selectedDate가 없으면 null 반환
+  return null;
 }
 
 const CodiPage: React.FC<{}> = () => {
@@ -58,6 +54,8 @@ const CodiPage: React.FC<{}> = () => {
   });
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [codiName, setCodiName] = useState<string>('');
+  const userId = useSelector((state: RootState) => state.user.userId); // Redux 상태에서 userId 가져오기
+
   useEffect(() => {
     const extractedDate = extractSelectedDateFromURL();
     setSelectedDate(extractedDate);
@@ -82,27 +80,14 @@ const CodiPage: React.FC<{}> = () => {
 
   const handleRegister = async () => {
     try {
-      // // 쿠키에서 데이터 가져오기
-      // const selectedDataString = Cookies.get('selectedIndexes');
-      // if (!selectedDataString) {
-      //   throw new Error('쿠키에서 데이터를 가져올 수 없습니다.');
-      // }
-
-      // // 쿠키에 저장된 JSON 문자열을 객체로 파싱
-      // const codiDTO = JSON.parse(selectedDataString);
-
-      // 쿠키에 저장된 데이터를 백엔드로 전송
-      const codiDTO = { ...selectedIndexes, codiName, selectedDate };
+      const codiDTO = { ...selectedIndexes, codiName, selectedDate, userId };
       await cookiesend(codiDTO);
-
       alert('등록되었습니다.');
     } catch (error) {
       console.error('데이터 전송 실패: ', error);
-      // 에러가 발생했을 때 사용자에게 알림
       alert('등록에 실패했습니다. 다시 시도해주세요.');
     }
   };
-
   return (
     <div>
       <div className={styles2.container}>

@@ -35,7 +35,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
+import { calendarReducer } from './calendarSlice/calendarSlice';
 import userReducer from './userSlice/userSlice';
 import { addClothesReducer } from './closetSlice/addClothesSlice';
 import { showListReducer } from './closetSlice/showListSlice';
@@ -52,7 +52,11 @@ const rootReducer = combineReducers({
   user: persistReducer(userPersistConfig, userReducer),
   status: showListReducer,
   clothes: addClothesReducer,
-  search: selectDataReducer,
+
+  calendar: calendarReducer,
+
+
+
 });
 
 const store = configureStore({
