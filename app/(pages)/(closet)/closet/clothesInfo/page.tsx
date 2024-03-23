@@ -12,6 +12,7 @@ import {
 export default function AllClothes() {
   const [crawClothes, setCrawClothes] = useState([]);
   // 크롤링 데이터 가져오기
+
   useEffect(() => {
     const crawlingData = async () => {
       try {

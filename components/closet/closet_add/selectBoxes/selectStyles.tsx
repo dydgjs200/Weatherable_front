@@ -53,7 +53,7 @@ export default function SelectStyles() {
   return (
     <>
       <label htmlFor="style">스타일</label>
-      <div className={styles.thicknessBox}>
+      <div>
         <input
           type="text"
           name="style"

@@ -134,14 +134,14 @@
           }
         }
         a:hover {
-          color: #ff6f61;
+          color: $theme-blue-5;
         }
         .path {
           position: absolute;
           left: 0;
-          background-color: #fa8c82;
+          background-color: $theme-blue-3;
           height: 100%;
-          color: #ff6f61;
+          color: $theme-blue-3;
           width: 6%;
           border-radius: 0 $radius-s $radius-s 0;
         }

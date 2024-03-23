@@ -26,6 +26,9 @@
     margin: 0;
     font-weight: 700;
     font-size: 1.1rem;
+    span {
+      color: $theme-blue-5;
+    }
   }
   div {
     display: flex;
@@ -34,6 +37,10 @@
     button {
       border: none;
       background: none;
+      @include flex();
+      span {
+        color: $lightgray;
+      }
     }
     span {
       font-weight: 700;
@@ -58,6 +65,10 @@
     background: none;
     border: none;
     color: $white;
+    span {
+      color: $white;
+      font-weight: 700;
+    }
   }
 }
 
@@ -66,8 +77,8 @@
   bottom: 80%;
   width: 100%;
   background-color: $black;
-  height: 12vh;
-  min-height: 12vh;
+  height: 13vh;
+  min-height: 13vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -96,18 +107,18 @@
   margin-top: 1rem;
   border-radius: $radius-s;
   box-shadow: 0px 2px 8px -5px #333;
-  overflow-x: hidden;
+  overflow-x: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   .bigCatChecked {
-    color: blue !important;
+    color: $theme-blue-5 !important;
     font-weight: 700 !important;
     font-size: 1rem;
   }
   .smallCatChecked {
-    color: blue !important;
+    color: $theme-blue-3 !important;
     font-weight: 700 !important;
     font-size: 0.9rem;
   }
@@ -115,7 +126,7 @@
     font-size: 1rem;
   }
   .smallCat {
-    color: #a5a5a5;
+    color: $lightgray;
     font-size: 0.9rem;
   }
   .selectUl {
@@ -144,17 +155,17 @@
     background: none;
     border: none;
     span {
-      color: #d9d9d9;
+      color: $lightgray;
     }
   }
   .smallBtn {
     span {
-      color: blue;
+      color: $theme-blue-2;
     }
   }
   .bigBtn {
     span {
-      color: blue;
+      color: $theme-blue-2;
     }
   }
 }
@@ -173,6 +184,7 @@
     border-radius: $radius-s;
     width: 100%;
     height: 180px;
+    min-height: 180px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -183,7 +195,6 @@
       height: 80%;
       flex-direction: column;
       align-items: center;
-      color: #333;
       div {
         width: 80%;
         display: flex;
@@ -193,8 +204,12 @@
           background: none;
           border: none;
         }
+        .title {
+          color: $black;
+        }
         span {
           font-size: 0.9rem;
+          color: $lightgray;
         }
       }
     }
@@ -230,7 +245,6 @@
       flex-direction: row-reverse;
       justify-content: space-between;
       align-items: center;
-      color: #333;
       div {
         width: 40%;
         display: flex;
@@ -240,8 +254,12 @@
           background: none;
           border: none;
         }
+        .title {
+          color: $black;
+        }
         span {
           font-size: 1rem;
+          color: $lightgray;
         }
       }
     }

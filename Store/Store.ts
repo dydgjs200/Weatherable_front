@@ -39,6 +39,7 @@ import { calendarReducer } from './calendarSlice/calendarSlice';
 import userReducer from './userSlice/userSlice';
 import { addClothesReducer } from './closetSlice/addClothesSlice';
 import { showListReducer } from './closetSlice/showListSlice';
+import { selectDataReducer } from './closetSlice/selectDataSlice';
 
 const userPersistConfig = {
   key: 'user',
@@ -51,7 +52,11 @@ const rootReducer = combineReducers({
   user: persistReducer(userPersistConfig, userReducer),
   status: showListReducer,
   clothes: addClothesReducer,
-  calendar: calendarReducer, // 수정된 부분
+
+  calendar: calendarReducer,
+
+
+
 });
 
 const store = configureStore({
