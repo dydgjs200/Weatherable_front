@@ -39,6 +39,7 @@ import storage from 'redux-persist/lib/storage';
 import userReducer from './userSlice/userSlice';
 import { addClothesReducer } from './closetSlice/addClothesSlice';
 import { showListReducer } from './closetSlice/showListSlice';
+import { selectDataReducer } from './closetSlice/selectDataSlice';
 
 const userPersistConfig = {
   key: 'user',
@@ -51,6 +52,7 @@ const rootReducer = combineReducers({
   user: persistReducer(userPersistConfig, userReducer),
   status: showListReducer,
   clothes: addClothesReducer,
+  search: selectDataReducer,
 });
 
 const store = configureStore({
