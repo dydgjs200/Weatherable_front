@@ -259,9 +259,15 @@ export const searchClothesGet = async (wordData: string) => {
 
 // 옷 정보 삭제
 export const deleteCloth = async (id: string) => {
+  const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.delete(
-      `${process.env.NEXT_PUBLIC_DB_HOST}/closet/delete/${id}`
+      `${process.env.NEXT_PUBLIC_DB_HOST}/closet/delete/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
     );
     return response;
   } catch (error) {
