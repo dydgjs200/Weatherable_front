@@ -43,7 +43,7 @@ export default function AllClothes() {
       }
     };
     crawlingData();
-  }, []);
+  }, [selectCatData]);
 
   // console.log(crawClothes[0].id);
 
