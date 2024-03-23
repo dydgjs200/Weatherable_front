@@ -262,7 +262,7 @@ export const deleteCloth = async (id: string) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.delete(
-      `${process.env.NEXT_PUBLIC_DB_HOST}/closet/${id}`
+      `${process.env.NEXT_PUBLIC_DB_HOST}/closet/${id}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
