@@ -53,12 +53,10 @@ const rootReducer = combineReducers({
   status: showListReducer,
   clothes: addClothesReducer,
 
+
   calendar: calendarReducer,
-
-
-
 });
-
+// test
 const store = configureStore({
   reducer: rootReducer, // 다음이 middleware 추가 코드이다.
   middleware: (getDefaultMiddleware) =>
