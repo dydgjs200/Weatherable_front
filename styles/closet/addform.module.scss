@@ -194,16 +194,18 @@
   // background-color: pink;
   width: 50vw;
   margin-top: 1rem;
-  height: 3vh;
-  min-height: 3vh;
+  height: 5vh;
+  min-height: 5vh;
   @include flex();
   button {
     border: none;
     background: none;
+    height: 4vh;
     color: $theme-blue-3;
     border: 1px solid $theme-blue-3;
     border-radius: $radius-m;
     padding: 0.2rem 0.9rem;
+
     width: 100%;
   }
   button:hover {

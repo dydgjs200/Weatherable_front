@@ -111,6 +111,31 @@ export const getCrawlingClothes = async () => {
   }
 };
 
+// 크롤링 옷 정보 카테고리 기준으로 불러오기
+export const getCrawlingClothesByCat = async (category: string) => {
+  const accessToken = sessionStorage.getItem('accessToken');
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo/' + category,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
+    );
+
+    console.log(response.data.data);
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error(
+      '예상치 못한 오류가 발생했습니다! (유저 옷 정보 불러오기/ 카테고리별)'
+    );
+  }
+};
+
 // 유저 옷 정보 (유저 옷장 전체 불러오기)
 export const getUserClothes = async () => {
   const accessToken = sessionStorage.getItem('accessToken');
@@ -134,7 +159,7 @@ export const getUserClothes = async () => {
   }
 };
 
-// 유저 옷 정보 카테고리 기준으로 불러오기
+// 유저 옷 정보 카테고리 기준으로 불러오기 (메인페이지)
 export const getUserClothesByCat = async (category: string) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
