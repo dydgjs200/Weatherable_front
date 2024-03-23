@@ -235,13 +235,13 @@ export const getCrawlingClothesById = async (id: string) => {
 };
 
 // 크롤링 옷 검색
-export const searchClothesGet = async (wordData: string) => {
+export const searchClothesGet = async (keyWord: string) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.get(
-      process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothesinfo/search',
+      process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo/search',
       {
-        params: { wordData },
+        params: { keyWord },
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'multipart/form-data',
@@ -261,7 +261,7 @@ export const searchClothesGet = async (wordData: string) => {
 export const deleteCloth = async (id: string) => {
   try {
     const response = await axios.delete(
-      `${process.env.NEXT_PUBLIC_DB_HOST}/closet/delete/${id}`
+      `${process.env.NEXT_PUBLIC_DB_HOST}/closet/${id}`
     );
     return response;
   } catch (error) {
