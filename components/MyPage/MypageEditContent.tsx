@@ -3,17 +3,27 @@
 import { useEffect, useState } from 'react';
 import styles from '../../styles/MyPage/mypageEditContent.module.scss';
 import axios from 'axios';
+import WithdrawalModal from '../WithdrawalModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../Store/Store';
+import { setUserId } from '../../Store/userSlice/userSlice';
+import { useRouter } from 'next/navigation';
 interface UserData {
   userid: string;
   height: number;
   weight: number;
   favoriteStyles: string[];
 }
+
 function MypageEditContent() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const userId = useSelector((state: RootState) => state.user.userId);
   // 각 스타일 요소의 상태를 관리하는 배열
   const [selectedDivs, setSelectedDivs] = useState(Array(8).fill(false));
   const [editableHeight, setEditableHeight] = useState<boolean>(false); // 키 수정 가능 여부 상태
   const [editableWeight, setEditableWeight] = useState<boolean>(false); // 몸무게 수정 가능 여부 상태
+  const [showWithdrawalModal, setShowWithdrawalModal] = useState(false);
   const [userData, setUserData] = useState<UserData>({
     userid: '',
     height: null,
@@ -29,6 +39,41 @@ function MypageEditContent() {
 
   // 선호 스타일 배열
   const likeStyles = ['캐주얼', '스포티', '고프고어', '포멀', '레트로'];
+
+  // 키 수정
+  const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거 (숫자만 칠수 있게)
+    setUserData({ ...userData, height: value ? parseInt(value) : null });
+  };
+
+  const handleHeightEditClick = () => {
+    setEditableHeight(true);
+  };
+
+  // 몸무게 수정
+  const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/[^0-9]/g, '');
+    setUserData({ ...userData, weight: value ? parseInt(value) : null });
+  };
+
+  const handleWeightEditClick = () => {
+    setEditableWeight(true);
+  };
+
+  // 수정 데이터 저장
+  const saveUserData = async () => {
+    try {
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_DB_HOST}/user/physical`,
+        userData
+      );
+      console.log('저장 완료', response);
+      setEditableHeight(false); // 저장 시 다시 readonly 상태로
+      setEditableWeight(false);
+    } catch (error) {
+      console.error('오류 발생', error);
+    }
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -56,44 +101,35 @@ function MypageEditContent() {
     fetchUserData();
   }, []);
 
-  // 수정 데이터 저장
-  const saveUserData = async () => {
+  // 계정 삭제
+  const deleteUser = async () => {
     try {
-      const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_DB_HOST}/user/physical`,
-        userData
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_DB_HOST}/user`
       );
-      console.log('저장 완료', response);
-      setEditableHeight(false); // 저장 시 다시 readonly 상태로
-      setEditableWeight(false);
+      console.log('계정 삭제 완료', response);
+      dispatch(setUserId(''));
+      sessionStorage.clear();
+      router.push('/login');
     } catch (error) {
-      console.error('오류 발생', error);
+      console.error('계정 삭제 중 오류 발생', error);
     }
   };
 
-  // 키 수정
-  const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거 (숫자만 칠수 있게)
-    setUserData({ ...userData, height: value ? parseInt(value) : null });
+  // 회원탈퇴 버튼 클릭 시 모달 보이기
+  const handleWithdrawalButtonClick = () => {
+    setShowWithdrawalModal(true);
   };
 
-  const handleHeightEditClick = () => {
-    setEditableHeight(true);
+  // 모달에서 취소 버튼 클릭 시
+  const handleWithdrawalModalCancel = () => {
+    setShowWithdrawalModal(false);
   };
 
-  // 몸무게 수정
-  const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/[^0-9]/g, '');
-    setUserData({ ...userData, weight: value ? parseInt(value) : null });
-  };
-
-  const handleWeightEditClick = () => {
-    setEditableWeight(true);
-  };
-
-  // 회원탈퇴
-  const Withdrawal = () => {
-    alert('정말 탈퇴하시겠습니까?');
+  // 모달에서 확인 버튼 클릭 시
+  const handleWithdrawalModalConfirm = () => {
+    setShowWithdrawalModal(false);
+    deleteUser();
   };
   return (
     <>
@@ -189,23 +225,36 @@ function MypageEditContent() {
         {/* 비밀번호 변경 */}
         <div className={styles.title_div}>
           <img src="/bar.png" alt="" />
+          <div className={styles.title}>비밀번호 변경</div>
+          <div className={`${styles.nick_Icon} ${styles.margin_left}`}>
+            <img src="/edit2.png" alt="" />
+          </div>
+        </div>
+        {/* 비밀번호 변경 */}
+        {/* <div className={styles.title_div}>
+          <img src="/bar.png" alt="" />
           <div className={styles.title}>비밀번호</div>
         </div>
         <div>
           <input className={styles.input} type="text" />
-        </div>
+        </div> */}
         {/* 비밀번호 변경 확인 */}
-        <div className={styles.title_div}>
+        {/* <div className={styles.title_div}>
           <img src="/bar.png" alt="" />
           <div className={styles.title}>비밀번호 재확인</div>
         </div>
         <div>
           <input className={styles.input} type="text" />
-        </div>
+        </div> */}
         {/* 회원탈퇴 버튼 */}
-        <button className={styles.Btn} onClick={Withdrawal}>
+        <button className={styles.Btn} onClick={handleWithdrawalButtonClick}>
           회원탈퇴
         </button>
+        <WithdrawalModal
+          isOpen={showWithdrawalModal}
+          onCancel={handleWithdrawalModalCancel}
+          onConfirm={handleWithdrawalModalConfirm}
+        />
       </div>
     </>
   );
