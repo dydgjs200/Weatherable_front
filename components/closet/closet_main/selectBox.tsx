@@ -22,13 +22,21 @@ export default function SelectBox() {
   const majorSelected = (value) => {
     console.log('대분류', value);
     setIsMajorCat(value);
-    dispatch(selectData({ value: value }));
+    if (value == 'All') {
+      dispatch(selectData({ value: '' }));
+    } else {
+      dispatch(selectData({ value: value }));
+    }
   };
 
   const midSelected = (value) => {
     console.log('중분류', value);
     setIsMiddleCat(value);
-    dispatch(selectData({ value: value }));
+    if (value == 'All') {
+      dispatch(selectData({ value: '' }));
+    } else {
+      dispatch(selectData({ value: value }));
+    }
   };
 
   const categoryArr = {

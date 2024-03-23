@@ -43,7 +43,7 @@ export default function Closet({ params: { userId } }) {
 
   // const [isSelectData, setIsSelectData] = useState('');
   // setIsSelectData(selectCatData);
-  console.log('검색분류', selectCatData);
+  console.log('검색분류 >>', selectCatData);
 
   const [userClothesData, setUserClothesData] = useState<clothes[]>([]);
 

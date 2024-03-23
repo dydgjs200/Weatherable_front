@@ -153,7 +153,9 @@ export const getUserClothesByCat = async (category: string) => {
     return response.data.data;
   } catch (error) {
     console.error(error);
-    throw new Error('예상치 못한 오류가 발생했습니다! (유저 옷 정보 불러오기)');
+    throw new Error(
+      '예상치 못한 오류가 발생했습니다! (유저 옷 정보 불러오기/ 카테고리별)'
+    );
   }
 };
 
