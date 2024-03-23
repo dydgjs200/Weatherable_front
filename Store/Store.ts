@@ -52,8 +52,7 @@ const rootReducer = combineReducers({
   user: persistReducer(userPersistConfig, userReducer),
   status: showListReducer,
   clothes: addClothesReducer,
-
-
+  search: selectDataReducer,
   calendar: calendarReducer,
 });
 // test
