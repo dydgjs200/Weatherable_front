@@ -75,17 +75,6 @@ export const postAddStyles = async (data: any) => {
   }
 };
 
-// 스타일 가져오기
-// export const getAddStyles = async () => {
-//   try {
-//     const response = await axios.get('http://localhost:5000/getAddStyles');
-//     return response.data;
-//   } catch (error) {
-//     console.error(error);
-//     throw new Error('예상치 못한 오류가 발생했습니다! (스타일 불러오기)');
-//   }
-// };
-
 // 크롤링 옷 데이터 가져오기 (메인)
 export const getCrawlingClothes = async () => {
   const accessToken = sessionStorage.getItem('accessToken');
@@ -249,7 +238,7 @@ export const searchClothesGet = async (keyWord: string) => {
         withCredentials: true,
       }
     );
-    console.log(response.data.msg);
+    console.log(response.data.data);
     return response;
   } catch (error) {
     console.error(error);
@@ -262,7 +251,7 @@ export const deleteCloth = async (id: string) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.delete(
-      `${process.env.NEXT_PUBLIC_DB_HOST}/closet/${id}`
+      `${process.env.NEXT_PUBLIC_DB_HOST}/closet/${id}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -276,9 +265,21 @@ export const deleteCloth = async (id: string) => {
   }
 };
 
-// 옷 카테고리 분류해서 데이터 추출
-export const selectCat = async (data: any) => {
+// 옷 좋아요
+export const likedCloth = async (data: boolean) => {
+  const accessToken = sessionStorage.getItem('accessToken');
   try {
-    const response = await axios.post;
-  } catch (error) {}
+    const response = await axios.patch(
+      `${process.env.NEXT_PUBLIC_DB_HOST}/closet/`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    throw new Error('좋아요 오류');
+  }
 };
