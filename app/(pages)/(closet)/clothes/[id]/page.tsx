@@ -8,6 +8,7 @@ import {
   deleteCloth,
   getMyClosetById,
 } from '../../../../../service/closetApiService';
+import { useRouter } from 'next/navigation';
 
 interface clothes {
   imagePath: string;
@@ -62,7 +63,7 @@ export default function Clothes({ params: { id } }) {
     price,
   } = clothes;
 
-  console.log(clothes);
+  // console.log(clothes);
 
   // 옷 정보 수정
   const changeValue = (e) => {
@@ -78,10 +79,13 @@ export default function Clothes({ params: { id } }) {
   const modifyClothes = () => {
     console.log(clothes);
   };
+  const router = useRouter();
 
   const deleteClothes = async () => {
     try {
       const result = await deleteCloth(id);
+      alert('삭제가 완료되었습니다.');
+      router.back();
     } catch (error) {
       console.log(error);
     }
@@ -150,7 +154,7 @@ export default function Clothes({ params: { id } }) {
         </div>
       </div>
       <div className={clothStyles.btnContainer}>
-        <button onClick={modifyClothes}>저장하기</button>
+        <button onClick={modifyClothes}>수정하기</button>
         <button onClick={deleteClothes}>삭제하기</button>
       </div>
     </div>

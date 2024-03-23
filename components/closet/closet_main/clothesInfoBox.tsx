@@ -1,32 +1,35 @@
-'use client';
-
 import styles from '../../../styles/closet/closet.module.scss';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { likedCloth } from '../../../service/closetApiService';
+import { useState } from 'react';
 
 export default function ClothesInfoBox(data: any) {
-  const liked = () => {
-    console.log('좋아요!');
-  };
+  const [isLike, setIsLike] = useState(false);
 
-  // console.log(data);
+  const liked = async () => {
+    setIsLike(!isLike);
+
+    try {
+      const clothLike = await likedCloth(isLike);
+    } catch (error) {
+      console.log(error, '좋아요 오류');
+    }
+  };
 
   const { imagePath, id, productName } = data.clothes;
 
-  const router = useRouter();
-  const onClick = () => {
-    router.push(`/clothes/${id}`);
-  };
-
   return (
-    <div className={styles.infoSmallBox} onClick={onClick}>
+    <div className={styles.infoSmallBox}>
+      <div>
+        <Link href={`/clothes/${id}`} className={styles.title}>
+          <span>{productName}</span>
+        </Link>
+        <button onClick={liked}>
+          <span className="material-symbols-outlined">favorite</span>
+        </button>
+      </div>
       <Link href={`/clothes/${id}`}>
-        <div>
-          <span className={styles.title}>{productName}</span>
-          <button onClick={liked}>
-            <span className="material-symbols-outlined">favorite</span>
-          </button>
-        </div>
         <img src={imagePath} alt="" />
       </Link>
     </div>

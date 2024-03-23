@@ -69,10 +69,11 @@
 
 .btnContainer {
   @include flex();
+  justify-content: space-between;
   margin-top: 3vh;
   // background-color: pink;
-  width: 50vw;
-  min-width: 50vw;
+  width: 70vw;
+  min-width: 70vw;
   height: 3vh;
   min-height: 3vh;
   button {
@@ -82,7 +83,8 @@
     border: 1px solid $theme-blue-3;
     border-radius: $radius-m;
     padding: 0.2rem 0.9rem;
-    width: 100%;
+    width: 30vw;
+    min-width: 30vw;
   }
   button:hover {
     background: $theme-blue-3;

@@ -44,7 +44,8 @@ export default function Closet({ params: { userId } }) {
   console.log('검색분류 >>', selectCatData);
 
   const [userClothesData, setUserClothesData] = useState<clothes[]>([]);
-
+  //
+  //
   useEffect(() => {
     const userClothesData = async () => {
       try {

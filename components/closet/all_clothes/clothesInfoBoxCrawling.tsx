@@ -10,10 +10,6 @@ export default function ClothesInfoBoxCrawling(data: any) {
 
   const { brand, id, image_path, productName } = data.data;
 
-  const liked = () => {
-    console.log('좋아요!');
-  };
-
   const router = useRouter();
   const onClick = () => {
     router.push(`/closet/clothesInfo/${id}`);
@@ -23,9 +19,6 @@ export default function ClothesInfoBoxCrawling(data: any) {
       <Link href={`/closet/clothesInfo/${id}`}>
         <div onClick={onClick}>
           <span className={styles.title}>{productName}</span>
-          <button onClick={liked}>
-            <span className="material-symbols-outlined">favorite</span>
-          </button>
         </div>
         <img src={image_path} alt="" />
       </Link>
