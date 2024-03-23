@@ -21,29 +21,57 @@ export default function AllClothes() {
   useEffect(() => {
     const crawlingData = async () => {
       try {
-        if (selectCatData) {
-          try {
-            const crawlingClothesByCat = await getCrawlingClothesByCat(
-              selectCatData
-            );
-            setCrawClothes(crawlingClothesByCat);
-          } catch (error) {
-            console.log(error, '크롤링 데이터 가져오기 오류 (카테고리별)');
-          }
-        } else {
-          try {
-            const crawlingClothes = await getCrawlingClothes();
-            setCrawClothes(crawlingClothes);
-          } catch (error) {
-            console.log(error, '크롤링 데이터 가져오기 오류 (전체)');
-          }
-        }
+        const crawlingClothes = await getCrawlingClothes();
+        setCrawClothes(crawlingClothes);
       } catch (error) {
-        console.log('크롤링 데이터 실패: ', error);
+        console.log(error, '크롤링 데이터 가져오기 오류 (전체)');
       }
     };
     crawlingData();
+  }, []);
+
+  useEffect(() => {
+    const userClothesData = async () => {
+      if (selectCatData !== '') {
+        try {
+          const crawlingClothesByCat = await getCrawlingClothesByCat(
+            selectCatData
+          );
+          setCrawClothes(crawlingClothesByCat);
+        } catch (error) {
+          console.log(error, '크롤링 데이터 가져오기 오류 (카테고리별)');
+        }
+      }
+    };
+    userClothesData();
   }, [selectCatData]);
+
+  // useEffect(() => {
+  //   const crawlingData = async () => {
+  //     try {
+  //       if (selectCatData) {
+  //         try {
+  //           const crawlingClothesByCat = await getCrawlingClothesByCat(
+  //             selectCatData
+  //           );
+  //           setCrawClothes(crawlingClothesByCat);
+  //         } catch (error) {
+  //           console.log(error, '크롤링 데이터 가져오기 오류 (카테고리별)');
+  //         }
+  //       } else if (selectCatData == 'All') {
+  //         try {
+  //           const crawlingClothes = await getCrawlingClothes();
+  //           setCrawClothes(crawlingClothes);
+  //         } catch (error) {
+  //           console.log(error, '크롤링 데이터 가져오기 오류 (전체)');
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.log('크롤링 데이터 실패: ', error);
+  //     }
+  //   };
+  //   crawlingData();
+  // }, [selectCatData]);
 
   // console.log(crawClothes[0].id);
 

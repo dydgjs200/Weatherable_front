@@ -32,7 +32,7 @@ export const postAddClothes = async (closetDTO: any) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.post(
-      'http://localhost:8080/closet',
+      process.env.NEXT_PUBLIC_DB_HOST + '/closet',
       closetDTO,
       {
         headers: {
@@ -249,7 +249,7 @@ export const searchClothesGet = async (wordData: string) => {
         withCredentials: true,
       }
     );
-
+    console.log(response.data.msg);
     return response;
   } catch (error) {
     console.error(error);
