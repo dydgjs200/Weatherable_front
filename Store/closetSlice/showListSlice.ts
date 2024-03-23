@@ -15,7 +15,7 @@ const showListSlice = createSlice({
   initialState,
   reducers: {
     showList: (state, action: PayloadAction<boolean>) => {
-      console.log(action);
+      // console.log(action);
       state.status = action.payload;
     },
   },

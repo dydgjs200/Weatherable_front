@@ -9,7 +9,7 @@ export default function ClothesInfoBox(data: any) {
     console.log('좋아요!');
   };
 
-  console.log(data);
+  // console.log(data);
 
   const { imagePath, id, productName } = data.clothes;
 
@@ -17,11 +17,12 @@ export default function ClothesInfoBox(data: any) {
   const onClick = () => {
     router.push(`/clothes/${id}`);
   };
+
   return (
-    <div className={styles.infoSmallBox}>
+    <div className={styles.infoSmallBox} onClick={onClick}>
       <Link href={`/clothes/${id}`}>
         <div>
-          <span>{productName}</span>
+          <span className={styles.title}>{productName}</span>
           <button onClick={liked}>
             <span className="material-symbols-outlined">favorite</span>
           </button>

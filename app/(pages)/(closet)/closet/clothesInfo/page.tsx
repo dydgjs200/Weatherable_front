@@ -4,19 +4,40 @@ import styles from '../../../../../styles/closet/addclothes.module.scss';
 import SelectBoxCrawling from '../../../../../components/closet/all_clothes/selectBoxCrawling';
 import ClothesInfoBoxCrawling from '../../../../../components/closet/all_clothes/clothesInfoBoxCrawling';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   getCrawlingClothes,
   searchClothesGet,
+  getCrawlingClothesByCat,
 } from '../../../../../service/closetApiService';
 
 export default function AllClothes() {
   const [crawClothes, setCrawClothes] = useState([]);
   // 크롤링 데이터 가져오기
+
+  const selectCatData = useSelector((state: any) => state.search.selectData);
+  // console.log('검색분류 >>', selectCatData);
+
   useEffect(() => {
     const crawlingData = async () => {
       try {
-        const crawlingClothes = await getCrawlingClothes();
-        setCrawClothes(crawlingClothes.slice(0, 10));
+        if (selectCatData) {
+          try {
+            const crawlingClothesByCat = await getCrawlingClothesByCat(
+              selectCatData
+            );
+            setCrawClothes(crawlingClothesByCat);
+          } catch (error) {
+            console.log(error, '크롤링 데이터 가져오기 오류 (카테고리별)');
+          }
+        } else {
+          try {
+            const crawlingClothes = await getCrawlingClothes();
+            setCrawClothes(crawlingClothes);
+          } catch (error) {
+            console.log(error, '크롤링 데이터 가져오기 오류 (전체)');
+          }
+        }
       } catch (error) {
         console.log('크롤링 데이터 실패: ', error);
       }

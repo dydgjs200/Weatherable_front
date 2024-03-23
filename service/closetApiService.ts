@@ -111,7 +111,32 @@ export const getCrawlingClothes = async () => {
   }
 };
 
-// 유저 옷 정보 (유저 옷장 전체)
+// 크롤링 옷 정보 카테고리 기준으로 불러오기
+export const getCrawlingClothesByCat = async (category: string) => {
+  const accessToken = sessionStorage.getItem('accessToken');
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo/' + category,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
+    );
+
+    console.log(response.data.data);
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error(
+      '예상치 못한 오류가 발생했습니다! (유저 옷 정보 불러오기/ 카테고리별)'
+    );
+  }
+};
+
+// 유저 옷 정보 (유저 옷장 전체 불러오기)
 export const getUserClothes = async () => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
@@ -134,7 +159,32 @@ export const getUserClothes = async () => {
   }
 };
 
-// 내 옷장 옷 검색 id 기반
+// 유저 옷 정보 카테고리 기준으로 불러오기 (메인페이지)
+export const getUserClothesByCat = async (category: string) => {
+  const accessToken = sessionStorage.getItem('accessToken');
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_DB_HOST + '/closet/' + category,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
+    );
+
+    console.log(response.data.data);
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error(
+      '예상치 못한 오류가 발생했습니다! (유저 옷 정보 불러오기/ 카테고리별)'
+    );
+  }
+};
+
+// 내 옷장 옷 정보 가져오기 id 기반
 export const getMyClosetById = async (id: string) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
@@ -149,11 +199,13 @@ export const getMyClosetById = async (id: string) => {
         withCredentials: true,
       }
     );
-    console.log(response.data);
+
+    console.log(response.data.data);
+    return response.data.data;
   } catch (error) {
     console.log(error);
     throw new Error(
-      '예상치 못한 오류가 발생했습니다! (id기반 옷 정보 불러오기)'
+      '예상치 못한 오류가 발생했습니다! (id기반 옷 정보 불러오기-백)'
     );
   }
 };
@@ -172,7 +224,8 @@ export const getCrawlingClothesById = async (id: string) => {
         withCredentials: true,
       }
     );
-    console.log(response.data);
+    console.log(response.data.data);
+    return response.data.data;
   } catch (error) {
     console.log(error);
     throw new Error(
@@ -183,10 +236,18 @@ export const getCrawlingClothesById = async (id: string) => {
 
 // 크롤링 옷 검색
 export const searchClothesGet = async (wordData: string) => {
+  const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.get(
       process.env.NEXT_PUBLIC_DB_HOST + '/closet/clothesinfo/search',
-      { params: { wordData } }
+      {
+        params: { wordData },
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
     );
 
     return response;
@@ -196,4 +257,22 @@ export const searchClothesGet = async (wordData: string) => {
   }
 };
 
-// 옷 정보 수정
+// 옷 정보 삭제
+export const deleteCloth = async (id: string) => {
+  try {
+    const response = await axios.delete(
+      `${process.env.NEXT_PUBLIC_DB_HOST}/closet/delete/${id}`
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw new Error('옷 삭제 오류');
+  }
+};
+
+// 옷 카테고리 분류해서 데이터 추출
+export const selectCat = async (data: any) => {
+  try {
+    const response = await axios.post;
+  } catch (error) {}
+};
