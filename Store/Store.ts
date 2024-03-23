@@ -51,7 +51,8 @@ const rootReducer = combineReducers({
   user: persistReducer(userPersistConfig, userReducer),
   status: showListReducer,
   clothes: addClothesReducer,
-  calendar: calendarReducer, // 수정된 부분
+
+  calendar: calendarReducer,
 });
 
 const store = configureStore({
