@@ -92,14 +92,14 @@ const MypageEditHeader: React.FC = () => {
           {/* 수정 가능한 상태에 따라 아이콘 클릭 가능 여부 결정 */}
           {!editable && (
             <div className={styles.nick_Icon} onClick={handleEditClick}>
-              <img src="/edit.png" alt="" />
+              <img src="/edit2.png" alt="" />
             </div>
           )}
           {/* 수정 가능한 상태에 따라 저장 버튼 렌더링 */}
           {editable && (
-            <button className={styles.saveButton} onClick={saveNickname}>
-              저장
-            </button>
+            <div className={styles.nick_Icon} onClick={saveNickname}>
+              <img src="/correct.png" alt="" />
+            </div>
           )}
         </div>
       </div>

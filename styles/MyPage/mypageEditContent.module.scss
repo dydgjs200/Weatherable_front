@@ -16,7 +16,7 @@
 
   .like_Style_div {
     @include flex();
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     justify-content: flex-end;
     cursor: pointer;
 
@@ -78,6 +78,7 @@
     height: 2.5em;
     margin: 2em 0;
     @include big_btn();
+    background-color: rgb(244, 76, 76);
   }
 }
 

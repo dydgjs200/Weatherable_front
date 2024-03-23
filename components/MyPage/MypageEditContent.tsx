@@ -28,21 +28,13 @@ function MypageEditContent() {
   };
 
   // 선호 스타일 배열
-  const likeStyles = [
-    '캐주얼',
-    '스포티',
-    '고프고어',
-    '포멀',
-    '레트로',
-    '',
-    '',
-    '',
-  ];
+  const likeStyles = ['캐주얼', '스포티', '고프고어', '포멀', '레트로'];
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const accessToken = sessionStorage.getItem('accessToken');
+
         // 헤더에 액세스 토큰 및 사용자 ID 설정
         axios.defaults.headers.common[
           'Authorization'
@@ -99,6 +91,10 @@ function MypageEditContent() {
     setEditableWeight(true);
   };
 
+  // 회원탈퇴
+  const Withdrawal = () => {
+    alert('정말 탈퇴하시겠습니까?');
+  };
   return (
     <>
       <div className={styles.Container}>
@@ -142,7 +138,12 @@ function MypageEditContent() {
             </div>
             {!editableHeight && (
               <div className={styles.nick_Icon} onClick={handleHeightEditClick}>
-                <img src="/edit.png" alt="" />
+                <img src="/edit2.png" alt="" />
+              </div>
+            )}
+            {editableHeight && (
+              <div className={styles.nick_Icon} onClick={saveUserData}>
+                <img src="/correct.png" alt="" />
               </div>
             )}
           </div>
@@ -162,7 +163,12 @@ function MypageEditContent() {
             </div>
             {!editableWeight && (
               <div className={styles.nick_Icon} onClick={handleWeightEditClick}>
-                <img src="/edit.png" alt="" />
+                <img src="/edit2.png" alt="" />
+              </div>
+            )}
+            {editableWeight && (
+              <div className={styles.nick_Icon} onClick={saveUserData}>
+                <img src="/correct.png" alt="" />
               </div>
             )}
           </div>
@@ -196,9 +202,9 @@ function MypageEditContent() {
         <div>
           <input className={styles.input} type="text" />
         </div>
-        {/* 저장하기 버튼 */}
-        <button className={styles.Btn} onClick={saveUserData}>
-          저장하기
+        {/* 회원탈퇴 버튼 */}
+        <button className={styles.Btn} onClick={Withdrawal}>
+          회원탈퇴
         </button>
       </div>
     </>
