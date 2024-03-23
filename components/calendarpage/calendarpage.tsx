@@ -32,14 +32,14 @@ const Calendar = () => {
   };
 
   const handleClick = (day: number) => {
-    setSelectedDate(`${year}년 ${month}월 ${day}일`);
+    setSelectedDate(`${year} ${month} ${day}`);
   };
 
   const getFormattedDate = (date: Date): string => {
     const yyyy = date.getFullYear();
     const mm = date.getMonth() + 1;
     const dd = date.getDate();
-    return `${yyyy}년 ${mm}월 ${dd}일`;
+    return `${yyyy} ${mm} ${dd}`;
   };
 
   const renderCalendar = () => {
@@ -58,7 +58,7 @@ const Calendar = () => {
         today.getFullYear() === year &&
         today.getMonth() + 1 === month &&
         today.getDate() === day;
-      const isSelected = selectedDate === `${year}년 ${month}월 ${day}일`;
+      const isSelected = selectedDate === `${year} ${month} ${day}`;
       row.push(
         <td
           key={day}
@@ -87,9 +87,7 @@ const Calendar = () => {
 
   const renderUploadButton = () => {
     if (selectedDate) {
-      const selectedDay = parseInt(
-        selectedDate.split(' ')[2].replace('일', '')
-      );
+      const selectedDay = parseInt(selectedDate.split(' ')[2]);
       const today = new Date().getDate();
 
       // 선택한 날짜가 오늘 날짜 또는 내일 날짜인 경우에만 버튼을 보여줌
