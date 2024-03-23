@@ -1,5 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { selectData } from '../../../Store/closetSlice/selectDataSlice';
 
 import styles from '../../../styles/closet/closet.module.scss';
 
@@ -15,14 +17,18 @@ export default function SelectBox() {
     }
   }, []);
 
+  const dispatch = useDispatch();
+
   const majorSelected = (value) => {
     console.log('대분류', value);
     setIsMajorCat(value);
+    dispatch(selectData({ value: value }));
   };
 
   const midSelected = (value) => {
     console.log('중분류', value);
     setIsMiddleCat(value);
+    dispatch(selectData({ value: value }));
   };
 
   const categoryArr = {

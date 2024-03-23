@@ -7,7 +7,10 @@ import styles from '../../../../../styles/closet/closet.module.scss';
 import SortBox from '../../../../../components/closet/closet_main/sortBox';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getUserClothes } from '../../../../../service/closetApiService';
+import {
+  getUserClothes,
+  getUserClothesByCat,
+} from '../../../../../service/closetApiService';
 import { RootState } from '../../../../../Store/Store';
 
 interface clothes {
@@ -36,24 +39,40 @@ export default function Closet({ params: { userId } }) {
   // console.log('sort 상태', sortStatus);
   const getUserId = useSelector((state: RootState) => state.user.userId);
   // console.log('userId > ', userId);
+  const selectCatData = useSelector((state: any) => state.search.selectData);
 
-  console.log('아이디', userId);
+  // const [isSelectData, setIsSelectData] = useState('');
+  // setIsSelectData(selectCatData);
+  console.log('검색분류', selectCatData);
 
   const [userClothesData, setUserClothesData] = useState<clothes[]>([]);
 
   useEffect(() => {
     const userClothesData = async () => {
       try {
-        const userClothesData = await getUserClothes();
-        setUserClothesData(userClothesData);
+        if (selectCatData) {
+          try {
+            const userClothesDataByCat = await getUserClothesByCat(
+              selectCatData
+            );
+            setUserClothesData(userClothesDataByCat);
+          } catch (error) {
+            console.log(error, '유저 옷장 데이터 가져오기 오류 (카테고리별)');
+          }
+        } else {
+          try {
+            const userClothesData = await getUserClothes();
+            setUserClothesData(userClothesData);
+          } catch (error) {
+            console.log(error, '유저 옷장 데이터 가져오기 오류 (전체)');
+          }
+        }
       } catch (error) {
         console.log(error, '유저 옷장 데이터 가져오기 오류');
       }
     };
     userClothesData();
-  }, []);
-
-  console.log(userClothesData);
+  }, [selectCatData]);
 
   return (
     <div className={styles.container}>

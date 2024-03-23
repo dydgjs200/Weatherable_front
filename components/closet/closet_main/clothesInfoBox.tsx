@@ -9,7 +9,7 @@ export default function ClothesInfoBox(data: any) {
     console.log('좋아요!');
   };
 
-  console.log(data);
+  // console.log(data);
 
   const { imagePath, id, productName } = data.clothes;
 
