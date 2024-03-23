@@ -41,8 +41,6 @@ export default function Closet({ params: { userId } }) {
   // console.log('userId > ', userId);
   const selectCatData = useSelector((state: any) => state.search.selectData);
 
-  // const [isSelectData, setIsSelectData] = useState('');
-  // setIsSelectData(selectCatData);
   console.log('검색분류 >>', selectCatData);
 
   const [userClothesData, setUserClothesData] = useState<clothes[]>([]);
@@ -50,29 +48,55 @@ export default function Closet({ params: { userId } }) {
   useEffect(() => {
     const userClothesData = async () => {
       try {
-        if (selectCatData) {
-          try {
-            const userClothesDataByCat = await getUserClothesByCat(
-              selectCatData
-            );
-            setUserClothesData(userClothesDataByCat);
-          } catch (error) {
-            console.log(error, '유저 옷장 데이터 가져오기 오류 (카테고리별)');
-          }
-        } else {
-          try {
-            const userClothesData = await getUserClothes();
-            setUserClothesData(userClothesData);
-          } catch (error) {
-            console.log(error, '유저 옷장 데이터 가져오기 오류 (전체)');
-          }
-        }
+        const userClothesData = await getUserClothes();
+        setUserClothesData(userClothesData);
       } catch (error) {
-        console.log(error, '유저 옷장 데이터 가져오기 오류');
+        console.log(error, '유저 옷장 데이터 가져오기 오류 (전체) ');
+      }
+    };
+    userClothesData();
+  }, []);
+
+  useEffect(() => {
+    const userClothesData = async () => {
+      if (selectCatData !== '') {
+        try {
+          const userClothesDataByCat = await getUserClothesByCat(selectCatData);
+          setUserClothesData(userClothesDataByCat);
+        } catch (error) {
+          console.log(error, '유저 옷장 데이터 가져오기 오류 (카테고리)');
+        }
       }
     };
     userClothesData();
   }, [selectCatData]);
+
+  // useEffect(() => {
+  //   const userClothesData = async () => {
+  //     try {
+  //       if (selectCatData == 'All') {
+  //         try {
+  //           const userClothesData = await getUserClothes();
+  //           setUserClothesData(userClothesData);
+  //         } catch (error) {
+  //           console.log(error, '유저 옷장 데이터 가져오기 오류 (전체)');
+  //         }
+  //       } else if (selectCatData !== 'All') {
+  //         try {
+  //           const userClothesDataByCat = await getUserClothesByCat(
+  //             selectCatData
+  //           );
+  //           setUserClothesData(userClothesDataByCat);
+  //         } catch (error) {
+  //           console.log(error, '유저 옷장 데이터 가져오기 오류 (카테고리별)');
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.log(error, '유저 옷장 데이터 가져오기 오류');
+  //     }
+  //   };
+  //   userClothesData();
+  // }, [selectCatData]);
 
   return (
     <div className={styles.container}>
