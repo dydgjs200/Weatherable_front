@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import styles from '../../styles/MyPage/mypageEditHeader.module.scss';
 import axios from 'axios';
+import { Token, refreshAccessToken } from '../../service/common';
 
 interface UserData {
   nickname: string;
@@ -18,11 +19,7 @@ const MypageEditHeader: React.FC = () => {
   // 이 부분이 있어야 요청이 가능하다. AT 을 헤더에 넣어서 보내야 하기 때문.
   const fetchUserData = async () => {
     try {
-      // 헤더에 액세스 토큰 및 사용자 ID 설정
-      // 전역으로 설정 모든 요청에 대해 헤더에 토큰 추가
-      const accessToken = sessionStorage.getItem('accessToken');
-      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-
+      await refreshAccessToken(); // 토큰 새로고침
       // 유저 정보 받아오기
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_DB_HOST}/user`
@@ -39,6 +36,7 @@ const MypageEditHeader: React.FC = () => {
   };
 
   useEffect(() => {
+    Token();
     fetchUserData();
   }, []);
 
@@ -78,6 +76,8 @@ const MypageEditHeader: React.FC = () => {
   // 서버에 닉네임 저장 요청 함수
   const saveNickname = async () => {
     try {
+      // await refreshAccessToken();
+
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_DB_HOST}/user/nickname`,
         userData
