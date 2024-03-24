@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../Store/Store';
 import { setUserId } from '../../Store/userSlice/userSlice';
 import { useRouter } from 'next/navigation';
+import EditPasswordModal from '../EditPasswordModal';
 interface UserData {
   userid: string;
   height: number;
@@ -23,7 +24,8 @@ function MypageEditContent() {
   const [selectedDivs, setSelectedDivs] = useState(Array(8).fill(false));
   const [editableHeight, setEditableHeight] = useState<boolean>(false); // 키 수정 가능 여부 상태
   const [editableWeight, setEditableWeight] = useState<boolean>(false); // 몸무게 수정 가능 여부 상태
-  const [showWithdrawalModal, setShowWithdrawalModal] = useState(false);
+  const [showWithdrawalModal, setShowWithdrawalModal] = useState(false); // 계정 삭제 모달
+  const [showEditPasswordModal, setShowEditPasswordModal] = useState(false); // 비번 변경 모달
   const [userData, setUserData] = useState<UserData>({
     userid: '',
     height: null,
@@ -100,7 +102,20 @@ function MypageEditContent() {
 
     fetchUserData();
   }, []);
+  // 비밀번호 변경 클릭시
+  const handleEditPasswordButtonClick = () => {
+    setShowEditPasswordModal(true);
+  };
 
+  // 비밀번호 변경 모달 취소 클릭 시
+  const handleEditPasswordModalCancel = () => {
+    setShowEditPasswordModal(false);
+  };
+
+  // 비밀번호 변경 모달 확인 클릭 시
+  const handleEditPasswordModalConfirm = () => {
+    setShowEditPasswordModal(false);
+  };
   // 계정 삭제
   const deleteUser = async () => {
     try {
@@ -226,26 +241,19 @@ function MypageEditContent() {
         <div className={styles.title_div}>
           <img src="/bar.png" alt="" />
           <div className={styles.title}>비밀번호 변경</div>
-          <div className={`${styles.nick_Icon} ${styles.margin_left}`}>
+          <div
+            className={`${styles.nick_Icon} ${styles.margin_left}`}
+            onClick={handleEditPasswordButtonClick}
+          >
             <img src="/edit2.png" alt="" />
           </div>
         </div>
-        {/* 비밀번호 변경 */}
-        {/* <div className={styles.title_div}>
-          <img src="/bar.png" alt="" />
-          <div className={styles.title}>비밀번호</div>
-        </div>
-        <div>
-          <input className={styles.input} type="text" />
-        </div> */}
-        {/* 비밀번호 변경 확인 */}
-        {/* <div className={styles.title_div}>
-          <img src="/bar.png" alt="" />
-          <div className={styles.title}>비밀번호 재확인</div>
-        </div>
-        <div>
-          <input className={styles.input} type="text" />
-        </div> */}
+        <EditPasswordModal
+          isOpen={showEditPasswordModal}
+          onCancel={handleEditPasswordModalCancel}
+          onConfirm={handleEditPasswordModalConfirm}
+        />
+
         {/* 회원탈퇴 버튼 */}
         <button className={styles.Btn} onClick={handleWithdrawalButtonClick}>
           회원탈퇴
