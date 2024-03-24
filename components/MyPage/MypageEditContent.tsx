@@ -3,73 +3,62 @@
 import { useEffect, useState } from 'react';
 import styles from '../../styles/MyPage/mypageEditContent.module.scss';
 import axios from 'axios';
+import WithdrawalModal from '../WithdrawalModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../Store/Store';
+import { setUserId } from '../../Store/userSlice/userSlice';
+import { useRouter } from 'next/navigation';
+import EditPasswordModal from '../EditPasswordModal';
+import { channel } from 'diagnostics_channel';
 interface UserData {
   userid: string;
   height: number;
   weight: number;
-  favoriteStyles: string[];
+  favoriteStyle: string[];
 }
+
 function MypageEditContent() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const userId = useSelector((state: RootState) => state.user.userId);
   // 각 스타일 요소의 상태를 관리하는 배열
   const [selectedDivs, setSelectedDivs] = useState(Array(8).fill(false));
   const [editableHeight, setEditableHeight] = useState<boolean>(false); // 키 수정 가능 여부 상태
   const [editableWeight, setEditableWeight] = useState<boolean>(false); // 몸무게 수정 가능 여부 상태
+  const [showWithdrawalModal, setShowWithdrawalModal] = useState(false); // 계정 삭제 모달
+  const [showEditPasswordModal, setShowEditPasswordModal] = useState(false); // 비번 변경 모달
   const [userData, setUserData] = useState<UserData>({
     userid: '',
     height: null,
     weight: null,
-    favoriteStyles: [],
+    favoriteStyle: [],
   });
   // 스타일 요소의 상태를 토글하는 함수
-  const handleDivChange = (index) => {
-    const newSelectedDivs = [...selectedDivs];
-    newSelectedDivs[index] = !newSelectedDivs[index];
-    setSelectedDivs(newSelectedDivs);
+  const handleDivChange = async (index) => {
+    try {
+      const selectedStyle = likeStyles[index];
+      console.log(selectedStyle); // 캐주얼 , 스포티 , 고프고어, 포멀, 레트로
+      const data = {
+        favoriteStyle: selectedStyle,
+      };
+
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_DB_HOST}/user/style`,
+        data
+      );
+
+      console.log('스타일 업로드 완료', response.data);
+
+      const newSelectedDivs = [...selectedDivs];
+      newSelectedDivs[index] = !newSelectedDivs[index];
+      setSelectedDivs(newSelectedDivs);
+    } catch (error) {
+      console.error('스타일 업데이트 중 오류 발생', error);
+    }
   };
 
   // 선호 스타일 배열
   const likeStyles = ['캐주얼', '스포티', '고프고어', '포멀', '레트로'];
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const accessToken = sessionStorage.getItem('accessToken');
-
-        // 헤더에 액세스 토큰 및 사용자 ID 설정
-        axios.defaults.headers.common[
-          'Authorization'
-        ] = `Bearer ${accessToken}`;
-
-        // 유저 정보 받아오기
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_DB_HOST}/user`
-        );
-        const { height, weight, userid, favoriteStyles } = response.data.data;
-        console.log(response.data.data);
-
-        setUserData({ height, weight, userid, favoriteStyles });
-      } catch (error) {
-        console.error('유저 데이터를 가져오는 도중 오류 발생', error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
-  // 수정 데이터 저장
-  const saveUserData = async () => {
-    try {
-      const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_DB_HOST}/user/physical`,
-        userData
-      );
-      console.log('저장 완료', response);
-      setEditableHeight(false); // 저장 시 다시 readonly 상태로
-      setEditableWeight(false);
-    } catch (error) {
-      console.error('오류 발생', error);
-    }
-  };
 
   // 키 수정
   const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,9 +80,90 @@ function MypageEditContent() {
     setEditableWeight(true);
   };
 
-  // 회원탈퇴
-  const Withdrawal = () => {
-    alert('정말 탈퇴하시겠습니까?');
+  // 수정 데이터 저장
+  const saveUserData = async () => {
+    try {
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_DB_HOST}/user/physical`,
+        userData
+      );
+      console.log('저장 완료', response);
+      setEditableHeight(false); // 저장 시 다시 readonly 상태로
+      setEditableWeight(false);
+    } catch (error) {
+      console.error('오류 발생', error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const accessToken = sessionStorage.getItem('accessToken');
+
+        // 헤더에 액세스 토큰 및 사용자 ID 설정
+        axios.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${accessToken}`;
+
+        // 유저 정보 받아오기
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_DB_HOST}/user`
+        );
+        const { height, weight, userid, favoriteStyle } = response.data.data;
+        console.log(response.data.data);
+
+        setUserData({ height, weight, userid, favoriteStyle });
+      } catch (error) {
+        console.error('유저 데이터를 가져오는 도중 오류 발생', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  // 비밀번호 변경 클릭시
+  const handleEditPasswordButtonClick = () => {
+    setShowEditPasswordModal(true);
+  };
+
+  // 비밀번호 변경 모달 취소 클릭 시
+  const handleEditPasswordModalCancel = () => {
+    setShowEditPasswordModal(false);
+  };
+
+  // 비밀번호 변경 모달 확인 클릭 시
+  const handleEditPasswordModalConfirm = () => {
+    setShowEditPasswordModal(false);
+  };
+  // 계정 삭제
+  const deleteUser = async () => {
+    try {
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_DB_HOST}/user`
+      );
+      console.log('계정 삭제 완료', response);
+      dispatch(setUserId(''));
+      sessionStorage.clear();
+      router.push('/login');
+    } catch (error) {
+      console.error('계정 삭제 중 오류 발생', error);
+    }
+  };
+
+  // 회원탈퇴 버튼 클릭 시 모달 보이기
+  const handleWithdrawalButtonClick = () => {
+    setShowWithdrawalModal(true);
+  };
+
+  // 모달에서 취소 버튼 클릭 시
+  const handleWithdrawalModalCancel = () => {
+    setShowWithdrawalModal(false);
+  };
+
+  // 모달에서 확인 버튼 클릭 시
+  const handleWithdrawalModalConfirm = () => {
+    setShowWithdrawalModal(false);
+    deleteUser();
   };
   return (
     <>
@@ -189,23 +259,29 @@ function MypageEditContent() {
         {/* 비밀번호 변경 */}
         <div className={styles.title_div}>
           <img src="/bar.png" alt="" />
-          <div className={styles.title}>비밀번호</div>
+          <div className={styles.title}>비밀번호 변경</div>
+          <div
+            className={`${styles.nick_Icon} ${styles.margin_left}`}
+            onClick={handleEditPasswordButtonClick}
+          >
+            <img src="/edit2.png" alt="" />
+          </div>
         </div>
-        <div>
-          <input className={styles.input} type="text" />
-        </div>
-        {/* 비밀번호 변경 확인 */}
-        <div className={styles.title_div}>
-          <img src="/bar.png" alt="" />
-          <div className={styles.title}>비밀번호 재확인</div>
-        </div>
-        <div>
-          <input className={styles.input} type="text" />
-        </div>
+        <EditPasswordModal
+          isOpen={showEditPasswordModal}
+          onCancel={handleEditPasswordModalCancel}
+          onConfirm={handleEditPasswordModalConfirm}
+        />
+
         {/* 회원탈퇴 버튼 */}
-        <button className={styles.Btn} onClick={Withdrawal}>
+        <button className={styles.Btn} onClick={handleWithdrawalButtonClick}>
           회원탈퇴
         </button>
+        <WithdrawalModal
+          isOpen={showWithdrawalModal}
+          onCancel={handleWithdrawalModalCancel}
+          onConfirm={handleWithdrawalModalConfirm}
+        />
       </div>
     </>
   );

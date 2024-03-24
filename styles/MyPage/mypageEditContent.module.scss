@@ -30,7 +30,7 @@
 
       @include flex();
       font-weight: bold;
-      font-size: 16px;
+      font-size: 100%;
     }
   }
 
@@ -90,4 +90,7 @@
 
 .clicked {
   background-color: lightcoral;
+}
+.margin_left {
+  margin-left: auto;
 }

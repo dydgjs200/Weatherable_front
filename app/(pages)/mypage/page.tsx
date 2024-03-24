@@ -1,12 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MypageFavorite from '../../../components/MyPage/MypageFavorite';
 import MypageHeader from '../../../components/MyPage/MypageHeader';
 import styles from '../../../styles/MyPage/mypage.module.scss';
 import PersonalInfo from '../../../components/MyPage/PersonalInfo';
 import Dimension from '../../../components/MyPage/Dimension';
 import Statistics from '../../../components/MyPage/Statistics';
+import axios from 'axios';
+import { log } from 'console';
 
 function MyPage() {
   const [selectedComponent, setSelectedComponent] = useState('기본정보');
