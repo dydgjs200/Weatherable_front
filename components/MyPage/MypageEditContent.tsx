@@ -9,11 +9,12 @@ import { RootState } from '../../Store/Store';
 import { setUserId } from '../../Store/userSlice/userSlice';
 import { useRouter } from 'next/navigation';
 import EditPasswordModal from '../EditPasswordModal';
+import { channel } from 'diagnostics_channel';
 interface UserData {
   userid: string;
   height: number;
   weight: number;
-  favoriteStyles: string[];
+  favoriteStyle: string[];
 }
 
 function MypageEditContent() {
@@ -30,13 +31,30 @@ function MypageEditContent() {
     userid: '',
     height: null,
     weight: null,
-    favoriteStyles: [],
+    favoriteStyle: [],
   });
   // 스타일 요소의 상태를 토글하는 함수
-  const handleDivChange = (index) => {
-    const newSelectedDivs = [...selectedDivs];
-    newSelectedDivs[index] = !newSelectedDivs[index];
-    setSelectedDivs(newSelectedDivs);
+  const handleDivChange = async (index) => {
+    try {
+      const selectedStyle = likeStyles[index];
+      console.log(selectedStyle); // 캐주얼 , 스포티 , 고프고어, 포멀, 레트로
+      const data = {
+        favoriteStyle: selectedStyle,
+      };
+
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_DB_HOST}/user/style`,
+        data
+      );
+
+      console.log('스타일 업로드 완료', response.data);
+
+      const newSelectedDivs = [...selectedDivs];
+      newSelectedDivs[index] = !newSelectedDivs[index];
+      setSelectedDivs(newSelectedDivs);
+    } catch (error) {
+      console.error('스타일 업데이트 중 오류 발생', error);
+    }
   };
 
   // 선호 스타일 배열
@@ -91,10 +109,10 @@ function MypageEditContent() {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_DB_HOST}/user`
         );
-        const { height, weight, userid, favoriteStyles } = response.data.data;
+        const { height, weight, userid, favoriteStyle } = response.data.data;
         console.log(response.data.data);
 
-        setUserData({ height, weight, userid, favoriteStyles });
+        setUserData({ height, weight, userid, favoriteStyle });
       } catch (error) {
         console.error('유저 데이터를 가져오는 도중 오류 발생', error);
       }
@@ -102,6 +120,7 @@ function MypageEditContent() {
 
     fetchUserData();
   }, []);
+
   // 비밀번호 변경 클릭시
   const handleEditPasswordButtonClick = () => {
     setShowEditPasswordModal(true);

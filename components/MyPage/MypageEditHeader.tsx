@@ -15,6 +15,33 @@ const MypageEditHeader: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false); // 수정 가능한지 여부를 나타내는 상태
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
+  // 이 부분이 있어야 요청이 가능하다. AT 을 헤더에 넣어서 보내야 하기 때문.
+  const fetchUserData = async () => {
+    try {
+      // 헤더에 액세스 토큰 및 사용자 ID 설정
+      // 전역으로 설정 모든 요청에 대해 헤더에 토큰 추가
+      const accessToken = sessionStorage.getItem('accessToken');
+      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+      // 유저 정보 받아오기
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_DB_HOST}/user`
+      );
+      const { nickname } = response.data.data; // 서버에서 받은 닉네임
+      // console.log(response.data.data.nickname);
+
+      console.log('response.data.data > ', response.data.data);
+
+      setUserData({ ...userData, nickname });
+    } catch (error) {
+      console.error('유저 데이터를 가져오는 도중 오류 발생', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
   // 이미지를 선택했을 때 호출되는 함수
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -27,7 +54,7 @@ const MypageEditHeader: React.FC = () => {
   const uploadImage = async () => {
     try {
       const formData = new FormData();
-      formData.append('image', selectedImage!);
+      formData.append('imageFile', selectedImage!);
 
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_DB_HOST}/user/image`,
@@ -47,33 +74,6 @@ const MypageEditHeader: React.FC = () => {
       console.error('이미지 업로드 중 오류 발생', error);
     }
   };
-
-  // 이 부분이 있어야 요청이 가능하다. AT 을 헤더에 넣어서 보내야 하기 때문.
-  const fetchUserData = async () => {
-    try {
-      // 헤더에 액세스 토큰 및 사용자 ID 설정
-      // 전역으로 설정 모든 요청에 대해 헤더에 토큰 추가
-      const accessToken = sessionStorage.getItem('accessToken');
-      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-
-      // 유저 정보 받아오기
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_DB_HOST}/user`
-      );
-      const { nickname } = response.data.data; // 서버에서 받은 닉네임
-      // console.log(response.data.data.nickname);
-
-      // console.log(response.data.data);
-
-      setUserData({ ...userData, nickname });
-    } catch (error) {
-      console.error('유저 데이터를 가져오는 도중 오류 발생', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
 
   // 서버에 닉네임 저장 요청 함수
   const saveNickname = async () => {

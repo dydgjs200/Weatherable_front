@@ -84,6 +84,11 @@ const EditPasswordModal = ({ isOpen, onCancel, onConfirm }) => {
       );
       console.log('비밀번호 변경 완료', response);
       onConfirm();
+      setUserData({
+        currentPassword: '',
+        password: '',
+        passwordConfirm: '',
+      });
     } catch (error) {
       console.error('비밀번호 변경 중 오류 발생', error);
     }
