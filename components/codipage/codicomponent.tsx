@@ -58,9 +58,11 @@ const CodiPage: React.FC<{}> = () => {
 
   useEffect(() => {
     const extractedDate = extractSelectedDateFromURL();
-    setSelectedDate(extractedDate);
+    if (extractedDate) {
+      const formattedDate = new Date(extractedDate).toISOString();
+      setSelectedDate(formattedDate);
+    }
   }, []);
-
   const openModal = (category: string) => {
     setSelectedCategory(category);
     setIsModalOpen(true);
@@ -69,7 +71,6 @@ const CodiPage: React.FC<{}> = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
   const handleImageSelect = (imageSrc: string, index: number) => {
     const updatedSelectedIndexes = { ...selectedIndexes };
     updatedSelectedIndexes[selectedCategory!] = index;
@@ -77,7 +78,6 @@ const CodiPage: React.FC<{}> = () => {
     setSelectedImages({ ...selectedImages, [selectedCategory!]: imageSrc });
     closeModal();
   };
-
   const handleRegister = async () => {
     try {
       const codiDTO = { ...selectedIndexes, codiName, selectedDate, userId };
