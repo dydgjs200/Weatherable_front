@@ -19,7 +19,6 @@ const MypageEditHeader: React.FC = () => {
   // 이 부분이 있어야 요청이 가능하다. AT 을 헤더에 넣어서 보내야 하기 때문.
   const fetchUserData = async () => {
     try {
-      await refreshAccessToken(); // 토큰 새로고침
       // 유저 정보 받아오기
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_DB_HOST}/user`
@@ -76,8 +75,6 @@ const MypageEditHeader: React.FC = () => {
   // 서버에 닉네임 저장 요청 함수
   const saveNickname = async () => {
     try {
-      // await refreshAccessToken();
-
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_DB_HOST}/user/nickname`,
         userData
