@@ -50,6 +50,7 @@
 import { useEffect, useState } from 'react';
 import styles from '../../styles/Dimension/TopSizeNum.module.scss';
 import axios from 'axios';
+import { Token } from '../../service/common';
 
 function TopSizeNum() {
   // 치수 정보 배열
@@ -68,56 +69,24 @@ function TopSizeNum() {
     t4: '',
   });
 
+  // 유저 정보 받아오기
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_DB_HOST}/user`
+      );
+      console.log(response.data.data.userSizeDTO);
+      const { t1, t2, t3, t4 } = response.data.data.userSizeDTO;
+
+      // 가져온 데이터를 state에 설정
+      setInputValues({ t1, t2, t3, t4 });
+    } catch (error) {
+      console.error('유저 데이터를 가져오는 도중 오류 발생', error);
+    }
+  };
+
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const accessToken = sessionStorage.getItem('accessToken');
-
-        // 헤더에 액세스 토큰 설정
-        axios.defaults.headers.common[
-          'Authorization'
-        ] = `Bearer ${accessToken}`;
-
-        // 유저 정보 받아오기
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_DB_HOST}/user`
-        );
-        console.log(response.data.data.userSizeDTO);
-        const { t1, t2, t3, t4 } = response.data.data.userSizeDTO;
-
-        // 가져온 데이터를 state에 설정
-        setInputValues({ t1, t2, t3, t4 });
-      } catch (error) {
-        console.error('유저 데이터를 가져오는 도중 오류 발생', error);
-        if (error.response && error.response.status === 401) {
-          // 만료된 토큰일 경우 토큰 refresh 시도
-          try {
-            const refreshToken = sessionStorage.getItem('refreshToken');
-            const refreshResponse = await axios.post('/refresh', {
-              refreshToken,
-            });
-
-            // 새로운 액세스 토큰으로 업데이트
-            const accessToken = refreshResponse.data.accessToken;
-            sessionStorage.setItem('accessToken', accessToken);
-
-            // 다시 요청을 보내어 유저 데이터 가져오기
-            axios.defaults.headers.common[
-              'Authorization'
-            ] = `Bearer ${accessToken}`;
-            const retryResponse = await axios.get(
-              `${process.env.NEXT_PUBLIC_DB_HOST}/user`
-            );
-            const { t1, t2, t3, t4 } = retryResponse.data.data.userSizeDTO;
-            setInputValues({ t1, t2, t3, t4 });
-          } catch (refreshError) {
-            console.error('토큰 refresh 중 오류 발생', refreshError);
-            // 토큰 refresh 실패 시 로그아웃 또는 다른 처리 수행
-          }
-        }
-      }
-    };
-
+    Token();
     fetchUserData();
   }, []);
 
@@ -129,10 +98,13 @@ function TopSizeNum() {
     e.preventDefault();
     try {
       // 서버에 데이터 저장
-      // await axios.post(`${process.env.NEXT_PUBLIC_DB_HOST}/user`, {
-      //   userSizeDTO: inputValues,
-      // });
-      // 성공 메시지 등을 처리할 수 있습니다.
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_DB_HOST}/user/size`,
+        {
+          userSizeDTO: inputValues,
+        }
+      );
+      console.log('수치 저장 성공', response);
     } catch (error) {
       console.error('데이터를 저장하는 도중 오류 발생', error);
       // 오류 처리 로직 추가

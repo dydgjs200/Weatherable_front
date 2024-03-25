@@ -1,9 +1,20 @@
 @import '../common.scss';
 .mypageEdit_Header {
   width: 100%;
-  height: 16em;
+  height: 18em;
   @include flex();
   flex-direction: column;
+
+  .uploadButtonContainer {
+    margin-left: auto;
+    width: 40px;
+    height: 24px;
+    margin-right: 10px;
+    .uploadButton {
+      background: #f6f6f6;
+      border: none;
+    }
+  }
 
   .mypageEdit_Profile_edit {
     margin-left: auto;
@@ -60,9 +71,6 @@
       margin-left: 12px;
     }
   }
-}
-.margin {
-  margin-top: 0.75em;
 }
 
 .centerText {
