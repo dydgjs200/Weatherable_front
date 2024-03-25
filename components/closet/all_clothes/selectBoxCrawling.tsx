@@ -1,7 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import selectData from '../../../Store/closetSlice/selectDataSlice';
+import selectData, {
+  selectMajor,
+  selectMiddle,
+} from '../../../Store/closetSlice/selectDataSlice';
 
 import styles from '../../../styles/closet/addclothes.module.scss';
 
@@ -23,9 +26,9 @@ export default function SelectBoxCrawling() {
     console.log('대분류', value);
     setIsMajorCat(value);
     if (value == 'All') {
-      dispatch(selectData({ value: '' }));
+      dispatch(selectMajor({ value: '' }));
     } else {
-      dispatch(selectData({ value: value }));
+      dispatch(selectMajor({ value: value }));
     }
   };
 
@@ -33,9 +36,9 @@ export default function SelectBoxCrawling() {
     console.log('중분류', value);
     setIsMiddleCat(value);
     if (value == 'All') {
-      dispatch(selectData({ value: '' }));
+      dispatch(selectMiddle({ value: '' }));
     } else {
-      dispatch(selectData({ value: value }));
+      dispatch(selectMiddle({ value: value }));
     }
   };
 

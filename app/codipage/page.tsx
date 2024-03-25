@@ -6,7 +6,7 @@ import SelectedDateDisplay from '../../components/codipage/date';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../Store/Store';
 
-const CodiPage: React.FC<{ selectedDate: string; userId: string }> = () => {
+const CodiPage: React.FC<{ selectedDate?: string; userId?: string }> = () => {
   const selectedDate = useSelector(
     (state: RootState) => state.calendar.selectedDate
   );
