@@ -3,6 +3,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import styles from '../styles/EditPasswordModal.module.scss';
 import axios from 'axios';
+import { Value } from 'sass';
 
 interface UserData {
   existingPassword: string;
@@ -38,6 +39,8 @@ const EditPasswordModal = ({ isOpen, onCancel, onConfirm }) => {
     // 현재 비밀번호와 변경할 비밀번호가 일치할 때 에러 설정
     if (userData.existingPassword === userData.password) {
       setExistingPasswordError('현재 비밀번호와 일치합니다.');
+    } else if (userData.password.length < 6) {
+      setExistingPasswordError('비밀번호는 6자리 이상 이어야 합니다.');
     } else {
       setExistingPasswordError(null);
     }
@@ -92,7 +95,6 @@ const EditPasswordModal = ({ isOpen, onCancel, onConfirm }) => {
       });
     } catch (error) {
       console.error('비밀번호 변경 중 오류 발생', error);
-      console.log('error.response > ', error.response.data.responseMessage);
       setPasswordError(error.response.data.responseMessage);
     }
   };
@@ -104,6 +106,7 @@ const EditPasswordModal = ({ isOpen, onCancel, onConfirm }) => {
           <h2 className={styles.modalHeading}>비밀번호 변경</h2>
           <p className={styles.modalText}>현재 비밀번호</p>
           <input
+            className={styles.input}
             type="password"
             name="existingPassword"
             onChange={handleChange}
@@ -112,6 +115,7 @@ const EditPasswordModal = ({ isOpen, onCancel, onConfirm }) => {
           />
           <p className={styles.modalText}>변경할 비밀번호</p>
           <input
+            className={styles.input}
             type="password"
             name="password"
             onBlur={handlePasswordBlur}
@@ -124,6 +128,7 @@ const EditPasswordModal = ({ isOpen, onCancel, onConfirm }) => {
           )}
           <p className={styles.modalText}>변경할 비밀번호 재확인</p>
           <input
+            className={styles.input}
             type="password"
             name="passwordConfirm"
             onBlur={handleConfirmPasswordBlur}

@@ -29,8 +29,10 @@ const SignUp: React.FC = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if (name === 'userid' && value.length > 9) {
-      return;
+    if (name === 'userid') {
+      if (value.length > 9) {
+        return; //  9 초과일 때는 상태 업데이트를 막습니다.
+      }
     }
 
     setUserData((prevState) => ({
@@ -65,12 +67,22 @@ const SignUp: React.FC = () => {
         }
       }
     }
+    if (name === 'password') {
+      if (value.length < 6) {
+        setPasswordError('비밀번호는 6자리 이상이어야 합니다.');
+      } else if (value !== userData.passwordConfirm) {
+        setPasswordError('비밀번호가 일치하지 않습니다.');
+      } else {
+        setPasswordError(null);
+      }
+    }
 
-    if (userData.password !== userData.passwordConfirm) {
-      setPasswordError('비밀번호가 일치하지 않습니다.');
-      return;
-    } else {
-      setPasswordError(null);
+    if (name === 'passwordConfirm') {
+      if (value !== userData.password) {
+        setPasswordError('비밀번호가 일치하지 않습니다.');
+      } else {
+        setPasswordError(null);
+      }
     }
   };
 
@@ -118,9 +130,10 @@ const SignUp: React.FC = () => {
                 className={styles.signup_input}
                 type="password"
                 name="password"
+                onBlur={handleBlur}
                 onChange={handleChange}
                 value={userData.password}
-                placeholder="비밀번호"
+                placeholder="비밀번호 (6자리 이상)"
               />
             </div>
             {/* password check*/}
