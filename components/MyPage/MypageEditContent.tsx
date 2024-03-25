@@ -9,6 +9,16 @@ import { RootState } from '../../Store/Store';
 import { setUserId } from '../../Store/userSlice/userSlice';
 import { useRouter } from 'next/navigation';
 import EditPasswordModal from '../EditPasswordModal';
+import { Token } from '../../service/common';
+
+// 스타일 enum 정의
+const Style = {
+  캐주얼: 'Casual',
+  스포티: 'Sporty',
+  레트로: 'Retro',
+  고프고어: 'Gorp_Core',
+  포멀: 'Formal',
+};
 interface UserData {
   userid: string;
   height: number;
@@ -22,6 +32,7 @@ function MypageEditContent() {
   const userId = useSelector((state: RootState) => state.user.userId);
   // 각 스타일 요소의 상태를 관리하는 배열
   const [selectedDivs, setSelectedDivs] = useState(Array(8).fill(false));
+  const [clickedStyles, setClickedStyles] = useState<String[]>([]);
   const [editableHeight, setEditableHeight] = useState<boolean>(false); // 키 수정 가능 여부 상태
   const [editableWeight, setEditableWeight] = useState<boolean>(false); // 몸무게 수정 가능 여부 상태
   const [showWithdrawalModal, setShowWithdrawalModal] = useState(false); // 계정 삭제 모달
@@ -35,29 +46,39 @@ function MypageEditContent() {
   // 스타일 요소의 상태를 토글하는 함수
   const handleDivChange = async (index) => {
     try {
-      const selectedStyle = likeStyles[index];
-      console.log(selectedStyle); // 캐주얼 , 스포티 , 고프고어, 포멀, 레트로
-      const data = {
-        favoriteStyle: selectedStyle,
-      };
+      const selectedStyle = Object.values(Style)[index]; // 열거형 저장
+      console.log(selectedStyle); // Causal, Sporty, Retro, Gorp_Core, Formal
 
-      const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_DB_HOST}/user/style`,
-        data
-      );
+      // 선택된 스타일을 확인합니다.
+      if (!selectedDivs[index]) {
+        // 선택되지 않은 스타일만 처리합니다.
 
-      console.log('스타일 업로드 완료', response.data);
+        // 다른 모든 스타일의 선택 상태를 해제합니다.
+        const newSelectedDivs = Array(8).fill(false);
+        newSelectedDivs[index] = true; // 선택한 스타일만 선택 상태로 변경합니다.
+        setSelectedDivs(newSelectedDivs);
 
-      const newSelectedDivs = [...selectedDivs];
-      newSelectedDivs[index] = !newSelectedDivs[index];
-      setSelectedDivs(newSelectedDivs);
+        // 선택한 스타일을 클릭한 스타일 목록에 업데이트합니다.
+        setClickedStyles([selectedStyle]);
+
+        const data = {
+          favoriteStyle: selectedStyle,
+        };
+
+        const response = await axios.patch(
+          `${process.env.NEXT_PUBLIC_DB_HOST}/user/style`,
+          data
+        );
+
+        console.log('스타일 업로드 완료', response.data);
+      }
     } catch (error) {
       console.error('스타일 업데이트 중 오류 발생', error);
     }
   };
 
   // 선호 스타일 배열
-  const likeStyles = ['캐주얼', '스포티', '고프고어', '포멀', '레트로'];
+  const likeStyles = ['캐주얼', '스포티', '레트로', '고프고어', '포멀'];
 
   // 키 수정
   const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,29 +115,36 @@ function MypageEditContent() {
     }
   };
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const accessToken = sessionStorage.getItem('accessToken');
+  // 유저 정보 받아오기
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_DB_HOST}/user`
+      );
+      const { height, weight, userid, favoriteStyle } = response.data.data;
+      console.log(response.data.data);
 
-        // 헤더에 액세스 토큰 및 사용자 ID 설정
-        axios.defaults.headers.common[
-          'Authorization'
-        ] = `Bearer ${accessToken}`;
+      setUserData({ height, weight, userid, favoriteStyle });
 
-        // 유저 정보 받아오기
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_DB_HOST}/user`
-        );
-        const { height, weight, userid, favoriteStyle } = response.data.data;
-        console.log(response.data.data);
-
-        setUserData({ height, weight, userid, favoriteStyle });
-      } catch (error) {
-        console.error('유저 데이터를 가져오는 도중 오류 발생', error);
+      // favoriteStyle이 배열이 아닌 경우에만 처리합니다.
+      if (typeof favoriteStyle === 'string') {
+        // favoriteStyle에 있는 스타일에 대해 선택 상태를 업데이트합니다.
+        const index = Object.values(Style).indexOf(favoriteStyle);
+        if (index !== -1) {
+          const updatedSelectedDivs = Array(8).fill(false);
+          updatedSelectedDivs[index] = true;
+          setSelectedDivs(updatedSelectedDivs);
+        }
+      } else {
+        console.error('유저의 favoriteStyle이 배열이 아닙니다.');
       }
-    };
+    } catch (error) {
+      console.error('유저 데이터를 가져오는 도중 오류 발생', error);
+    }
+  };
 
+  useEffect(() => {
+    Token();
     fetchUserData();
   }, []);
 
@@ -170,7 +198,7 @@ function MypageEditContent() {
         {/* 선호스타일 변경 */}
         <div className={styles.title_div}>
           <img src="/bar.png" alt="" />
-          <div className={styles.title}>선호스타일</div>
+          <div className={styles.title}>선호스타일 (1개)</div>
         </div>
         <div className={styles.like_Style_div}>
           {/* 각 선호 스타일 요소에 대해 매핑 */}
