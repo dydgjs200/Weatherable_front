@@ -12,7 +12,6 @@ interface UserData {
 }
 
 const MypageHeader: React.FC = () => {
-  const [nickname, setNickname] = useState('');
   const [userData, setUserData] = useState<UserData>({
     nickname: '',
     image_path: null,
@@ -43,7 +42,7 @@ const MypageHeader: React.FC = () => {
           className={`${styles.mypage_Profile_edit} ${styles.margin}`}
         >
           <div>
-            <img src="/edit.png" alt="" />
+            <img src="/option.png" alt="" />
           </div>
         </Link>
         <div className={`${styles.mypage_Profile_image} ${styles.margin}`}>

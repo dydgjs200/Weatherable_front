@@ -17,8 +17,8 @@ const MypageEditHeader: React.FC = () => {
   });
   const [editable, setEditable] = useState<boolean>(false); // 수정 가능한지 여부를 나타내는 상태
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [uploading, setUploading] = useState<boolean>(false);
 
-  // 이 부분이 있어야 요청이 가능하다. AT 을 헤더에 넣어서 보내야 하기 때문.
   const fetchUserData = async () => {
     try {
       // 유저 정보 받아오기
@@ -29,7 +29,7 @@ const MypageEditHeader: React.FC = () => {
 
       console.log('response.data.data > ', response.data.data);
 
-      setUserData({ ...userData, nickname, image_path });
+      setUserData({ nickname, image_path });
     } catch (error) {
       console.error('유저 데이터를 가져오는 도중 오류 발생', error);
     }
@@ -42,6 +42,7 @@ const MypageEditHeader: React.FC = () => {
 
   // 이미지를 선택했을 때 호출되는 함수
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUploading(false);
     if (e.target.files && e.target.files.length > 0) {
       setSelectedImage(e.target.files[0]);
       console.log('e.target > ', e.target.files);
@@ -51,6 +52,7 @@ const MypageEditHeader: React.FC = () => {
   // 선택된 이미지를 업로드하는 함수
   const uploadImage = async () => {
     try {
+      setUploading(false);
       const formData = new FormData();
       formData.append('imageFile', selectedImage!);
 
@@ -68,6 +70,7 @@ const MypageEditHeader: React.FC = () => {
 
       // 이미지 업로드 후 유저 데이터 갱신
       fetchUserData();
+      setUploading(true); // 업로딩 완료 후 상태 변경
     } catch (error) {
       console.error('이미지 업로드 중 오류 발생', error);
     }
@@ -100,6 +103,13 @@ const MypageEditHeader: React.FC = () => {
   return (
     <>
       <div className={styles.mypageEdit_Header}>
+        <div className={styles.uploadButtonContainer}>
+          {!uploading && selectedImage && (
+            <button className={styles.uploadButton} onClick={uploadImage}>
+              완료
+            </button>
+          )}
+        </div>
         <div className={`${styles.mypage_Profile_image} ${styles.margin}`}>
           <img
             src={
@@ -120,11 +130,7 @@ const MypageEditHeader: React.FC = () => {
           onChange={handleImageChange}
           accept="image/*"
         />
-        {selectedImage && (
-          <button className={styles.uploadButton} onClick={uploadImage}>
-            업로드
-          </button>
-        )}
+
         <div className={styles.nick_Div}>
           {/* 수정 가능한 상태에 따라 input의 readonly 속성 적용 */}
           <input
