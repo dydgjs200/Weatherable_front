@@ -8,6 +8,7 @@ import {
   deleteCloth,
   getMyClosetById,
   modifyCloth,
+  likedCloth,
 } from '../../../../../service/closetApiService';
 import { useRouter } from 'next/navigation';
 import { isIP } from 'net';
@@ -44,6 +45,7 @@ export default function Clothes({ params: { id } }) {
   const [isPrice, setIsPrice] = useState('');
   const [isStyle, setIsStyle] = useState('');
   const [isclothId, setIsClothId] = useState('');
+  const [isLike, setIsLike] = useState(false);
   const categoryArr = require('../../../../../data/categoryData');
 
   // id 기반 옷 정보 가져오기
@@ -51,6 +53,7 @@ export default function Clothes({ params: { id } }) {
     const fetchData = async () => {
       try {
         const crawlingClothes = await getMyClosetById(id);
+        console.log(crawlingClothes);
         setClothes(crawlingClothes);
         setIsSize(crawlingClothes.size);
         setIsName(crawlingClothes.productName);
@@ -129,8 +132,13 @@ export default function Clothes({ params: { id } }) {
     window.location.reload();
   };
 
-  const addlike = () => {
-    console.log('좋아요 ㅋ');
+  const likeBtn = async () => {
+    // const likedData = { id: id, liked: liked };
+    // console.log(likedData);
+    // const likeRes = await likedCloth(likedData);
+    // if (likeRes === 200) {
+    //   setIsLike(!isLike);
+    // }
   };
 
   return (
@@ -150,7 +158,7 @@ export default function Clothes({ params: { id } }) {
       <div className={clothStyles.imgContainer}>
         {/* <Image src={} alt="로고" />; */}
         <img src={imagePath} alt="" />
-        <button className={clothStyles.likedBtn} onClick={addlike}>
+        <button className={clothStyles.likedBtn} onClick={likeBtn}>
           <span className="material-symbols-outlined">favorite</span>
         </button>
       </div>

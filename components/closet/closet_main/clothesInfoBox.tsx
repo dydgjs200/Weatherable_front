@@ -29,7 +29,7 @@ export default function ClothesInfoBox(data: any) {
         <button onClick={likeBtn}>
           <span
             className="material-symbols-outlined"
-            style={isLike ? { color: '#3c6aa3' } : { color: '#d3d3d3' }}
+            style={isLike ? { color: '#4d77b6' } : { color: '#d3d3d3' }}
           >
             favorite
           </span>
