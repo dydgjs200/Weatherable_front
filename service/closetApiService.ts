@@ -140,7 +140,7 @@ export const getUserClothes = async () => {
       }
     );
 
-    console.log(response.data.data);
+    console.log('>>>>', response.data.data);
     return response.data.data;
   } catch (error) {
     console.error(error);
