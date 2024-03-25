@@ -329,6 +329,6 @@ export const modifyCloth = async (clothData: any) => {
     return response;
   } catch (error) {
     console.log(error);
-    throw new Error('좋아요 오류');
+    throw new Error('옷 수정 오류');
   }
 };
