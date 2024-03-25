@@ -55,17 +55,17 @@ export default function SideBar({ open, close }: props) {
           <ul className={styles.userBox}>
             {/* 삼항 연산자로 로그인 / 회원가입 / 로그아웃 변경 */}
             {loggedin ? (
-              <ul className={styles.logoutBox}>
+              <ul className={styles.myPageBox}>
                 <li>
-                  <Link href={'/mypage'} onClick={logOut}>
+                  <Link href={'/mypage'}>
                     <span>마이페이지</span>
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href={'/login'} onClick={logOut}>
                     <span>로그아웃</span>
                   </Link>
-                </li>
+                </li> */}
               </ul>
             ) : (
               <>
@@ -127,6 +127,16 @@ export default function SideBar({ open, close }: props) {
               </Link>
             </li>
           </ul>
+          {loggedin && (
+            <ul className={styles.logoutBox}>
+              <li>
+                <Link href={'/login'} onClick={logOut}>
+                  <span>로그아웃 </span>
+                  <span className="material-symbols-outlined">logout</span>
+                </Link>
+              </li>
+            </ul>
+          )}
         </nav>
       </div>
       <button
