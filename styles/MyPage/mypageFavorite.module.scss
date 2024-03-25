@@ -12,7 +12,7 @@
 
   .mypage_favorite_content {
     @include flex();
-    justify-content: start;
+    justify-content: flex-start;
     white-space: nowrap; // 요소들이 한 줄로 유지되도록 함.
     @include scrollbar(); // 스크롤바 안보이게 할건지..?
 

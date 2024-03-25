@@ -9,7 +9,7 @@
 
   .dimension {
     @include flex();
-    justify-content: start;
+    justify-content: flex-start;
     margin-top: 1em;
 
     .number {
