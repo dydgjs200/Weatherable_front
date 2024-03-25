@@ -7,6 +7,7 @@ import Image from 'next/image';
 import {
   deleteCloth,
   getMyClosetById,
+  modifyCloth,
 } from '../../../../../service/closetApiService';
 import { useRouter } from 'next/navigation';
 import { isIP } from 'net';
@@ -95,14 +96,19 @@ export default function Clothes({ params: { id } }) {
     setIsSizeDisabled(!isSizeDisabled);
   };
 
-  const modifyClothes = () => {
+  const modifyClothes = async () => {
     const modifyData = {
       productName: { isName },
       size: { isSize },
       price: { isPrice },
     };
-
+    const response = await modifyCloth(modifyData);
     console.log(modifyData);
+    console.log(response);
+  };
+
+  const addlike = () => {
+    console.log('좋아요 ㅋ');
   };
 
   return (
@@ -122,7 +128,7 @@ export default function Clothes({ params: { id } }) {
       <div className={clothStyles.imgContainer}>
         {/* <Image src={} alt="로고" />; */}
         <img src={imagePath} alt="" />
-        <button className={clothStyles.likedBtn}>
+        <button className={clothStyles.likedBtn} onClick={addlike}>
           <span className="material-symbols-outlined">favorite</span>
         </button>
       </div>
