@@ -118,14 +118,15 @@ export default function Clothes({ params: { id } }) {
   // 수정
   const modifyClothes = async () => {
     const modifyData = {
-      id: { isclothId },
-      productName: { isName },
-      size: { isSize },
-      price: { isPrice },
+      id: isclothId,
+      productName: isName,
+      size: isSize,
+      price: isPrice,
     };
     const response = await modifyCloth(modifyData);
     console.log(modifyData);
     console.log(response);
+    window.location.reload();
   };
 
   const addlike = () => {

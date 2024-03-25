@@ -155,10 +155,27 @@
         }
       }
     }
+    .myPageBox {
+      // background-color: pink;
+      width: 100%;
+      height: 20%;
+      @include flex();
+    }
     .logoutBox {
       width: 100%;
       height: 10%;
       @include flex();
+      li {
+        width: 40%;
+        a {
+          @include flex();
+          width: 100%;
+          justify-content: space-evenly;
+          span {
+            color: $theme-blue-4;
+          }
+        }
+      }
     }
   }
 }

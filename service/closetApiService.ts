@@ -100,7 +100,7 @@ export const getCrawlingClothes = async () => {
   }
 };
 
-// 크롤링 옷 정보 카테고리 기준으로 불러오기
+// 크롤링 옷 정보 카테고리 기준으로 불러오기 (중분류)
 export const getCrawlingClothesByCat = async (category: string) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
@@ -148,7 +148,7 @@ export const getUserClothes = async () => {
   }
 };
 
-// 유저 옷 정보 카테고리 기준으로 불러오기 (메인페이지)
+// 유저 옷 정보 카테고리 기준으로 불러오기 (중분류)
 export const getUserClothesByCatMajor = async (category: string) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
@@ -174,6 +174,7 @@ export const getUserClothesByCatMajor = async (category: string) => {
   }
 };
 
+// 유저 옷 정보 카테고리 기준으로 불러오기 (소분류)
 export const getUserClothesByCatMiddle = async (category: string) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
@@ -304,8 +305,8 @@ export const likedCloth = async (likeData: any) => {
         },
       }
     );
-    console.log(response);
-    return response;
+    console.log(response.data.statusCode);
+    return response.data.statusCode;
   } catch (error) {
     console.log(error);
     throw new Error('좋아요 오류');
