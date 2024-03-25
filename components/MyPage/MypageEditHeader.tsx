@@ -7,11 +7,13 @@ import { Token, refreshAccessToken } from '../../service/common';
 
 interface UserData {
   nickname: string;
+  image_path: string;
 }
 
 const MypageEditHeader: React.FC = () => {
   const [userData, setUserData] = useState<UserData>({
     nickname: '',
+    image_path: null,
   });
   const [editable, setEditable] = useState<boolean>(false); // 수정 가능한지 여부를 나타내는 상태
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -23,12 +25,11 @@ const MypageEditHeader: React.FC = () => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_DB_HOST}/user`
       );
-      const { nickname } = response.data.data; // 서버에서 받은 닉네임
-      // console.log(response.data.data.nickname);
+      const { nickname, image_path } = response.data.data; // 서버에서 받은 닉네임
 
       console.log('response.data.data > ', response.data.data);
 
-      setUserData({ ...userData, nickname });
+      setUserData({ ...userData, nickname, image_path });
     } catch (error) {
       console.error('유저 데이터를 가져오는 도중 오류 발생', error);
     }
@@ -99,14 +100,16 @@ const MypageEditHeader: React.FC = () => {
   return (
     <>
       <div className={styles.mypageEdit_Header}>
-        <div
-          className={`${styles.mypage_Profile_image} ${styles.margin}`}
-          style={{
-            backgroundImage: selectedImage
-              ? `url(${URL.createObjectURL(selectedImage)})`
-              : undefined,
-          }}
-        ></div>
+        <div className={`${styles.mypage_Profile_image} ${styles.margin}`}>
+          <img
+            src={
+              selectedImage
+                ? URL.createObjectURL(selectedImage)
+                : userData.image_path
+            }
+            alt=""
+          />
+        </div>
         <label className={styles.label} htmlFor="file">
           <div className={styles.label_Div}>프로필 변경</div>
         </label>

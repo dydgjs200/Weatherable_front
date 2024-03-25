@@ -121,7 +121,7 @@ const EditPasswordModal = ({ isOpen, onCancel, onConfirm }) => {
             onBlur={handlePasswordBlur}
             onChange={handleChange}
             value={userData.password}
-            placeholder="비밀번호"
+            placeholder="비밀번호 (6자리 이상)"
           />
           {existingPasswordError && (
             <p className={styles.errorMsg}>{existingPasswordError}</p>

@@ -9,7 +9,6 @@ import { RootState } from '../../Store/Store';
 import { setUserId } from '../../Store/userSlice/userSlice';
 import { useRouter } from 'next/navigation';
 import EditPasswordModal from '../EditPasswordModal';
-import { channel } from 'diagnostics_channel';
 interface UserData {
   userid: string;
   height: number;
