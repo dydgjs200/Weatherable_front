@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { selectData } from '../../../Store/closetSlice/selectDataSlice';
+import selectData from '../../../Store/closetSlice/selectDataSlice';
 
 import styles from '../../../styles/closet/addclothes.module.scss';
 
