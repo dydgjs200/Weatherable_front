@@ -12,45 +12,47 @@ import {
 import { postAddStyles } from '../../../../service/closetApiService';
 
 export default function SelectCat() {
-  const categoryArr = {
-    Top: [
-      { Shirt: '티셔츠' },
-      { Short_T_shirt: '반팔 티셔츠' },
-      { Long_T_shirt: '긴팔 티셔츠' },
-      { Hoodies: '후드 티셔츠' },
-      { Sweat_shirt: '맨투맨' },
-      { Sweater: '니트' },
-    ],
-    Pants: [
-      { Denim: '청바지' },
-      { Slacks: '슬랙스' },
-      { Sport_pants: '트레이닝복' },
-      { Short_pants: '반바지' },
-    ],
-    Outer: [
-      { Jacket: '자켓' },
-      { Coat: '코트' },
-      { Padded_jacket: '패딩' },
-      { Blazer: '블레이저' },
-      { Mustang: '무스탕' },
-      { Sport_shirt: '스포츠 자켓' },
-    ],
-    Shoes: [
-      { Running_shoes: '러닝 슈즈' },
-      { Dress_Shoes: '구두' },
-      { Sneakers: '스니커즈' },
-      { Boots: '부츠' },
-    ],
-    Skirt: [{ Short_Skirt: '숏 스커트' }, { Long_Skirt: '롱 스커트' }],
-    Onepiece: [{ Short_Onepiece: '숏 원피스' }, { Long_Onepiece: '롱 원피스' }],
-    Accessory: [
-      { Watch: '시계' },
-      { Jewelry: '주얼리' },
-      { Eyewear: '안경' },
-      { Headwear: '모자' },
-      { Bag: '가방' },
-    ],
-  };
+  //  const categoryArr = {
+  //   Top: [
+  //     { Shirt: '티셔츠' },
+  //     { Short_T_shirt: '반팔 티셔츠' },
+  //     { Long_T_shirt: '긴팔 티셔츠' },
+  //     { Hoodies: '후드 티셔츠' },
+  //     { Sweat_shirt: '맨투맨' },
+  //     { Sweater: '니트' },
+  //   ],
+  //   Pants: [
+  //     { Denim: '청바지' },
+  //     { Slacks: '슬랙스' },
+  //     { Sport_pants: '트레이닝복' },
+  //     { Short_pants: '반바지' },
+  //   ],
+  //   Outer: [
+  //     { Jacket: '자켓' },
+  //     { Coat: '코트' },
+  //     { Padded_jacket: '패딩' },
+  //     { Blazer: '블레이저' },
+  //     { Mustang: '무스탕' },
+  //     { Sport_shirt: '스포츠 자켓' },
+  //   ],
+  //   Shoes: [
+  //     { Running_shoes: '러닝 슈즈' },
+  //     { Dress_Shoes: '구두' },
+  //     { Sneakers: '스니커즈' },
+  //     { Boots: '부츠' },
+  //   ],
+  //   Skirt: [{ Short_Skirt: '숏 스커트' }, { Long_Skirt: '롱 스커트' }],
+  //   Onepiece: [{ Short_Onepiece: '숏 원피스' }, { Long_Onepiece: '롱 원피스' }],
+  //   Accessory: [
+  //     { Watch: '시계' },
+  //     { Jewelry: '주얼리' },
+  //     { Eyewear: '안경' },
+  //     { Headwear: '모자' },
+  //     { Bag: '가방' },
+  //   ],
+  // };
+
+  const categoryArr = require('../../../../data/categoryData');
 
   interface aiData {
     img: string;
@@ -108,7 +110,7 @@ export default function SelectCat() {
       case 'Skirt':
         setPythonCategoty('Bottom');
         break;
-      case 'Skirt':
+      case 'Onepiece':
         setPythonCategoty('Bottom');
         break;
     }
@@ -126,8 +128,6 @@ export default function SelectCat() {
         const aiStyle = await postAddStyles(formData);
         console.log('실제 전송 데이터', formData);
 
-        // console.log('스타일', Object.keys(aiStyle)[0]);
-        // console.log('스코어', Object.values(aiStyle)[0]);
         dispatch(selectStyle_num({ value: Object.keys(aiStyle)[0] as string }));
         dispatch(selectScore({ value: Object.values(aiStyle)[0] as string }));
       } catch (error) {
@@ -140,14 +140,8 @@ export default function SelectCat() {
     }
   }, [pythonCategory]);
 
-  // const postStyles = async () => {
-  //   try {
-  //     await postAddStyles(formData);
-  //     console.log('실제 전송 데이터', formData);
-  //   } catch (error) {
-  //     console.error('실패: ', error);
-  //   }
-  // };
+  // console.log(Object.keys(subCategory).join());
+  // console.log(subCategory);
 
   return (
     <>
@@ -208,8 +202,6 @@ export default function SelectCat() {
                       }
                       onClick={() => {
                         selectCategory(cat);
-                        // postAddStyles(formData);
-                        // postStyles();
                       }}
                     />
                   </li>
@@ -228,7 +220,12 @@ export default function SelectCat() {
             }}
             disabled={!subCategory}
           >
-            <span>{subCategory || `${subCategory}`}</span>
+            <span>
+              {subCategory &&
+                categoryArr[category].find((obj) =>
+                  obj.hasOwnProperty(subCategory)
+                )[subCategory]}
+            </span>
             <span className="material-symbols-outlined">
               keyboard_arrow_down
             </span>
@@ -242,6 +239,7 @@ export default function SelectCat() {
                       type="button"
                       value={`${item[Object.keys(item)[0]]}`}
                       onClick={() => {
+                        console.log();
                         selectSubCategory(Object.keys(item)[0]);
                       }}
                     />

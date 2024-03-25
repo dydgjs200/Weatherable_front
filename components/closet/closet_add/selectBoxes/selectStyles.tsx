@@ -10,7 +10,6 @@ export default function SelectStyles() {
     score: string;
   }
   const dispatch = useDispatch();
-  const [isClicked, setIsClicked] = useState(null);
 
   const aiStyles: aiStyles = useSelector((state: any) => ({
     style_num: state.clothes.clothes.style_num,
@@ -27,23 +26,23 @@ export default function SelectStyles() {
 
     switch (aiStyles.style_num) {
       case '0':
-        setStyleState('Casual');
+        setStyleState('캐주얼');
         dispatch(selectStyle_str({ value: 'Casual' }));
         break;
       case '1':
-        setStyleState('Sporty');
+        setStyleState('스포티');
         dispatch(selectStyle_str({ value: 'Sporty' }));
         break;
       case '2':
-        setStyleState('Retro');
+        setStyleState('레트로');
         dispatch(selectStyle_str({ value: 'Retro' }));
         break;
       case '3':
-        setStyleState('Gorp_Core');
+        setStyleState('고프 코어');
         dispatch(selectStyle_str({ value: 'Gorp_Core' }));
         break;
       case '4':
-        setStyleState('Formal');
+        setStyleState('포멀');
         dispatch(selectStyle_str({ value: 'Formal' }));
         break;
     }

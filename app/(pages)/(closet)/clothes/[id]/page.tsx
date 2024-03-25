@@ -42,6 +42,9 @@ export default function Clothes({ params: { id } }) {
   const [isSize, setIsSize] = useState('');
   const [isName, setIsName] = useState('');
   const [isPrice, setIsPrice] = useState('');
+  const [isStyle, setIsStyle] = useState('');
+  const [isclothId, setIsClothId] = useState('');
+  const categoryArr = require('../../../../../data/categoryData');
 
   // id 기반 옷 정보 가져오기
   useEffect(() => {
@@ -52,6 +55,24 @@ export default function Clothes({ params: { id } }) {
         setIsSize(crawlingClothes.size);
         setIsName(crawlingClothes.productName);
         setIsPrice(crawlingClothes.price);
+        setIsClothId(crawlingClothes.id);
+        switch (crawlingClothes.style) {
+          case 'Casual':
+            setIsStyle('캐주얼');
+            break;
+          case 'Sporty':
+            setIsStyle('스포티');
+            break;
+          case 'Retro':
+            setIsStyle('레트로');
+            break;
+          case 'Gorp_Core':
+            setIsStyle('고프 코어');
+            break;
+          case 'Formal':
+            setIsStyle('포멀');
+            break;
+        }
       } catch (error) {
         console.log('내 옷장 상세 정보가져오기 실패: ', error);
       }
@@ -71,8 +92,6 @@ export default function Clothes({ params: { id } }) {
     style,
     price,
   } = clothes;
-
-  // console.log(clothes);
 
   const router = useRouter();
 
@@ -96,8 +115,10 @@ export default function Clothes({ params: { id } }) {
     setIsSizeDisabled(!isSizeDisabled);
   };
 
+  // 수정
   const modifyClothes = async () => {
     const modifyData = {
+      id: { isclothId },
       productName: { isName },
       size: { isSize },
       price: { isPrice },
@@ -140,7 +161,28 @@ export default function Clothes({ params: { id } }) {
         <div>
           <span className={clothStyles.title}>카테고리</span>
           <span className={clothStyles.desc}>
-            {majorCategory} <span>-</span> <span>{middleCategory}</span>
+            {majorCategory === 'Top'
+              ? '상의'
+              : majorCategory === 'Pants'
+              ? '하의'
+              : majorCategory === 'Outer'
+              ? '아우터'
+              : majorCategory === 'Shoes'
+              ? '신발'
+              : majorCategory === 'Skirt'
+              ? '치마'
+              : majorCategory === 'Onepiece'
+              ? '원피스'
+              : majorCategory === 'Accessory'
+              ? '악세사리'
+              : majorCategory}
+            <span> / </span>
+            <span>
+              {middleCategory &&
+                categoryArr[majorCategory].find((obj) =>
+                  obj.hasOwnProperty(middleCategory)
+                )[middleCategory]}
+            </span>
           </span>
         </div>
         <div>
@@ -301,7 +343,7 @@ export default function Clothes({ params: { id } }) {
         </div>
         <div>
           <span className={clothStyles.title}>스타일</span>
-          <span className={clothStyles.desc}>{style}</span>
+          <span className={clothStyles.desc}>{isStyle}</span>
         </div>
         <div>
           <span className={clothStyles.title}>구매가격</span>
@@ -310,7 +352,7 @@ export default function Clothes({ params: { id } }) {
             name="price"
             id=""
             className={clothStyles.descPrice}
-            value={isPrice}
+            value={isPrice.toLocaleString()}
             onChange={(e) => {
               setIsPrice(e.target.value);
             }}
