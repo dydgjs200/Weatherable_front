@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from '../../styles/mainpage/mainpage.module.scss';
-
+import { useDispatch } from 'react-redux';
+import { setTemp, setWeather } from '../../Store/aiSlice/aiSlice';
 interface WeatherData {
   main: {
     temp: number;
@@ -34,7 +35,10 @@ const LocationWeather: React.FC = () => {
   } | null>(null);
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isTemp, setIsTemp] = useState<number>(0);
+  const [isWeather, setIsWeather] = useState('');
 
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,6 +51,8 @@ const LocationWeather: React.FC = () => {
         const apiURI = `http://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=${apiKey}`;
         const response = await axios.get<WeatherData>(apiURI);
         setWeatherData(response.data);
+        setIsTemp(Math.round((response.data.main.temp - 273) * 10) / 10);
+        setIsWeather(response.data.weather[0].main);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching weather data:', error);
@@ -55,6 +61,26 @@ const LocationWeather: React.FC = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const tempData = async () => {
+      try {
+        await dispatch(
+          setTemp({
+            value: isTemp,
+          })
+        );
+        await dispatch(
+          setWeather({
+            value: isWeather,
+          })
+        );
+      } catch (error) {
+        console.log('온도 저장 에러', error);
+      }
+    };
+    tempData();
+  }, [isTemp, isWeather]);
 
   // 사용자의 위치 정보를 가져오는 함수
   const getLocation = async (): Promise<{
@@ -111,6 +137,10 @@ const LocationWeather: React.FC = () => {
 
   // 위치 이름 가져오기
   const locationName = getLocationName(weatherData?.name || '');
+
+  // console.log('온도 정보', Math.round((weatherData.main.temp - 273) * 10) / 10);
+
+  // console.log('날씨 정보', weatherData.weather[0].main);
 
   return (
     <div className={styles.weatherContainer}>

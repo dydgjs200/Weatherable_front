@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { selectData } from '../../../Store/closetSlice/selectDataSlice';
+// import { selectData } from '../../../Store/closetSlice/selectDataSlice';
 
 import styles from '../../../styles/closet/addclothes.module.scss';
 
@@ -22,21 +22,21 @@ export default function SelectBoxCrawling() {
   const majorSelected = (value) => {
     console.log('대분류', value);
     setIsMajorCat(value);
-    if (value == 'All') {
-      dispatch(selectData({ value: '' }));
-    } else {
-      dispatch(selectData({ value: value }));
-    }
+    // if (value == 'All') {
+    //   dispatch(selectData({ value: '' }));
+    // } else {
+    //   dispatch(selectData({ value: value }));
+    // }
   };
 
   const midSelected = (value) => {
     console.log('중분류', value);
     setIsMiddleCat(value);
-    if (value == 'All') {
-      dispatch(selectData({ value: '' }));
-    } else {
-      dispatch(selectData({ value: value }));
-    }
+    // if (value == 'All') {
+    //   dispatch(selectData({ value: '' }));
+    // } else {
+    //   dispatch(selectData({ value: value }));
+    // }
   };
 
   const categoryArr = {

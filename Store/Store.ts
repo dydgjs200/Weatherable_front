@@ -40,6 +40,7 @@ import userReducer from './userSlice/userSlice';
 import { addClothesReducer } from './closetSlice/addClothesSlice';
 import { showListReducer } from './closetSlice/showListSlice';
 import { selectDataReducer } from './closetSlice/selectDataSlice';
+import { aiRecommedRuducer } from './aiSlice/aiSlice';
 
 const userPersistConfig = {
   key: 'user',
@@ -54,6 +55,7 @@ const rootReducer = combineReducers({
   clothes: addClothesReducer,
   search: selectDataReducer,
   calendar: calendarReducer,
+  aiRecommend: aiRecommedRuducer,
 });
 // test
 const store = configureStore({
