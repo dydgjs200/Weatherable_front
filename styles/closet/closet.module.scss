@@ -189,7 +189,6 @@
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-
     div {
       width: 80%;
       display: flex;
@@ -231,6 +230,17 @@
       }
     }
   }
+  .noResultBox {
+    background: none;
+    position: absolute;
+    width: 90%;
+    @include flex();
+    flex-direction: column;
+    top: 50vh;
+    span {
+      color: $theme-blue-1;
+    }
+  }
 }
 
 .mainInfoBoxSmall {
@@ -245,40 +255,56 @@
     box-shadow: 0px 2px 8px -5px #333;
     border-radius: $radius-s;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    // background-color: pink;
+    flex-direction: row-reverse;
+    justify-content: space-around;
     align-items: center;
-    background-color: white;
     height: 6vh;
     min-height: 6vh;
     margin-bottom: 0.5rem;
-    a {
-      display: flex;
-      width: 85%;
+    div {
+      width: 60%;
       height: 90%;
-      flex-direction: row-reverse;
-      justify-content: space-between;
+      display: flex;
       align-items: center;
-      div {
-        width: 40%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        button {
-          background: none;
-          border: none;
-        }
-        .title {
-          color: $black;
-        }
+      justify-content: space-between;
+      a {
+        width: 50%;
+      }
+      button {
+        background: none;
+        border: none;
         span {
           font-size: 1rem;
           color: $lightgray;
         }
       }
+      .title {
+        color: $black;
+      }
     }
-    img {
-      height: 90%;
+    a {
+      // width: 30%;
+      img {
+        height: 35px;
+        max-height: 35px;
+      }
     }
   }
+  .noResultBox {
+    background: none;
+    position: absolute;
+    width: 90%;
+    @include flex();
+    flex-direction: column;
+    top: 50vh;
+    span {
+      color: $theme-blue-1;
+    }
+  }
+}
+
+.noResultBox {
+  background-color: pink;
+  width: 100%;
 }

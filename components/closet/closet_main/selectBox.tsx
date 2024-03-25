@@ -1,7 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { selectData } from '../../../Store/closetSlice/selectDataSlice';
+import {
+  selectMajor,
+  selectMiddle,
+} from '../../../Store/closetSlice/selectDataSlice';
 
 import styles from '../../../styles/closet/closet.module.scss';
 
@@ -23,9 +26,9 @@ export default function SelectBox() {
     console.log('대분류', value);
     setIsMajorCat(value);
     if (value == 'All') {
-      dispatch(selectData({ value: '' }));
+      dispatch(selectMajor({ value: '' }));
     } else {
-      dispatch(selectData({ value: value }));
+      dispatch(selectMajor({ value: value }));
     }
   };
 
@@ -33,9 +36,9 @@ export default function SelectBox() {
     console.log('중분류', value);
     setIsMiddleCat(value);
     if (value == 'All') {
-      dispatch(selectData({ value: '' }));
+      dispatch(selectMiddle({ value: '' }));
     } else {
-      dispatch(selectData({ value: value }));
+      dispatch(selectMiddle({ value: value }));
     }
   };
 
@@ -118,15 +121,6 @@ export default function SelectBox() {
         ))}
       </ul>
       <ul className={styles.selectUl}>
-        {/* {Object.keys(categoryArr[isCat]).map((index) => (
-          <li key={index}>
-            <input
-              type="button"
-              className={styles.smallCat}
-              value={Object.values(categoryArr[isCat][index])[0]}
-            />
-          </li>
-        ))} */}
         {categoryArr[isMajorCat].map((category, index) => (
           <li key={index}>
             <input

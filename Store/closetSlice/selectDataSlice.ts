@@ -3,19 +3,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface searchData {
-  selectData: string;
+  selectMajor: string;
+  selectMiddle: string;
 }
 
 const initialState: searchData = {
-  selectData: '',
+  selectMajor: '',
+  selectMiddle: '',
 };
 
 const selectDataSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    selectData: (state, action: PayloadAction<{ value: string }>) => {
-      state.selectData = action.payload.value;
+    selectMajor: (state, action: PayloadAction<{ value: string }>) => {
+      state.selectMajor = action.payload.value;
+    },
+    selectMiddle: (state, action: PayloadAction<{ value: string }>) => {
+      state.selectMiddle = action.payload.value;
     },
   },
 });
@@ -24,4 +29,4 @@ export const selectDataReducer = selectDataSlice.reducer;
 
 export default selectDataSlice;
 
-export const { selectData } = selectDataSlice.actions;
+export const { selectMajor, selectMiddle } = selectDataSlice.actions;

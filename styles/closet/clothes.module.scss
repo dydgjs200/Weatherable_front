@@ -28,6 +28,7 @@
   position: relative;
   overflow: hidden;
   @include flex();
+  // background-color: pink;
   img {
     position: absolute;
     top: 50%;
@@ -35,6 +36,17 @@
     transform: translate(-50%, -50%);
     height: 100%;
     border-radius: $radius-m;
+  }
+  .likedBtn {
+    position: absolute;
+    @include flex();
+    top: 90%;
+    left: 90%;
+    background: none;
+    border: none;
+    span {
+      color: $lightgray;
+    }
   }
 }
 
@@ -63,6 +75,44 @@
     .desc {
       font-weight: 500;
       width: 70%;
+    }
+    .descPrice {
+      font-weight: 500;
+      width: 70%;
+      border: 0.5px solid $lightgray;
+      border-radius: $radius-s;
+    }
+  }
+  .sizeBox {
+    position: relative;
+    width: 70%;
+    .sizeBtn {
+      background: white;
+      width: 100%;
+      border: 0.5px solid $lightgray;
+      border-radius: $radius-s;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sizeSelectBox {
+      background-color: white;
+      border: 0.5px solid $lightgray;
+      border-radius: $radius-s;
+      position: absolute;
+      width: 100%;
+      ul {
+        padding: 0;
+        margin: 0;
+        li {
+          input {
+            width: 100%;
+            border: none;
+            background: none;
+          }
+        }
+      }
     }
   }
 }

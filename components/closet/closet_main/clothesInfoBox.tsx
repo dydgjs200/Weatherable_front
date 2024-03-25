@@ -7,25 +7,22 @@ import { useState } from 'react';
 export default function ClothesInfoBox(data: any) {
   const [isLike, setIsLike] = useState(false);
 
-  const liked = async () => {
-    setIsLike(!isLike);
+  const { imagePath, id, productName, liked } = data.clothes;
 
-    try {
-      const clothLike = await likedCloth(isLike);
-    } catch (error) {
-      console.log(error, '좋아요 오류');
-    }
+  // like 데이터 보내기
+
+  const likeBtn = async () => {
+    const likedData = { id: { id }, liked: { liked } };
+    console.log(likedData);
+    const likeRes = await likedCloth(likedData);
   };
-
-  const { imagePath, id, productName } = data.clothes;
-
   return (
     <div className={styles.infoSmallBox}>
       <div>
         <Link href={`/clothes/${id}`} className={styles.title}>
           <span>{productName}</span>
         </Link>
-        <button onClick={liked}>
+        <button onClick={likeBtn}>
           <span className="material-symbols-outlined">favorite</span>
         </button>
       </div>

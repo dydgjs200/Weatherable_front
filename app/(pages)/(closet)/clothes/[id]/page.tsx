@@ -9,6 +9,7 @@ import {
   getMyClosetById,
 } from '../../../../../service/closetApiService';
 import { useRouter } from 'next/navigation';
+import { isIP } from 'net';
 
 interface clothes {
   imagePath: string;
@@ -37,12 +38,19 @@ export default function Clothes({ params: { id } }) {
     price: '',
   });
 
+  const [isSize, setIsSize] = useState('');
+  const [isName, setIsName] = useState('');
+  const [isPrice, setIsPrice] = useState('');
+
   // id 기반 옷 정보 가져오기
   useEffect(() => {
     const fetchData = async () => {
       try {
         const crawlingClothes = await getMyClosetById(id);
         setClothes(crawlingClothes);
+        setIsSize(crawlingClothes.size);
+        setIsName(crawlingClothes.productName);
+        setIsPrice(crawlingClothes.price);
       } catch (error) {
         console.log('내 옷장 상세 정보가져오기 실패: ', error);
       }
@@ -65,20 +73,6 @@ export default function Clothes({ params: { id } }) {
 
   // console.log(clothes);
 
-  // 옷 정보 수정
-  const changeValue = (e) => {
-    const { value, name } = e.target;
-    console.log(value);
-    console.log(name);
-    setClothes((prevClothes) => ({
-      ...prevClothes,
-      [name]: value,
-    }));
-  };
-
-  const modifyClothes = () => {
-    console.log(clothes);
-  };
   const router = useRouter();
 
   const deleteClothes = async () => {
@@ -91,6 +85,26 @@ export default function Clothes({ params: { id } }) {
     }
   };
 
+  const [isSizeDisabled, setIsSizeDisabled] = useState(false);
+
+  // console.log(isSize);
+
+  const selectSize = (e) => {
+    const selectedSize = e.target.value;
+    setIsSize(selectedSize);
+    setIsSizeDisabled(!isSizeDisabled);
+  };
+
+  const modifyClothes = () => {
+    const modifyData = {
+      productName: { isName },
+      size: { isSize },
+      price: { isPrice },
+    };
+
+    console.log(modifyData);
+  };
+
   return (
     <div className={styles.container}>
       <form className={clothStyles.pNameContainer}>
@@ -99,13 +113,18 @@ export default function Clothes({ params: { id } }) {
           name="productName"
           id=""
           className={clothStyles.desc}
-          value={productName}
-          onChange={changeValue}
+          value={isName}
+          onChange={(e) => {
+            setIsName(e.target.value);
+          }}
         />
       </form>
       <div className={clothStyles.imgContainer}>
         {/* <Image src={} alt="로고" />; */}
         <img src={imagePath} alt="" />
+        <button className={clothStyles.likedBtn}>
+          <span className="material-symbols-outlined">favorite</span>
+        </button>
       </div>
       <div className={clothStyles.infoContainer}>
         <div>
@@ -120,14 +139,151 @@ export default function Clothes({ params: { id } }) {
         </div>
         <div>
           <span className={clothStyles.title}>사이즈</span>
-          <input
-            type="text"
-            name="size"
-            id=""
-            className={clothStyles.desc}
-            value={size}
-            onChange={changeValue}
-          />
+          <section className={clothStyles.sizeBox}>
+            <button
+              className={clothStyles.sizeBtn}
+              onClick={(e) => {
+                e.preventDefault();
+                setIsSizeDisabled(!isSizeDisabled);
+              }}
+            >
+              <span>{isSize}</span>
+              <span className="material-symbols-outlined">
+                keyboard_arrow_down
+              </span>
+            </button>
+            {isSizeDisabled && (
+              <section className={clothStyles.sizeSelectBox}>
+                {majorCategory !== 'Shoes' ? (
+                  <ul>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="sizeS"
+                        className="sizeInput"
+                        value="S"
+                        onClick={selectSize}
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="sizeM"
+                        className="sizeInput"
+                        value="M"
+                        onClick={selectSize}
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="sizeL"
+                        className="sizeInput"
+                        value="L"
+                        onClick={selectSize}
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="sizeXL"
+                        className="sizeInput"
+                        value="XL"
+                        onClick={selectSize}
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="sizeXXL"
+                        className="sizeInput"
+                        value="XXL"
+                        onClick={selectSize}
+                      />
+                    </li>
+                  </ul>
+                ) : (
+                  <ul>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="size30"
+                        className="sizeInput"
+                        value="230"
+                        onClick={selectSize}
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="size40"
+                        className="sizeInput"
+                        value="240"
+                        onClick={selectSize}
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="size50"
+                        className="sizeInput"
+                        value="250"
+                        onClick={selectSize}
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="size60"
+                        className="sizeInput"
+                        value="260"
+                        onClick={selectSize}
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="size70"
+                        className="sizeInput"
+                        value="270"
+                        onClick={selectSize}
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="size80"
+                        className="sizeInput"
+                        value="280"
+                        onClick={selectSize}
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="button"
+                        name=""
+                        id="size90"
+                        className="sizeInput"
+                        value="290"
+                        onClick={selectSize}
+                      />
+                    </li>
+                  </ul>
+                )}
+              </section>
+            )}
+          </section>
         </div>
         <div>
           <span className={clothStyles.title}>계절</span>
@@ -147,9 +303,11 @@ export default function Clothes({ params: { id } }) {
             type="text"
             name="price"
             id=""
-            className={clothStyles.desc}
-            value={price}
-            onChange={changeValue}
+            className={clothStyles.descPrice}
+            value={isPrice}
+            onChange={(e) => {
+              setIsPrice(e.target.value);
+            }}
           />
         </div>
       </div>
