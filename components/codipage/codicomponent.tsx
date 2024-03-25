@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { cookiesend } from '../../service/codiApiservice';
 import ClosetPage from '../../components/uploadcloset/uploadcloset';
+import { getCodiInfo } from '../../service/getCodiInfoApi';
 import MyComponent from '../codipage/image';
 import { RootState } from '../../Store/Store';
 // 선택된 날짜를 URL에서 추출하는 함수
@@ -28,7 +29,6 @@ function extractSelectedDateFromURL() {
 
   return null;
 }
-
 const CodiPage: React.FC<{}> = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedIndexes, setSelectedIndexes] = useState<{
@@ -54,7 +54,9 @@ const CodiPage: React.FC<{}> = () => {
   });
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [codiName, setCodiName] = useState<string>('');
-  const userId = useSelector((state: RootState) => state.user.userId); // Redux 상태에서 userId 가져오기
+  const [codiInfo, setCodiInfo] = useState<any>(null); // 코디 정보 상태 추가
+
+  const userId = useSelector((state: RootState) => state.user.userId);
 
   useEffect(() => {
     const extractedDate = extractSelectedDateFromURL();
@@ -62,7 +64,26 @@ const CodiPage: React.FC<{}> = () => {
       const formattedDate = new Date(extractedDate).toISOString();
       setSelectedDate(formattedDate);
     }
+    getCodiData(); // 페이지 로드시 코디 정보 가져오기 함수 호출
   }, []);
+
+  const getCodiData = async () => {
+    try {
+      const codiInfo = await getCodiInfo({
+        ...selectedIndexes,
+        codiName,
+        selectedDate,
+        userId,
+      });
+      console.log('초기 코디 정보:', codiInfo);
+
+      // 받아온 코디 정보를 상태에 저장
+      setCodiInfo(codiInfo);
+    } catch (error) {
+      console.error('초기 코디 정보 요청 실패: ', error);
+    }
+  };
+
   const openModal = (category: string) => {
     setSelectedCategory(category);
     setIsModalOpen(true);
@@ -71,6 +92,7 @@ const CodiPage: React.FC<{}> = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
   const handleImageSelect = (imageSrc: string, index: number) => {
     const updatedSelectedIndexes = { ...selectedIndexes };
     updatedSelectedIndexes[selectedCategory!] = index;
@@ -78,6 +100,7 @@ const CodiPage: React.FC<{}> = () => {
     setSelectedImages({ ...selectedImages, [selectedCategory!]: imageSrc });
     closeModal();
   };
+
   const handleRegister = async () => {
     try {
       const codiDTO = { ...selectedIndexes, codiName, selectedDate, userId };
@@ -89,6 +112,7 @@ const CodiPage: React.FC<{}> = () => {
       alert('등록에 실패했습니다. 다시 시도해주세요.');
     }
   };
+
   return (
     <div>
       <div className={styles2.container}>
