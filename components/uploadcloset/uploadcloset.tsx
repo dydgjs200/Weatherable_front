@@ -60,7 +60,6 @@ const ClothesInfoBoxComponent: React.FC<ClosetPageProps> = ({
           <ClothesInfoBox
             key={clothesItem.id}
             clothes={clothesItem}
-            index={index} // 인덱스를 전달합니다.
             onImageSelect={(imageSrc: string, index: number) =>
               onImageSelect(imageSrc, index)
             } // 이미지를 선택할 때 호출될 함수를 전달합니다.

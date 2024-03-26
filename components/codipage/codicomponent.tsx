@@ -63,10 +63,10 @@ const CodiPage: React.FC<{}> = () => {
     if (extractedDate) {
       const formattedDate = new Date(extractedDate).toISOString();
       setSelectedDate(formattedDate);
+      console.log('페이지 selectedDate:', formattedDate);
     }
     getCodiData(); // 페이지 로드시 코디 정보 가져오기 함수 호출
   }, []);
-
   const getCodiData = async () => {
     try {
       const codiInfo = await getCodiInfo({});
@@ -74,7 +74,7 @@ const CodiPage: React.FC<{}> = () => {
       // 받아온 코디 정보를 상태에 저장
       setCodiInfo(codiInfo);
       const targetCodi = codiInfo.find(
-        (item) => item.codiDate === '2024-03-24T15:00:00'
+        (item) => item.codiDate === '2024-03-25T15:00:00'
       );
       console.log(targetCodi);
     } catch (error) {
@@ -91,9 +91,10 @@ const CodiPage: React.FC<{}> = () => {
     setIsModalOpen(false);
   };
 
-  const handleImageSelect = (imageSrc: string, index: number) => {
+  const handleImageSelect = (imageSrc: string, id: number) => {
+    // ID를 전달받도록 수정
     const updatedSelectedIndexes = { ...selectedIndexes };
-    updatedSelectedIndexes[selectedCategory!] = index;
+    updatedSelectedIndexes[selectedCategory!] = id; // 선택된 옷의 ID로 업데이트
     setSelectedIndexes(updatedSelectedIndexes);
     setSelectedImages({ ...selectedImages, [selectedCategory!]: imageSrc });
     closeModal();
