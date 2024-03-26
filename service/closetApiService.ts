@@ -343,15 +343,17 @@ export const aiRecommendGet = async (aiData: any) => {
       `${process.env.NEXT_PUBLIC_PYTHON}/recommend/cloth`,
       aiData,
       {
+
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
+
         },
         withCredentials: true,
       }
     );
     console.log(response);
-    return response;
+    return response.data; // 응답 데이터만 반환
   } catch (error) {
     console.log(error);
     throw new Error('옷 수정 오류');

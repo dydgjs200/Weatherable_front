@@ -4,6 +4,7 @@ import styles from '../../../../styles/closet/addform.module.scss';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStyle_str } from '../../../../Store/closetSlice/addClothesSlice';
+
 export default function SelectStyles() {
   interface aiStyles {
     style_num: string;
@@ -54,6 +55,7 @@ export default function SelectStyles() {
       <label htmlFor="style">스타일</label>
       <div>
         <input
+          className={styles.inputBox}
           type="text"
           name="style"
           id="style"
