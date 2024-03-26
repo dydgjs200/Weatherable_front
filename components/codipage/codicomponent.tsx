@@ -103,7 +103,10 @@ const CodiPage: React.FC<{}> = () => {
   const handleRegister = async () => {
     try {
       const codiDTO = { ...selectedIndexes, codiName, selectedDate, userId };
-      codiDTO['codiDate'] = new Date(codiDTO['selectedDate']).toISOString();
+      let UTCdate = new Date(codiDTO['selectedDate']);
+      let localOffset = UTCdate.getTimezoneOffset() * 60000; // 현재 시간대 보정
+      let localDate = new Date(UTCdate.getTime() - localOffset);
+      codiDTO['codiDate'] = localDate.toISOString(); // 시간대 보정 후 ISO 문자열 생성
       await cookiesend(codiDTO);
       alert('등록되었습니다.');
     } catch (error) {
