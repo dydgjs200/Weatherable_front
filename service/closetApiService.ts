@@ -339,14 +339,15 @@ export const modifyCloth = async (clothData: any) => {
 export const aiRecommendGet = async (aiData: any) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
-    const response = await axios.get(
+    const response = await axios.post(
       `${process.env.NEXT_PUBLIC_PYTHON}/recommend/cloth`,
+      aiData,
       {
-        params: { aiData },
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          'Content-Type': ' application/json',
+          'Content-Type': 'application/json',
         },
+        withCredentials: true,
       }
     );
     console.log(response);
