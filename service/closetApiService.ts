@@ -339,14 +339,17 @@ export const modifyCloth = async (clothData: any) => {
 export const aiRecommendGet = async (aiData: any) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
-    const response = await axios.get(
+    const response = await axios.post(
       `${process.env.NEXT_PUBLIC_PYTHON}/recommend/cloth`,
+      aiData,
       {
-        params: aiData, // 요청 데이터를 쿼리 매개변수로 전달
+
         headers: {
-          Authorization: `Bearer ${accessToken}`, // 인증 토큰을 헤더에 포함
-          'Content-Type': 'application/json', // Content-Type을 설정
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+
         },
+        withCredentials: true,
       }
     );
     console.log(response);
