@@ -1,33 +1,30 @@
 'user client';
 import React from 'react';
 import styles from '../../styles/closet/closet.module.scss';
-// ClothesInfoBox 컴포넌트에서 선택된 이미지 정보를 전달받을 props 추가
+// ClothesInfoBox 컴포넌트에서 선택된 이미지 정보를 전달받을 props 추가// ClothesInfoBox 컴포넌트에서 이미지를 클릭했을 때 호출될 함수 추가
+
 interface ClothesInfoBoxProps {
   clothes: {
-    imagePath: string;
     id: number;
+    imagePath: string;
     productName: string;
   };
-  index: number; // 이미지의 인덱스를 전달받을 props 추가
-  onImageSelect: (imageSrc: string, index: number) => void; // 이미지를 클릭했을 때 호출될 함수 타입 정의
+  onImageSelect: (imageSrc: string, id: number) => void;
 }
-
-// ClothesInfoBox 컴포넌트에서 이미지를 클릭했을 때 호출될 함수 추가
 const ClothesInfoBox: React.FC<ClothesInfoBoxProps> = ({
   clothes,
-  index,
   onImageSelect,
 }) => {
   const liked = () => {
     console.log('좋아요!');
   };
 
-  const { imagePath, productName } = clothes;
+  const { id, imagePath, productName } = clothes; // 옷의 ID를 비구조화 할당
 
   const onClick = () => {
     console.log('이미지 URL:', imagePath);
-    console.log('인덱스:', index); // 이미지의 인덱스 출력
-    onImageSelect(imagePath, index); // 이미지 클릭 시 선택된 이미지 정보와 인덱스를 상위 컴포넌트로 전달
+    console.log('ID:', id); // 옷의 ID 출력
+    onImageSelect(imagePath, id); // 이미지 클릭 시 선택된 이미지 정보와 ID를 상위 컴포넌트로 전달
   };
 
   return (
@@ -42,5 +39,4 @@ const ClothesInfoBox: React.FC<ClothesInfoBoxProps> = ({
     </div>
   );
 };
-
 export default ClothesInfoBox;
