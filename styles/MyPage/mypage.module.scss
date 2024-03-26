@@ -3,7 +3,6 @@
 .mypage_Container {
   width: $width;
   max-width: $max-width;
-  // height: calc(100vh - 50px);
   @include scrollbar();
 
   .mypage_components {
@@ -12,15 +11,20 @@
 
     .mypage_components_info {
       width: calc(100% / 3);
-      border-bottom: 1px solid lightgray;
+      border-bottom: 1px solid $lightgray;
       font-weight: bold;
-      color: lightgray;
-      margin-right: 0.5em;
+      height: 2em;
+      color: $lightgray;
+      // margin-right: 0.5em;
       text-align: center;
 
       &.changedComponent {
         border-bottom: 3px solid black;
         color: black;
+      }
+      > img {
+        width: 2em;
+        height: 2em;
       }
     }
   }

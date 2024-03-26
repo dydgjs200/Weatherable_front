@@ -270,18 +270,13 @@ function MypageEditContent() {
             )}
           </div>
         </div>
-        {/* 아이디 변경 */}
+        {/* 아이디 */}
         <div className={styles.title_div}>
           <img src="/bar.png" alt="" />
           <div className={styles.title}>아이디</div>
         </div>
-        <div>
-          <input
-            className={styles.input}
-            type="text"
-            value={userData.userid}
-            readOnly
-          />
+        <div className={`${styles.input} ${styles.id_Div}`}>
+          {userData.userid}
         </div>
         {/* 비밀번호 변경 */}
         <div className={styles.title_div}>

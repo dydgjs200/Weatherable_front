@@ -1,5 +1,4 @@
 @import '../common.scss';
-@import './Dimension.module.scss';
 
 .gridContainer {
   display: grid;
@@ -18,7 +17,9 @@
 }
 
 .content {
-  padding: 20px;
+  padding-top: 1.5em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
 }
 
 .label {
@@ -34,7 +35,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 10px;
+  padding: 2em 2em;
 }
 
 .image {
