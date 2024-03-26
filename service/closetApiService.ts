@@ -59,7 +59,7 @@ export const postAddStyles = async (data: any) => {
     }
 
     const response = await axios.post(
-      process.env.NEXT_PUBLIC_PYTHON + '/sendmessage',
+      process.env.NEXT_PUBLIC_PYTHON + '/closet/styleai',
       formData,
       {
         headers: {
@@ -343,11 +343,9 @@ export const aiRecommendGet = async (aiData: any) => {
       `${process.env.NEXT_PUBLIC_PYTHON}/recommend/cloth`,
       aiData,
       {
-
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
-
         },
         withCredentials: true,
       }
