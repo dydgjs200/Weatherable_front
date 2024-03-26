@@ -11,7 +11,7 @@ export interface PageProps {
   searchParams?: any;
 }
 
-const CodiPage: React.FC<{ selectedDate: string; userId: string }> = () => {
+const CodiPage: React.FC<{ selectedDate?: string; userId?: string }> = () => {
   const selectedDate = useSelector(
     (state: RootState) => state.calendar.selectedDate
   );
