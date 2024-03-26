@@ -26,12 +26,10 @@ export default function Header() {
     <div className={styles.container}>
       <ul>
         <li>
-          <button
-            onClick={() => {
-              setIsOpen(!isOpen);
-            }}
-          >
-            <span className="material-symbols-outlined">menu</span>
+          <button onClick={back}>
+            <span className="material-symbols-outlined">
+              keyboard_backspace
+            </span>
           </button>
         </li>
         <li>
@@ -41,10 +39,12 @@ export default function Header() {
           </Link>
         </li>
         <li>
-          <button onClick={back}>
-            <span className="material-symbols-outlined">
-              keyboard_backspace
-            </span>
+          <button
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+          >
+            <span className="material-symbols-outlined">menu</span>
           </button>
         </li>
       </ul>
