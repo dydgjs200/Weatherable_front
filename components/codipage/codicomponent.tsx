@@ -69,16 +69,14 @@ const CodiPage: React.FC<{}> = () => {
 
   const getCodiData = async () => {
     try {
-      const codiInfo = await getCodiInfo({
-        ...selectedIndexes,
-        codiName,
-        selectedDate,
-        userId,
-      });
+      const codiInfo = await getCodiInfo({});
       console.log('초기 코디 정보:', codiInfo);
-
       // 받아온 코디 정보를 상태에 저장
       setCodiInfo(codiInfo);
+      const targetCodi = codiInfo.find(
+        (item) => item.codiDate === '2024-03-24T15:00:00'
+      );
+      console.log(targetCodi);
     } catch (error) {
       console.error('초기 코디 정보 요청 실패: ', error);
     }
