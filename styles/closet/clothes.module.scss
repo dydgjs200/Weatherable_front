@@ -60,6 +60,7 @@
   flex-direction: column;
   border-radius: $radius-m;
   box-shadow: 0px 2px 6px -5px #333;
+
   div {
     width: 90%;
     height: 10%;
@@ -102,6 +103,7 @@
       border-radius: $radius-s;
       position: absolute;
       width: 100%;
+      z-index: 99;
       ul {
         padding: 0;
         margin: 0;
@@ -115,13 +117,50 @@
       }
     }
   }
+  .weatherBox {
+    // background-color: pink;
+    width: 70%;
+    height: 100%;
+    justify-content: space-between;
+    input {
+      width: 20%;
+      border: 0.5px solid $lightgray;
+      border-radius: $radius-s;
+      background: none;
+      color: $gray;
+    }
+    .weatherClicked {
+      background: $theme-blue-3;
+      color: white;
+    }
+  }
+  .thicknessBox {
+    width: 70%;
+    height: 100%;
+    justify-content: space-between;
+    input {
+      width: 30%;
+      border: 0.5px solid $lightgray;
+      border-radius: $radius-s;
+      background: none;
+      color: $gray;
+    }
+    .thickClicked {
+      background: $theme-blue-3;
+      color: white;
+    }
+  }
+  .priceInput {
+    border: 0.5px solid $lightgray;
+    border-radius: $radius-s;
+    width: 70%;
+  }
 }
 
 .btnContainer {
   @include flex();
   justify-content: space-between;
   margin-top: 3vh;
-  // background-color: pink;
   width: 70vw;
   min-width: 70vw;
   height: 3vh;

@@ -12,13 +12,20 @@ export const Token = async () => {
     // 에러 핸들링: 적절한 처리를 추가하여 사용자 경험을 개선할 수 있습니다.
   }
 };
-
 // 토큰 새로고침 함수
 // 지금 만료되었을때 가정이 없네. 가정을 해줘야할듯?
 export const refreshAccessToken = async () => {
   try {
     const refreshToken = sessionStorage.getItem('refreshToken');
-    const refreshResponse = await axios.post('/refresh', { refreshToken });
+    const refreshResponse = await axios.post(
+      `${process.env.NEXT_PUBLIC_DB_HOST}/refresh`,
+      {
+        headers: {
+          Refresh: `Bearer ${refreshToken}`,
+        },
+        withCredentials: true,
+      }
+    );
 
     // 새로운 액세스 토큰으로 업데이트
     const accessToken = refreshResponse.data.accessToken;

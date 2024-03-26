@@ -45,8 +45,8 @@ export default function Closet({ params: { userId } }) {
     (state: any) => state.search.selectMiddle
   );
 
-  console.log('검색분류 (중) >>', selectMajorData);
-  console.log('검색분류 (소) >>', selectMiddleData);
+  // console.log('검색분류 (중) >>', selectMajorData);
+  // console.log('검색분류 (소) >>', selectMiddleData);
 
   const [userClothesData, setUserClothesData] = useState<clothes[]>([]);
   //
@@ -80,14 +80,14 @@ export default function Closet({ params: { userId } }) {
           const userClothesData = await getUserClothes();
           setUserClothesData(userClothesData);
         } catch (error) {
-          console.log(error, '유저 옷장 데이터 가져오기 오류 (전체) ');
+          console.log(error, '유저 옷장 데이터 가져오기 오류 (중분류) ');
         }
       }
     };
     userClothesData();
   }, [selectMajorData]);
 
-  // 대분류 카테고리
+  // 소분류 카테고리
   useEffect(() => {
     const userClothesData = async () => {
       if (selectMajorData !== '') {
@@ -97,12 +97,14 @@ export default function Closet({ params: { userId } }) {
           );
           setUserClothesData(userClothesDataByCat);
         } catch (error) {
-          console.log(error, '유저 옷장 데이터 가져오기 오류 (카테고리)');
+          console.log(error, '유저 옷장 데이터 가져오기 오류 (소분류)');
         }
       }
     };
     userClothesData();
   }, [selectMiddleData]);
+
+  console.log(userClothesData);
 
   return (
     <div className={styles.container}>

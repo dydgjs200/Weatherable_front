@@ -5,6 +5,11 @@ import Codicomponent from '../../components/codipage/codicomponent';
 import SelectedDateDisplay from '../../components/codipage/date';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../Store/Store';
+export interface PageProps {
+  selectedDate?: string;
+  params?: any;
+  searchParams?: any;
+}
 
 const CodiPage: React.FC<{ selectedDate?: string; userId?: string }> = () => {
   const selectedDate = useSelector(
