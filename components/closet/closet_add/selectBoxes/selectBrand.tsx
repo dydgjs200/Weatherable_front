@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { selectBrandName } from '../../../../Store/closetSlice/addClothesSlice';
+import styles from '../../../../styles/closet/addform.module.scss';
 
 export default function SelectBrand() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export default function SelectBrand() {
         name="brand"
         id="brand"
         value={brandName}
+        className={styles.inputBox}
         onChange={(e) => {
           setBrandName(e.target.value);
           dispatch(selectBrandName({ value: e.target.value }));

@@ -11,7 +11,6 @@ import {
   likedCloth,
 } from '../../../../../service/closetApiService';
 import { useRouter } from 'next/navigation';
-import { isIP } from 'net';
 
 interface clothes {
   imagePath: string;

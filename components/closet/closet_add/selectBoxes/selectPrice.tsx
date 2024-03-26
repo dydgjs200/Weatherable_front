@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { selectPrice as selectPriceAction } from '../../../../Store/closetSlice/addClothesSlice';
+import styles from '../../../../styles/closet/addform.module.scss';
 
 export default function SelectPrice() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export default function SelectPrice() {
         name="price"
         id="price"
         value={price}
+        className={styles.inputBox}
         onChange={(e) => {
           setPrice(e.target.value);
           dispatch(selectPriceAction({ value: e.target.value }));

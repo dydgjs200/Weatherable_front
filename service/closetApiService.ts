@@ -342,15 +342,15 @@ export const aiRecommendGet = async (aiData: any) => {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_PYTHON}/recommend/cloth`,
       {
-        params: { aiData },
+        params: aiData, // 요청 데이터를 쿼리 매개변수로 전달
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': ' application/json',
+          Authorization: `Bearer ${accessToken}`, // 인증 토큰을 헤더에 포함
+          'Content-Type': 'application/json', // Content-Type을 설정
         },
       }
     );
     console.log(response);
-    return response;
+    return response.data; // 응답 데이터만 반환
   } catch (error) {
     console.log(error);
     throw new Error('옷 수정 오류');

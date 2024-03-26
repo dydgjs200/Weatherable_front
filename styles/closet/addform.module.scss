@@ -65,15 +65,24 @@
     // border-radius: $radius-m;
     margin-top: 1rem;
 
-    input {
+    .inputBox {
       border: 0.5px solid $lightgray;
       border-radius: $radius-s;
       width: 100%;
       height: 3vh;
       min-height: 3vh;
-      padding: 1.5rem 1rem;
+      padding: 1.2rem 1rem;
       box-sizing: border-box;
     }
+    // input {
+    //   border: 0.5px solid $lightgray;
+    //   border-radius: $radius-s;
+    //   width: 100%;
+    //   height: 3vh;
+    //   min-height: 3vh;
+    //   padding: 1.5rem 1rem;
+    //   box-sizing: border-box;
+    // }
     select {
       background-color: transparent;
     }
