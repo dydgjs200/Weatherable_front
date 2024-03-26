@@ -5,10 +5,13 @@ import { Providers } from '../Store/provider';
 
 export const metadata: Metadata = {
   title: {
-    template: '',
-    default: 'project',
+    template: 'project',
+    default: 'Weatherable',
   },
   description: '4차 프로젝트',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({
