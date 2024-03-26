@@ -52,9 +52,22 @@ import styles from '../../styles/Dimension/TopSizeNum.module.scss';
 import axios from 'axios';
 import { Token } from '../../service/common';
 
-function TopSizeNum() {
+interface Dimension {
+  number: string;
+  name: string;
+  key: string;
+}
+
+interface InputValues {
+  t1: number;
+  t2: number;
+  t3: number;
+  t4: number;
+}
+
+const TopSizeNum: React.FC = () => {
   // 치수 정보 배열
-  const dimensions = [
+  const dimensions: Dimension[] = [
     { number: '1', name: '총장', key: 't1' },
     { number: '2', name: '가슴단면', key: 't2' },
     { number: '3', name: '어깨너비', key: 't3' },
@@ -62,11 +75,11 @@ function TopSizeNum() {
   ];
 
   // 각 input 값에 해당하는 state
-  const [inputValues, setInputValues] = useState({
-    t1: '',
-    t2: '',
-    t3: '',
-    t4: '',
+  const [inputValues, setInputValues] = useState<InputValues>({
+    t1: null,
+    t2: null,
+    t3: null,
+    t4: null,
   });
 
   // 유저 정보 받아오기
@@ -75,11 +88,12 @@ function TopSizeNum() {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_DB_HOST}/user`
       );
-      console.log(response.data.data.userSizeDTO);
-      const { t1, t2, t3, t4 } = response.data.data.userSizeDTO;
+      console.log(response);
 
+      console.log(response.data.data.userSizeDTO);
+      const userSizeDTO: InputValues = response.data.data.userSizeDTO;
       // 가져온 데이터를 state에 설정
-      setInputValues({ t1, t2, t3, t4 });
+      setInputValues(userSizeDTO);
     } catch (error) {
       console.error('유저 데이터를 가져오는 도중 오류 발생', error);
     }
@@ -90,20 +104,19 @@ function TopSizeNum() {
     fetchUserData();
   }, []);
 
-  const handleChange = (key, value) => {
-    setInputValues({ ...inputValues, [key]: value });
+  const handleChange = (key: string, value: string) => {
+    setInputValues({ ...inputValues, [key]: parseFloat(value) });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       // 서버에 데이터 저장
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_DB_HOST}/user/size`,
-        {
-          userSizeDTO: inputValues,
-        }
+        inputValues
       );
+      console.log('inputValues >', inputValues);
       console.log('수치 저장 성공', response);
     } catch (error) {
       console.error('데이터를 저장하는 도중 오류 발생', error);
@@ -135,6 +148,6 @@ function TopSizeNum() {
       </form>
     </div>
   );
-}
+};
 
 export default TopSizeNum;
