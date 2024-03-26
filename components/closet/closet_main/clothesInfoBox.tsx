@@ -9,15 +9,15 @@ export default function ClothesInfoBox(data: any) {
 
   const { imagePath, id, productName, liked } = data.clothes;
 
+  // console.log(liked);
+
   // like 데이터 보내기
 
   const likeBtn = async () => {
     const likedData = { id: id, liked: liked };
-    console.log(likedData);
+    // console.log(likedData);
     const likeRes = await likedCloth(likedData);
-    if (likeRes === 200) {
-      setIsLike(!isLike);
-    }
+    window.location.reload();
   };
 
   return (
@@ -29,7 +29,7 @@ export default function ClothesInfoBox(data: any) {
         <button onClick={likeBtn}>
           <span
             className="material-symbols-outlined"
-            style={isLike ? { color: '#4d77b6' } : { color: '#d3d3d3' }}
+            style={liked ? { color: '#4d77b6' } : { color: '#d3d3d3' }}
           >
             favorite
           </span>

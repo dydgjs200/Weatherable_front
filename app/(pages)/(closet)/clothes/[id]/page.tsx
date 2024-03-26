@@ -11,7 +11,6 @@ import {
   likedCloth,
 } from '../../../../../service/closetApiService';
 import { useRouter } from 'next/navigation';
-import { isIP } from 'net';
 
 interface clothes {
   imagePath: string;
@@ -24,6 +23,7 @@ interface clothes {
   thickness: string;
   style: string;
   price: string;
+  liked: boolean;
 }
 
 export default function Clothes({ params: { id } }) {
@@ -38,6 +38,7 @@ export default function Clothes({ params: { id } }) {
     thickness: '',
     style: '',
     price: '',
+    liked: true,
   });
 
   const [isSize, setIsSize] = useState('');
@@ -45,7 +46,8 @@ export default function Clothes({ params: { id } }) {
   const [isPrice, setIsPrice] = useState('');
   const [isStyle, setIsStyle] = useState('');
   const [isclothId, setIsClothId] = useState('');
-  const [isLike, setIsLike] = useState(false);
+  const [isLiked, setIsLiked] = useState('');
+
   const categoryArr = require('../../../../../data/categoryData');
 
   // id 기반 옷 정보 가져오기
@@ -59,6 +61,7 @@ export default function Clothes({ params: { id } }) {
         setIsName(crawlingClothes.productName);
         setIsPrice(crawlingClothes.price);
         setIsClothId(crawlingClothes.id);
+        setIsLiked(crawlingClothes.liked);
         switch (crawlingClothes.style) {
           case 'Casual':
             setIsStyle('캐주얼');
@@ -94,6 +97,7 @@ export default function Clothes({ params: { id } }) {
     thickness,
     style,
     price,
+    liked,
   } = clothes;
 
   const router = useRouter();
@@ -133,12 +137,10 @@ export default function Clothes({ params: { id } }) {
   };
 
   const likeBtn = async () => {
-    // const likedData = { id: id, liked: liked };
+    const likedData = { id: id, liked: liked };
     // console.log(likedData);
-    // const likeRes = await likedCloth(likedData);
-    // if (likeRes === 200) {
-    //   setIsLike(!isLike);
-    // }
+    const likeRes = await likedCloth(likedData);
+    window.location.reload();
   };
 
   return (
@@ -159,7 +161,12 @@ export default function Clothes({ params: { id } }) {
         {/* <Image src={} alt="로고" />; */}
         <img src={imagePath} alt="" />
         <button className={clothStyles.likedBtn} onClick={likeBtn}>
-          <span className="material-symbols-outlined">favorite</span>
+          <span
+            className="material-symbols-outlined"
+            style={liked ? { color: '#4d77b6' } : { color: '#d3d3d3' }}
+          >
+            favorite
+          </span>
         </button>
       </div>
       <div className={clothStyles.infoContainer}>

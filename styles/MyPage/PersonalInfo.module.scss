@@ -1,17 +1,43 @@
 @import '../common.scss';
 @import './Dimension.module.scss';
 
-.container {
-  @extend .gridContainer;
+.gridContainer {
+  display: grid;
+  padding: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 30px;
+  @include scrollbar();
+}
 
-  .content_Div {
-    @extend .gridItem;
-  }
-  .wardrobe {
-    position: relative;
-    width: 200px;
-    height: 300px;
-    background-color: brown;
-    overflow: hidden;
-  }
+.card {
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.content {
+  padding: 20px;
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.value {
+  color: #333333;
+}
+
+.imgDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10px;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
 }

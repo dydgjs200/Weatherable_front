@@ -333,3 +333,29 @@ export const modifyCloth = async (clothData: any) => {
     throw new Error('옷 수정 오류');
   }
 };
+
+// ai 추천 코드
+
+export const aiRecommendGet = async (aiData: any) => {
+  const accessToken = sessionStorage.getItem('accessToken');
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_PYTHON}/recommend/cloth`,
+      aiData,
+      {
+
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+
+        },
+        withCredentials: true,
+      }
+    );
+    console.log(response);
+    return response.data; // 응답 데이터만 반환
+  } catch (error) {
+    console.log(error);
+    throw new Error('옷 수정 오류');
+  }
+};

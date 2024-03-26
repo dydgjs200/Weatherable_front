@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { selectProductName } from '../../../../Store/closetSlice/addClothesSlice';
+import styles from '../../../../styles/closet/addform.module.scss';
 
 export default function SelectName() {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ export default function SelectName() {
     <>
       <label htmlFor="productName">제품명</label>
       <input
+        className={styles.inputBox}
         type="text"
         name="productName"
         id="productName"

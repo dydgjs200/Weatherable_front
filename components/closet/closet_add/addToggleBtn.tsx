@@ -16,7 +16,7 @@ export default function AddToggleBtn() {
         }}
       >
         {isToggleOpen ? (
-          <span className="material-symbols-outlined">close</span>
+          <span className="material-symbols-outlined">keyboard_arrow_down</span>
         ) : (
           '옷 추가하기'
         )}
