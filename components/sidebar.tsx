@@ -18,7 +18,7 @@ export default function SideBar({ open, close }: props) {
 
   // Redux에서 userid 상태 가져오기. (RootState 타입 지정)
   const userId = useSelector((state: RootState) => state.user.userId);
-  console.log('userId > ', userId); // userId 값 가져오는 확인.
+  // console.log('userId > ', userId); // userId 값 가져오는 확인.
 
   // 로그인 상태 state
   const [loggedin, setLoggedIn] = useState(false);
@@ -37,7 +37,7 @@ export default function SideBar({ open, close }: props) {
     close();
   };
 
-  console.log(path);
+  // console.log(path);
 
   const sidebarLeft = open ? '0%' : '-100%';
 
@@ -139,7 +139,7 @@ export default function SideBar({ open, close }: props) {
           )}
         </nav>
       </div>
-      <button
+      {/* <button
         onClick={close}
         className={styles.closeBtn}
         style={{
@@ -147,7 +147,7 @@ export default function SideBar({ open, close }: props) {
         }}
       >
         <span className="material-symbols-outlined">close</span>
-      </button>
+      </button> */}
     </div>
   );
 }

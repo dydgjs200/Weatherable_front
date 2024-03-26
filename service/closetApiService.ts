@@ -59,7 +59,7 @@ export const postAddStyles = async (data: any) => {
     }
 
     const response = await axios.post(
-      process.env.NEXT_PUBLIC_PYTHON + '/sendmessage',
+      process.env.NEXT_PUBLIC_PYTHON + '/closet/styleai',
       formData,
       {
         headers: {
@@ -336,26 +336,24 @@ export const modifyCloth = async (clothData: any) => {
 
 // ai 추천 코드
 
-export const aiRecommendGet = async (aiData: any) => {
+export const aiRecommendPost = async (aiData: any) => {
   const accessToken = sessionStorage.getItem('accessToken');
   try {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_PYTHON}/recommend/cloth`,
       aiData,
       {
-
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
-
         },
         withCredentials: true,
       }
     );
     console.log(response);
-    return response.data; // 응답 데이터만 반환
+    return response.data.message; // 응답 데이터만 반환
   } catch (error) {
     console.log(error);
-    throw new Error('옷 수정 오류');
+    throw new Error('Ai 오류');
   }
 };

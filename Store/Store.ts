@@ -47,6 +47,11 @@ const userPersistConfig = {
   storage,
 };
 
+const weatherPersistConfig = {
+  key: 'aiRecommend',
+  storage,
+};
+
 export type RootState = ReturnType<typeof rootReducer>;
 
 const rootReducer = combineReducers({
@@ -55,7 +60,7 @@ const rootReducer = combineReducers({
   clothes: addClothesReducer,
   search: selectDataReducer,
   calendar: calendarReducer,
-  aiRecommend: aiRecommedRuducer,
+  aiRecommend: persistReducer(weatherPersistConfig, aiRecommedRuducer),
 });
 // test
 const store = configureStore({
