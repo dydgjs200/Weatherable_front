@@ -6,6 +6,7 @@ import styles from '../../../styles/MyPage/mypage.module.scss';
 import PersonalInfo from '../../../components/MyPage/PersonalInfo';
 import Dimension from '../../../components/MyPage/Dimension';
 import Statistics from '../../../components/MyPage/Statistics';
+import { useRouter } from 'next/navigation';
 
 function MyPage() {
   const [selectedComponent, setSelectedComponent] = useState('기본정보');
@@ -13,6 +14,16 @@ function MyPage() {
   const handleComponentChange = (component) => {
     setSelectedComponent(component);
   };
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // const accessToken = sessionStorage.getItem('accessToken');
+    // if (!accessToken) {
+    //   alert('로그인 후 이용 가능합니다.');
+    //   router.push('/login');
+    // }
+  }, []);
 
   return (
     <>

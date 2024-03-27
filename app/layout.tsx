@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: 'project',
     default: 'Weatherable',
   },
-  description: '4차 프로젝트',
+  description: '당신만의 옷장을 만들어 편하게 관리해보세요!',
   icons: {
     icon: '/favicon.png',
   },

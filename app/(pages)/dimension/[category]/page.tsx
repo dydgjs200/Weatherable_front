@@ -7,6 +7,7 @@ import TopSize from '../../../../components/Dimension/TopSize';
 import BottomSize from '../../../../components/Dimension/BottomSize';
 import OuterSize from '../../../../components/Dimension/OuterSize';
 import ShoesSize from '../../../../components/Dimension/ShoesSize';
+import { useRouter } from 'next/navigation';
 
 interface DimensionProps {
   params: {
@@ -15,6 +16,7 @@ interface DimensionProps {
 }
 
 const dimensionCategory: React.FC<DimensionProps> = ({ params }) => {
+  const router = useRouter();
   // console.log({ params });
   const [selectedComponent, setSelectedComponent] = useState<String>('');
 
@@ -50,6 +52,11 @@ const dimensionCategory: React.FC<DimensionProps> = ({ params }) => {
 
   // 리렌더링 시켜주면서 해당 컴포넌트에 해당하는 div에 class 추가해주기.
   useEffect(() => {
+    const accessToken = sessionStorage.getItem('accessToken');
+    if (!accessToken) {
+      alert('로그인 후 이용 가능합니다.');
+      router.push('/login');
+    }
     const components = document.querySelectorAll(`.${styles.components}`);
 
     // 모든 components 요소에서 changedComponent2 클래스를 제거합니다.

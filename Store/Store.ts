@@ -41,6 +41,7 @@ import { addClothesReducer } from './closetSlice/addClothesSlice';
 import { showListReducer } from './closetSlice/showListSlice';
 import { selectDataReducer } from './closetSlice/selectDataSlice';
 import { aiRecommedRuducer } from './aiSlice/aiSlice';
+import mainPageReducer from './mainSlice/mainPageSlice';
 
 const userPersistConfig = {
   key: 'user',
@@ -61,6 +62,7 @@ const rootReducer = combineReducers({
   search: selectDataReducer,
   calendar: calendarReducer,
   aiRecommend: persistReducer(weatherPersistConfig, aiRecommedRuducer),
+  mainPage: mainPageReducer,
 });
 // test
 const store = configureStore({

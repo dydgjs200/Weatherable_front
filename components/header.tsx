@@ -3,14 +3,21 @@
 import React, { useState } from 'react';
 import styles from '../styles/header.module.scss';
 import '../styles/icons.scss';
-import { Span } from 'next/dist/trace';
 import SideBar from './sidebar';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { RootState } from '../Store/Store';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
+
+  const backButtonVisible = useSelector(
+    (state: RootState) => state.mainPage.backButtonVisible
+  );
+  console.log(backButtonVisible);
+
   // 닫기 버튼
   const close = () => {
     setIsOpen(false);
@@ -42,11 +49,13 @@ export default function Header() {
         </li>
 
         <li>
-          <button onClick={back}>
-            <span className="material-symbols-outlined">
-              keyboard_backspace
-            </span>
-          </button>
+          {!backButtonVisible && (
+            <button onClick={back}>
+              <span className="material-symbols-outlined">
+                keyboard_backspace
+              </span>
+            </button>
+          )}
         </li>
       </ul>
       {/* {isOpen && <SideBar open={isOpen} close={close} width={width} />} */}
