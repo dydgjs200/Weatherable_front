@@ -187,6 +187,7 @@ const CodiPage: React.FC<{}> = () => {
             '상의'
           )}
         </div>
+
         <div
           className={styles2.uploadButtonHat}
           onClick={() => openModal('bottomIndex')}
@@ -197,7 +198,7 @@ const CodiPage: React.FC<{}> = () => {
               onClick={() => openModal('bottomIndex')}
             />
           ) : (
-            (targetCodi && targetCodi.bottom && (
+            (targetCodi && targetCodi.bottom && targetCodi.bottom.imagePath && (
               <MyComponent
                 imageSrc={targetCodi.bottom.imagePath}
                 onClick={() => openModal('bottomIndex')}
@@ -206,6 +207,7 @@ const CodiPage: React.FC<{}> = () => {
             '하의'
           )}
         </div>
+
         <div
           className={styles2.uploadButtonHat}
           onClick={() => openModal('outerIndex')}
@@ -216,7 +218,7 @@ const CodiPage: React.FC<{}> = () => {
               onClick={() => openModal('outerIndex')}
             />
           ) : (
-            (targetCodi && targetCodi.outer && (
+            (targetCodi && targetCodi.outer && targetCodi.outer.imagePath && (
               <MyComponent
                 imageSrc={targetCodi.outer.imagePath}
                 onClick={() => openModal('outerIndex')}
@@ -236,7 +238,7 @@ const CodiPage: React.FC<{}> = () => {
               onClick={() => openModal('shoesIndex')}
             />
           ) : (
-            (targetCodi && targetCodi.shoes && (
+            (targetCodi && targetCodi.shoes && targetCodi.shoes.imagePath && (
               <MyComponent
                 imageSrc={targetCodi.shoes.imagePath}
                 onClick={() => openModal('shoesIndex')}
@@ -256,12 +258,14 @@ const CodiPage: React.FC<{}> = () => {
               onClick={() => openModal('accessoryIndex')}
             />
           ) : (
-            (targetCodi && targetCodi.accessory && (
-              <MyComponent
-                imageSrc={targetCodi.accessory.imagePath}
-                onClick={() => openModal('accessoryIndex')}
-              />
-            )) ||
+            (targetCodi &&
+              targetCodi.accessory &&
+              targetCodi.accessory.imagePath && (
+                <MyComponent
+                  imageSrc={targetCodi.accessory.imagePath}
+                  onClick={() => openModal('accessoryIndex')}
+                />
+              )) ||
             '악세사리'
           )}
         </div>
@@ -276,7 +280,7 @@ const CodiPage: React.FC<{}> = () => {
               onClick={() => openModal('capIndex')}
             />
           ) : (
-            (targetCodi && targetCodi.cap && (
+            (targetCodi && targetCodi.cap && targetCodi.cap.imagePath && (
               <MyComponent
                 imageSrc={targetCodi.cap.imagePath}
                 onClick={() => openModal('capIndex')}

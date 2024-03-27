@@ -48,7 +48,7 @@ const LocationWeather: React.FC = () => {
 
         // 날씨 데이터 가져오기
         const apiKey = '15c5ec95f74fa746cc03e71ed9b610f5';
-        const apiURI = `http://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=${apiKey}`;
+        const apiURI = `https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=${apiKey}`;
         const response = await axios.get<WeatherData>(apiURI);
         setWeatherData(response.data);
         setIsTemp(Math.round((response.data.main.temp - 273) * 10) / 10);
