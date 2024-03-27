@@ -10,6 +10,7 @@ import ClosetPage from '../../components/uploadcloset/uploadcloset';
 import { getCodiInfo } from '../../service/getCodiInfoApi';
 import MyComponent from '../codipage/image';
 import { RootState } from '../../Store/Store';
+
 // 선택된 날짜를 URL에서 추출하는 함수
 function extractSelectedDateFromURL() {
   if (typeof window !== 'undefined') {
@@ -29,6 +30,7 @@ function extractSelectedDateFromURL() {
 
   return null;
 }
+
 const CodiPage: React.FC<{}> = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedIndexes, setSelectedIndexes] = useState<{
@@ -52,6 +54,7 @@ const CodiPage: React.FC<{}> = () => {
     shoesIndex: null,
     accessoryIndex: null,
   });
+  const [targetCodi, setTargetCodi] = useState<any>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [codiName, setCodiName] = useState<string>('');
   const [codiInfo, setCodiInfo] = useState<any>(null); // 코디 정보 상태 추가
@@ -61,27 +64,77 @@ const CodiPage: React.FC<{}> = () => {
   useEffect(() => {
     const extractedDate = extractSelectedDateFromURL();
     if (extractedDate) {
-      const formattedDate = new Date(extractedDate).toISOString();
+      const formattedDate = new Date(
+        new Date(extractedDate).getTime() + 9 * 60 * 60 * 1000
+      ).toISOString();
+
       setSelectedDate(formattedDate);
       console.log('페이지 selectedDate:', formattedDate);
+      getCodiData(formattedDate); // formattedDate를 매개변수로 전달
     }
-    getCodiData(); // 페이지 로드시 코디 정보 가져오기 함수 호출
+    console.log(extractedDate);
   }, []);
-  const getCodiData = async () => {
+
+  const getCodiData = async (formattedDate) => {
     try {
       const codiInfo = await getCodiInfo({});
       console.log('초기 코디 정보:', codiInfo);
       // 받아온 코디 정보를 상태에 저장
       setCodiInfo(codiInfo);
-      const targetCodi = codiInfo.find(
-        (item) => item.codiDate === '2024-03-25T15:00:00'
-      );
-      console.log(targetCodi);
+
+      // 지정한 날짜에 해당하는 코디 정보를 찾습니다.
+      const targetCodis = codiInfo.filter((item) => {
+        // item.codiDate에서 시간 부분을 제거하여 날짜 부분만 추출합니다.
+        const itemDate = item.codiDate.split('T')[0];
+
+        // formattedDate에서도 시간 부분을 제거하여 날짜 부분만 추출합니다.
+        const formattedDateWithoutTime = formattedDate.split('T')[0];
+
+        // 두 날짜를 비교합니다.
+        return itemDate === formattedDateWithoutTime;
+      });
+
+      // 날짜에 해당하는 코디 정보 중에서 가장 최근에 등록된 정보를 선택합니다.
+      const foundTargetCodi =
+        targetCodis.length > 0 ? targetCodis[targetCodis.length - 1] : null;
+
+      console.log(formattedDate);
+      console.log(foundTargetCodi);
+
+      // 코디 정보가 있을 경우에만 상태 업데이트
+      if (foundTargetCodi) {
+        console.log(
+          'Top:',
+          foundTargetCodi.top ? foundTargetCodi.top.imagePath : null
+        );
+        console.log(
+          'Bottom:',
+          foundTargetCodi.bottom ? foundTargetCodi.bottom.imagePath : null
+        );
+        console.log(
+          'Outer:',
+          foundTargetCodi.outer ? foundTargetCodi.outer.imagePath : null
+        );
+        console.log(
+          'Shoes:',
+          foundTargetCodi.shoes ? foundTargetCodi.shoes.imagePath : null
+        );
+        console.log(
+          'Cap:',
+          foundTargetCodi.cap ? foundTargetCodi.cap.imagePath : null
+        );
+        console.log(
+          'Accessory:',
+          foundTargetCodi.accessory ? foundTargetCodi.accessory.imagePath : null
+        );
+
+        // 상태 업데이트
+        setTargetCodi(foundTargetCodi);
+      }
     } catch (error) {
       console.error('초기 코디 정보 요청 실패: ', error);
     }
   };
-
   const openModal = (category: string) => {
     setSelectedCategory(category);
     setIsModalOpen(true);
@@ -215,6 +268,34 @@ const CodiPage: React.FC<{}> = () => {
           </div>
         </div>
       )}
+
+      {/* 추가된 부분 시작 */}
+      <div>
+        {targetCodi && (
+          <div>
+            {targetCodi.top && (
+              <img src={targetCodi.top.imagePath} alt="Top Image" />
+            )}
+            {targetCodi.bottom && (
+              <img src={targetCodi.bottom.imagePath} alt="Bottom Image" />
+            )}
+            {targetCodi.outer && (
+              <img src={targetCodi.outer.imagePath} alt="Outer Image" />
+            )}
+            {targetCodi.shoes && (
+              <img src={targetCodi.shoes.imagePath} alt="Shoes Image" />
+            )}
+            {targetCodi.cap && (
+              <img src={targetCodi.cap.imagePath} alt="Cap Image" />
+            )}
+            {targetCodi.accessory && (
+              <img src={targetCodi.accessory.imagePath} alt="Accessory Image" />
+            )}
+          </div>
+        )}
+      </div>
+      {/* 추가된 부분 끝 */}
+
       <input
         type="text"
         value={codiName}
