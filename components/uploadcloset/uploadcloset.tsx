@@ -69,6 +69,5 @@ const ClothesInfoBoxComponent: React.FC<ClosetPageProps> = ({
     </div>
   );
 };
-// dkanrjsk
 
 export default ClothesInfoBoxComponent;
