@@ -225,7 +225,9 @@ function MypageEditContent() {
             <div className={styles.height_title}>키 (cm)</div>
             <div className={styles.height_input_div}>
               <input
-                className={styles.height_input}
+                className={`${styles.height_input} ${
+                  !editableHeight ? styles.none_border : ''
+                } `}
                 value={userData.height !== null ? userData.height : ''}
                 type="text"
                 placeholder="수치를 입력해주세요."
@@ -234,12 +236,15 @@ function MypageEditContent() {
               />
             </div>
             {!editableHeight && (
-              <div className={styles.nick_Icon} onClick={handleHeightEditClick}>
+              <div
+                className={styles.physicalicon}
+                onClick={handleHeightEditClick}
+              >
                 <img src="/edit2.png" alt="" />
               </div>
             )}
             {editableHeight && (
-              <div className={styles.nick_Icon} onClick={saveUserData}>
+              <div className={styles.physicalicon} onClick={saveUserData}>
                 <img src="/correct.png" alt="" />
               </div>
             )}
@@ -250,7 +255,9 @@ function MypageEditContent() {
             <div className={styles.weight_title}>몸무게 (kg)</div>
             <div className={styles.weight_input_div}>
               <input
-                className={styles.weight_input}
+                className={`${styles.weight_input} ${
+                  !editableWeight ? styles.none_border : ''
+                } `}
                 type="text"
                 value={userData.weight !== null ? userData.weight : ''}
                 placeholder="수치를 입력해주세요."
@@ -259,12 +266,15 @@ function MypageEditContent() {
               />
             </div>
             {!editableWeight && (
-              <div className={styles.nick_Icon} onClick={handleWeightEditClick}>
+              <div
+                className={styles.physicalicon}
+                onClick={handleWeightEditClick}
+              >
                 <img src="/edit2.png" alt="" />
               </div>
             )}
             {editableWeight && (
-              <div className={styles.nick_Icon} onClick={saveUserData}>
+              <div className={styles.physicalicon} onClick={saveUserData}>
                 <img src="/correct.png" alt="" />
               </div>
             )}

@@ -52,8 +52,8 @@
           height: 3vh;
         }
       }
-      .icon {
-        width: 2em;
+
+      .physicalicon {
         @include flex();
       }
     }
@@ -99,4 +99,8 @@
   border: none;
   font-size: 1.25em;
   background-color: $bg-gray;
+}
+
+.none_border {
+  border: none;
 }
