@@ -1,6 +1,6 @@
 import LocationWeather from '../../components/mainpage/MapComponent';
 
-const MyPage: React.FC = () => {
+const MainPage: React.FC = () => {
   return (
     <div>
       <LocationWeather />
@@ -8,4 +8,4 @@ const MyPage: React.FC = () => {
   );
 };
 
-export default MyPage;
+export default MainPage;

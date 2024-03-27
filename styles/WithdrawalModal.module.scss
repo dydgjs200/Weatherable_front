@@ -1,4 +1,4 @@
-// WithdrawalModal.module.scss
+@import './common.scss';
 
 .modal {
   display: flex;
@@ -48,12 +48,12 @@
 }
 
 .withdrawalModalButtonYes {
-  background-color: #ff5c5c; /* Yes 버튼 색상 */
+  background-color: $modal-no; /* Yes 버튼 색상 */
   color: white;
 }
 
 .withdrawalModalButtonNo {
-  background-color: #5666f3; /* No 버튼 색상 */
+  background-color: $modal-yes; /* No 버튼 색상 */
   color: white;
 }
 

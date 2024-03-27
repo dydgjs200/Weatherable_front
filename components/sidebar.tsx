@@ -25,6 +25,13 @@ export default function SideBar({ open, close }: props) {
 
   useEffect(() => {
     setLoggedIn(!!userId); // 사용자 ID가 있으면 로그인 상태로 설정해주기.
+    // accessToken이 없으면 로그아웃 시키기.
+    const accessToken = sessionStorage.getItem('accessToken');
+    if (!accessToken) {
+      dispatch(setUserId(''));
+      setLoggedIn(false);
+      close(); // 사이드바 닫기
+    }
   }, [userId]); // userId가 변경 될 때마다 useEffect 실행.
 
   const logOut = () => {
