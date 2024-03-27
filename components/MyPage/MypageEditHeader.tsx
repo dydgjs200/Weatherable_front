@@ -133,7 +133,7 @@ const MypageEditHeader: React.FC = () => {
             />
           </div>
           <div className={styles.camera} onClick={handleImageDivClick}>
-            <img src="/cameraicon.png" alt="" />
+            <Image src="/cameraicon.png" alt="" width={20} height={20} />
           </div>
         </div>
         <input
@@ -158,13 +158,13 @@ const MypageEditHeader: React.FC = () => {
           {/* 수정 가능한 상태에 따라 아이콘 클릭 가능 여부 결정 */}
           {!editable && (
             <div className={styles.nick_Icon} onClick={handleEditClick}>
-              <img src="/edit2.png" alt="" />
+              <Image src="/edit2.png" alt="" width={20} height={20} />
             </div>
           )}
           {/* 수정 가능한 상태에 따라 저장 버튼 렌더링 */}
           {editable && (
             <div className={styles.nick_Icon} onClick={saveNickname}>
-              <img src="/correct.png" alt="" />
+              <Image src="/correct.png" alt="" width={20} height={20} />
             </div>
           )}
         </div>

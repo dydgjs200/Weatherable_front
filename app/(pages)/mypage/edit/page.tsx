@@ -7,15 +7,15 @@ import styles from '../../../../styles/MyPage/mypageEdit.module.scss';
 import { useEffect } from 'react';
 
 function MypageEditPage() {
-  const router = useRouter();
+  // const router = useRouter();
 
-  useEffect(() => {
-    // const accessToken = sessionStorage.getItem('accessToken');
-    // if (!accessToken) {
-    //   alert('로그인 후 이용 가능합니다.');
-    //   router.push('/login');
-    // }
-  }, []);
+  // useEffect(() => {
+  //   const accessToken = sessionStorage.getItem('accessToken');
+  //   if (!accessToken) {
+  //     alert('로그인 후 이용 가능합니다.');
+  //     router.push('/login');
+  //   }
+  // }, []);
   return (
     <>
       <div className={styles.mypageEdit_Container}>

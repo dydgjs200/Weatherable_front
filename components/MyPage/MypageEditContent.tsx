@@ -10,6 +10,7 @@ import { setUserId } from '../../Store/userSlice/userSlice';
 import { useRouter } from 'next/navigation';
 import EditPasswordModal from '../EditPasswordModal';
 import { Token } from '../../service/common';
+import Image from 'next/image';
 
 // 스타일 enum 정의
 const Style = {
@@ -240,12 +241,12 @@ function MypageEditContent() {
                 className={styles.physicalicon}
                 onClick={handleHeightEditClick}
               >
-                <img src="/edit2.png" alt="" />
+                <Image src="/edit2.png" alt="" width={20} height={20} />
               </div>
             )}
             {editableHeight && (
               <div className={styles.physicalicon} onClick={saveUserData}>
-                <img src="/correct.png" alt="" />
+                <Image src="/correct.png" alt="" width={20} height={20} />
               </div>
             )}
           </div>
@@ -270,12 +271,12 @@ function MypageEditContent() {
                 className={styles.physicalicon}
                 onClick={handleWeightEditClick}
               >
-                <img src="/edit2.png" alt="" />
+                <Image src="/edit2.png" alt="" width={20} height={20} />
               </div>
             )}
             {editableWeight && (
               <div className={styles.physicalicon} onClick={saveUserData}>
-                <img src="/correct.png" alt="" />
+                <Image src="/correct.png" alt="" width={20} height={20} />
               </div>
             )}
           </div>
@@ -296,7 +297,7 @@ function MypageEditContent() {
             className={`${styles.nick_Icon} ${styles.margin_left}`}
             onClick={handleEditPasswordButtonClick}
           >
-            <img src="/edit2.png" alt="" />
+            <Image src="/edit2.png" alt="" width={20} height={20} />
           </div>
         </div>
         <EditPasswordModal

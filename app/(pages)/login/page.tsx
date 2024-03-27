@@ -22,8 +22,8 @@ const Login: React.FC = () => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const [userData, setUserData] = useState<UserData>({
-    userid: '',
-    password: '',
+    userid: 'test1',
+    password: '111111',
   });
 
   const [useridError, setUseridError] = useState<string | null>(null);

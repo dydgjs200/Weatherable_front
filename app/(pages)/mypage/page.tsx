@@ -7,6 +7,7 @@ import PersonalInfo from '../../../components/MyPage/PersonalInfo';
 import Dimension from '../../../components/MyPage/Dimension';
 import Statistics from '../../../components/MyPage/Statistics';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 function MyPage() {
   const [selectedComponent, setSelectedComponent] = useState('기본정보');
@@ -45,9 +46,11 @@ function MyPage() {
             }`}
             onClick={() => handleComponentChange('치수')}
           >
-            <img
+            <Image
               src="/ruler.png"
               alt="Ruler"
+              width={32} // 이미지의 너비와 높이 조정
+              height={32}
               onClick={() => handleComponentChange('치수')}
             />
           </div>
