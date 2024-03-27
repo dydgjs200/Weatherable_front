@@ -75,7 +75,6 @@ const Login: React.FC = () => {
       // 로그인 성공 후 세션 스토리지에 access token 저장 , refreshToken 저장
       sessionStorage.setItem('refreshToken', res.data.data[0]);
       sessionStorage.setItem('accessToken', res.data.data[1]);
-      // console.log('res.data.userid', res.data);
 
       dispatch(setUserId(userData.userid));
       console.log('로그인 성공');

@@ -28,8 +28,6 @@ const MypageEditHeader: React.FC = () => {
       );
       const { nickname, image_path } = response.data.data; // 서버에서 받은 닉네임
 
-      console.log('response.data.data > ', response.data.data);
-
       setUserData({ nickname, image_path });
     } catch (error) {
       console.error('유저 데이터를 가져오는 도중 오류 발생', error);
@@ -46,7 +44,6 @@ const MypageEditHeader: React.FC = () => {
     setUploading(false);
     if (e.target.files && e.target.files.length > 0) {
       setSelectedImage(e.target.files[0]);
-      console.log('e.target > ', e.target.files);
     }
   };
 
@@ -80,6 +77,12 @@ const MypageEditHeader: React.FC = () => {
   // 서버에 닉네임 저장 요청 함수
   const saveNickname = async () => {
     try {
+      // 닉네임이 빈 값인지 확인
+      if (userData.nickname.trim() === '') {
+        console.error('닉네임은 빈 값일 수 없습니다.');
+        return; // 빈 값이면 함수 종료
+      }
+
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_DB_HOST}/user/nickname`,
         userData
