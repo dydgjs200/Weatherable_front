@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import styles from '../../styles/MyPage/PersonalInfo.module.scss';
 import axios from 'axios';
 import { Token } from '../../service/common';
+import Image from 'next/image';
 
 interface UserData {
   favoriteStyle: string;
@@ -51,7 +52,13 @@ function PersonalInfo() {
             <div className={styles.value}>{height} cm</div>
           </div>
           <div className={styles.imgDiv}>
-            <img src="/height.png" alt="Height" className={styles.image} />
+            <Image
+              src="/height.png"
+              alt="Height"
+              width={100}
+              height={100}
+              className={styles.image}
+            />
           </div>
         </div>
         <div className={styles.card}>
@@ -60,7 +67,13 @@ function PersonalInfo() {
             <div className={styles.value}>{weight} kg</div>
           </div>
           <div className={styles.imgDiv}>
-            <img src="/weight.png" alt="Weight" className={styles.image} />
+            <Image
+              src="/weight.png"
+              alt="Weight"
+              width={100}
+              height={100}
+              className={styles.image}
+            />
           </div>
         </div>
         <div className={styles.card}>
@@ -75,7 +88,13 @@ function PersonalInfo() {
             </div>
           </div>
           <div className={styles.imgDiv}>
-            <img src="/fashionstyle.png" alt="style" className={styles.image} />
+            <Image
+              src="/fashionstyle.png"
+              alt="style"
+              width={100}
+              height={100}
+              className={styles.image}
+            />
           </div>
         </div>
         {/* <div className={styles.card}>

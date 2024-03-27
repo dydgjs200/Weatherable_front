@@ -8,6 +8,7 @@ import BottomSize from '../../../../components/Dimension/BottomSize';
 import OuterSize from '../../../../components/Dimension/OuterSize';
 import ShoesSize from '../../../../components/Dimension/ShoesSize';
 import { useRouter } from 'next/navigation';
+import MoveLoginModal from '../../../../components/MoveLoginModal';
 
 interface DimensionProps {
   params: {
@@ -16,6 +17,7 @@ interface DimensionProps {
 }
 
 const dimensionCategory: React.FC<DimensionProps> = ({ params }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 닫힌 상태
   const router = useRouter();
   // console.log({ params });
   const [selectedComponent, setSelectedComponent] = useState<String>('');
@@ -54,8 +56,7 @@ const dimensionCategory: React.FC<DimensionProps> = ({ params }) => {
   useEffect(() => {
     const accessToken = sessionStorage.getItem('accessToken');
     if (!accessToken) {
-      alert('로그인 후 이용 가능합니다.');
-      router.push('/login');
+      setIsModalOpen(true); // 모달 열기
     }
     const components = document.querySelectorAll(`.${styles.components}`);
 
@@ -90,6 +91,11 @@ const dimensionCategory: React.FC<DimensionProps> = ({ params }) => {
         break;
     }
   }, [params.category]);
+
+  const handleModalConfirm = () => {
+    setIsModalOpen(false);
+    router.push('/login');
+  };
 
   return (
     <>
@@ -134,6 +140,7 @@ const dimensionCategory: React.FC<DimensionProps> = ({ params }) => {
         {selectedComponent === '하의' && <BottomSize />}
         {selectedComponent === '아우터' && <OuterSize />}
         {selectedComponent === '신발' && <ShoesSize />}
+        <MoveLoginModal isOpen={isModalOpen} onConfirm={handleModalConfirm} />
       </div>
     </>
   );

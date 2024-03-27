@@ -3,23 +3,29 @@
 import LocationWeather from './MapPage';
 import Mainpage_button from '../../components/mainpage/Mainpage_button';
 import styles from '../../styles/mainpage/mainpage.module.scss';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { hideBackButton } from '../../Store/mainSlice/mainPageSlice';
 import { useDispatch } from 'react-redux';
+import MoveLoginModal from '../../components/MoveLoginModal';
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 닫힌 상태
+
   useEffect(() => {
-    // const accessToken = sessionStorage.getItem('accessToken');
-    // if (!accessToken) {
-    //   alert('로그인 후 이용 가능합니다.');
-    //   router.push('/login');
-    // }
+    const accessToken = sessionStorage.getItem('accessToken');
+    if (!accessToken) {
+      setIsModalOpen(true); // 모달 열기
+    }
     dispatch(hideBackButton());
   }, [dispatch]);
 
+  const handleModalConfirm = () => {
+    setIsModalOpen(false);
+    router.push('/login');
+  };
   return (
     <div className={styles.all}>
       <hr />
@@ -32,6 +38,7 @@ const MainPage: React.FC = () => {
           <Mainpage_button />
         </div>
       </div>
+      <MoveLoginModal isOpen={isModalOpen} onConfirm={handleModalConfirm} />
     </div>
   );
 };
