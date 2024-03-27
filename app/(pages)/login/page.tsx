@@ -127,11 +127,9 @@ const Login: React.FC = () => {
             </div>
             {/* etc */}
             <div className={styles.login_info}>
-              <div>아이디 찾기</div>
+              <div>아직 Weatherable Member가 아니신가요? </div>
               <img src="bar.png" alt="" />
-              <div>비밀번호 찾기</div>
-              <img src="bar.png" alt="" />
-              <Link href={'/signup'}>
+              <Link href={'/signup'} className={styles.signup_text}>
                 <div>회원가입</div>
               </Link>
             </div>

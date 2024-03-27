@@ -2,8 +2,11 @@
 
 .gridContainer {
   display: grid;
-  grid-template-columns: repeat(2, minmax(150px, 1fr));
-  gap: 20px;
+  padding: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 30px;
+  @include scrollbar();
 }
 
 .gridItem {

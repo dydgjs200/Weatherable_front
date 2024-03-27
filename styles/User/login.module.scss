@@ -33,6 +33,10 @@
     margin: 4em 1em;
     @include flex();
     justify-content: space-evenly;
+
+    .signup_text {
+      color: $theme-blue-3;
+    }
   }
   .login_Btn {
     @include big_btn();

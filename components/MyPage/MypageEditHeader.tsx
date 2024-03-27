@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import styles from '../../styles/MyPage/mypageEditHeader.module.scss';
 import axios from 'axios';
-import { Token, refreshAccessToken } from '../../service/common';
+import { Token } from '../../service/common';
+import Image from 'next/image';
 
 interface UserData {
   nickname: string;
@@ -99,6 +100,10 @@ const MypageEditHeader: React.FC = () => {
   const handleEditClick = () => {
     setEditable(true); // 수정 가능하도록 상태 변경
   };
+  // 이미지 변경을 위해 파일 입력 실행
+  const handleImageDivClick = () => {
+    document.getElementById('file').click();
+  };
 
   return (
     <>
@@ -110,19 +115,24 @@ const MypageEditHeader: React.FC = () => {
             </button>
           )}
         </div>
-        <div className={`${styles.mypage_Profile_image} ${styles.margin}`}>
-          <img
-            src={
-              selectedImage
-                ? URL.createObjectURL(selectedImage)
-                : userData.image_path
-            }
-            alt=""
-          />
+        <div className={styles.edit_image}>
+          <div
+            className={`${styles.mypage_Profile_image} ${styles.margin}`}
+            onClick={handleImageDivClick}
+          >
+            <img
+              src={
+                selectedImage
+                  ? URL.createObjectURL(selectedImage)
+                  : userData.image_path
+              }
+              alt=""
+            />
+          </div>
+          <div className={styles.camera} onClick={handleImageDivClick}>
+            <img src="/cameraicon.png" alt="" />
+          </div>
         </div>
-        <label className={styles.label} htmlFor="file">
-          <div className={styles.label_Div}>프로필 변경</div>
-        </label>
         <input
           className={styles.input}
           type="file"
@@ -135,7 +145,7 @@ const MypageEditHeader: React.FC = () => {
           {/* 수정 가능한 상태에 따라 input의 readonly 속성 적용 */}
           <input
             className={`${styles.mypage_Profile_nickname} ${
-              !editable ? styles.centerText : ''
+              !editable ? styles.centerText : styles.centerText2
             }`}
             type="text"
             value={userData.nickname}

@@ -23,7 +23,7 @@
     .like_Style {
       width: calc(25% - 0.7em);
       height: 2em;
-      border: 1px solid salmon;
+      border: 1px solid $theme-blue-1;
       border-radius: 0.5em;
       margin-right: 0.5em;
       margin-bottom: 0.5em;
@@ -89,8 +89,14 @@
 }
 
 .clicked {
-  background-color: lightcoral;
+  background-color: $theme-blue-1;
 }
 .margin_left {
   margin-left: auto;
+}
+
+.id_Div {
+  border: none;
+  font-size: 1.25em;
+  background-color: $bg-gray;
 }
