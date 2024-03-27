@@ -139,15 +139,17 @@ export default function SideBar({ open, close }: props) {
           )}
         </nav>
       </div>
-      {/* <button
-        onClick={close}
-        className={styles.closeBtn}
-        style={{
-          opacity: open ? '1' : '0',
-        }}
-      >
-        <span className="material-symbols-outlined">close</span>
-      </button> */}
+      {
+        <button
+          onClick={close}
+          className={styles.closeBtn}
+          style={{
+            opacity: open ? '1' : '0',
+          }}
+        >
+          <span className="material-symbols-outlined">close</span>
+        </button>
+      }
     </div>
   );
 }
