@@ -18,6 +18,15 @@
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease forwards; /* Fade-in 애니메이션 */
+
+  .modalLogo {
+    width: 100%;
+    @include flex();
+    margin-bottom: 2em;
+  }
+  > img {
+    text-align: center;
+  }
 }
 
 @keyframes fadeIn {
@@ -48,7 +57,7 @@
 }
 
 .withdrawalModalButtonYes {
-  background-color: $modal-no; /* Yes 버튼 색상 */
+  background-color: $modal-yes; /* Yes 버튼 색상 */
   color: white;
 }
 

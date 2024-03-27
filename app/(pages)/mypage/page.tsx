@@ -8,9 +8,11 @@ import Dimension from '../../../components/MyPage/Dimension';
 import Statistics from '../../../components/MyPage/Statistics';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import MoveLoginModal from '../../../components/MoveLoginModal';
 
 function MyPage() {
   const [selectedComponent, setSelectedComponent] = useState('기본정보');
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 닫힌 상태
 
   const handleComponentChange = (component) => {
     setSelectedComponent(component);
@@ -19,13 +21,16 @@ function MyPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // const accessToken = sessionStorage.getItem('accessToken');
-    // if (!accessToken) {
-    //   alert('로그인 후 이용 가능합니다.');
-    //   router.push('/login');
-    // }
+    const accessToken = sessionStorage.getItem('accessToken');
+    if (!accessToken) {
+      setIsModalOpen(true); // 모달 열기
+    }
   }, []);
 
+  const handleModalConfirm = () => {
+    setIsModalOpen(false);
+    router.push('/login');
+  };
   return (
     <>
       <div className={styles.mypage_Container}>
@@ -66,6 +71,7 @@ function MyPage() {
         {selectedComponent === '기본정보' && <PersonalInfo />}
         {selectedComponent === '치수' && <Dimension />}
         {selectedComponent === '통계' && <Statistics />}
+        <MoveLoginModal isOpen={isModalOpen} onConfirm={handleModalConfirm} />
       </div>
     </>
   );
