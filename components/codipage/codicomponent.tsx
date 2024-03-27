@@ -172,14 +172,18 @@ const CodiPage: React.FC<{}> = () => {
           className={styles2.uploadButtonHat}
           onClick={() => openModal('topIndex')}
         >
-          {' '}
-          {selectedIndexes['topIndex'] !== null ? (
+          {selectedImages['topIndex'] ? (
             <MyComponent
-              // imageindex={`${selectedIndexes['topIndex']}`}
-              imageSrc={`${selectedImages['topIndex']}`}
-              onClick={() => openModal('topIndex')} // onClick prop을 전달합니다.
+              imageSrc={selectedImages['topIndex']}
+              onClick={() => openModal('topIndex')}
             />
           ) : (
+            (targetCodi && targetCodi.top && targetCodi.top.imagePath && (
+              <MyComponent
+                imageSrc={targetCodi.top.imagePath}
+                onClick={() => openModal('topIndex')}
+              />
+            )) ||
             '상의'
           )}
         </div>
@@ -187,14 +191,18 @@ const CodiPage: React.FC<{}> = () => {
           className={styles2.uploadButtonHat}
           onClick={() => openModal('bottomIndex')}
         >
-          {' '}
-          {selectedIndexes['bottomIndex'] !== null ? (
+          {selectedImages['bottomIndex'] ? (
             <MyComponent
-              // imageindex={`${selectedIndexes['bottomIndex']}`}
-              imageSrc={`${selectedImages['bottomIndex']}`}
-              onClick={() => openModal('bottomIndex')} // onClick prop을 전달합니다.
+              imageSrc={selectedImages['bottomIndex']}
+              onClick={() => openModal('bottomIndex')}
             />
           ) : (
+            (targetCodi && targetCodi.bottom && (
+              <MyComponent
+                imageSrc={targetCodi.bottom.imagePath}
+                onClick={() => openModal('bottomIndex')}
+              />
+            )) ||
             '하의'
           )}
         </div>
@@ -202,59 +210,78 @@ const CodiPage: React.FC<{}> = () => {
           className={styles2.uploadButtonHat}
           onClick={() => openModal('outerIndex')}
         >
-          {' '}
-          {selectedIndexes['outerIndex'] !== null ? (
+          {selectedImages['outerIndex'] ? (
             <MyComponent
-              // imageindex={`${selectedIndexes['outerIndex']}`}
-              imageSrc={`${selectedImages['outerIndex']}`}
-              onClick={() => openModal('outerIndex')} // onClick prop을 전달합니다.
+              imageSrc={selectedImages['outerIndex']}
+              onClick={() => openModal('outerIndex')}
             />
           ) : (
+            (targetCodi && targetCodi.outer && (
+              <MyComponent
+                imageSrc={targetCodi.outer.imagePath}
+                onClick={() => openModal('outerIndex')}
+              />
+            )) ||
             '아우터'
           )}
         </div>
+
         <div
           className={styles2.uploadButtonHat}
           onClick={() => openModal('shoesIndex')}
         >
-          {' '}
-          {selectedIndexes['shoesIndex'] !== null ? (
+          {selectedImages['shoesIndex'] ? (
             <MyComponent
-              // imageindex={`${selectedIndexes['shoesIndex']}`}
-              imageSrc={`${selectedImages['shoesIndex']}`}
-              onClick={() => openModal('shoesIndex')} // onClick prop을 전달합니다.
+              imageSrc={selectedImages['shoesIndex']}
+              onClick={() => openModal('shoesIndex')}
             />
           ) : (
+            (targetCodi && targetCodi.shoes && (
+              <MyComponent
+                imageSrc={targetCodi.shoes.imagePath}
+                onClick={() => openModal('shoesIndex')}
+              />
+            )) ||
             '신발'
           )}
         </div>
+
         <div
           className={styles2.uploadButtonHat}
           onClick={() => openModal('accessoryIndex')}
         >
-          {' '}
-          {selectedIndexes['accessoryIndex'] !== null ? (
+          {selectedImages['accessoryIndex'] ? (
             <MyComponent
-              // imageindex={`${selectedIndexes['accessoryIndex']}`}
-              imageSrc={`${selectedImages['accessoryIndex']}`}
-              onClick={() => openModal('accessoryIndex')} // onClick prop을 전달합니다.
+              imageSrc={selectedImages['accessoryIndex']}
+              onClick={() => openModal('accessoryIndex')}
             />
           ) : (
+            (targetCodi && targetCodi.accessory && (
+              <MyComponent
+                imageSrc={targetCodi.accessory.imagePath}
+                onClick={() => openModal('accessoryIndex')}
+              />
+            )) ||
             '악세사리'
           )}
         </div>
+
         <div
           className={styles2.uploadButtonHat}
           onClick={() => openModal('capIndex')}
         >
-          {' '}
-          {selectedIndexes['capIndex'] !== null ? (
+          {selectedImages['capIndex'] ? (
             <MyComponent
-              // imageindex={`${selectedIndexes['모자']}`}
-              imageSrc={`${selectedImages['capIndex']}`}
-              onClick={() => openModal('capIndex')} // onClick prop을 전달합니다.
+              imageSrc={selectedImages['capIndex']}
+              onClick={() => openModal('capIndex')}
             />
           ) : (
+            (targetCodi && targetCodi.cap && (
+              <MyComponent
+                imageSrc={targetCodi.cap.imagePath}
+                onClick={() => openModal('capIndex')}
+              />
+            )) ||
             '모자'
           )}
         </div>
@@ -270,7 +297,7 @@ const CodiPage: React.FC<{}> = () => {
       )}
 
       {/* 추가된 부분 시작 */}
-      <div>
+      {/* <div>
         {targetCodi && (
           <div>
             {targetCodi.top && (
@@ -293,7 +320,7 @@ const CodiPage: React.FC<{}> = () => {
             )}
           </div>
         )}
-      </div>
+      </div> */}
       {/* 추가된 부분 끝 */}
 
       <input
