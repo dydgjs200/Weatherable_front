@@ -56,7 +56,7 @@ export default function SelectBox() {
       { Denim: '청바지' },
       { Slacks: '슬랙스' },
       { Sport_pants: '트레이닝복' },
-      { short_pants: '반바지' },
+      { Short_pants: '반바지' },
     ],
     Outer: [
       { Jacket: '자켓' },
@@ -64,7 +64,7 @@ export default function SelectBox() {
       { Padded_jacket: '패딩' },
       { Blazer: '블레이저' },
       { Mustang: '무스탕' },
-      { Sport_shirt: '스포츠 자켓' },
+      { Sport_Jacket: '스포츠 자켓' },
     ],
     Shoes: [
       { Running_shoes: '러닝 슈즈' },
