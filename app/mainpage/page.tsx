@@ -5,8 +5,11 @@ import Mainpage_button from '../../components/mainpage/Mainpage_button';
 import styles from '../../styles/mainpage/mainpage.module.scss';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { hideBackButton } from '../../Store/mainSlice/mainPageSlice';
+import { useDispatch } from 'react-redux';
 
 const MainPage: React.FC = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
     // const accessToken = sessionStorage.getItem('accessToken');
@@ -14,7 +17,8 @@ const MainPage: React.FC = () => {
     //   alert('로그인 후 이용 가능합니다.');
     //   router.push('/login');
     // }
-  }, []);
+    dispatch(hideBackButton());
+  }, [dispatch]);
 
   return (
     <div className={styles.all}>

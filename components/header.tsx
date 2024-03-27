@@ -49,7 +49,7 @@ export default function Header() {
         </li>
 
         <li>
-          {!backButtonVisible && (
+          {backButtonVisible && (
             <button onClick={back}>
               <span className="material-symbols-outlined">
                 keyboard_backspace
