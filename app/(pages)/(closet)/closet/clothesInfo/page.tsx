@@ -30,21 +30,21 @@ export default function AllClothes() {
     crawlingData();
   }, []);
 
-  useEffect(() => {
-    const userClothesData = async () => {
-      if (selectCatData !== '') {
-        try {
-          const crawlingClothesByCat = await getCrawlingClothesByCat(
-            selectCatData
-          );
-          setCrawClothes(crawlingClothesByCat);
-        } catch (error) {
-          console.log(error, '크롤링 데이터 가져오기 오류 (카테고리별)');
-        }
-      }
-    };
-    userClothesData();
-  }, [selectCatData]);
+  // useEffect(() => {
+  //   const userClothesData = async () => {
+  //     if (selectCatData !== '') {
+  //       try {
+  //         const crawlingClothesByCat = await getCrawlingClothesByCat(
+  //           selectCatData
+  //         );
+  //         setCrawClothes(crawlingClothesByCat);
+  //       } catch (error) {
+  //         console.log(error, '크롤링 데이터 가져오기 오류 (카테고리별)');
+  //       }
+  //     }
+  //   };
+  //   userClothesData();
+  // }, [selectCatData]);
 
   // useEffect(() => {
   //   const crawlingData = async () => {

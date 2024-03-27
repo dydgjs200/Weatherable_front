@@ -26,10 +26,12 @@ export default function Header() {
     <div className={styles.container}>
       <ul>
         <li>
-          <button onClick={back}>
-            <span className="material-symbols-outlined">
-              keyboard_backspace
-            </span>
+          <button
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+          >
+            <span className="material-symbols-outlined">menu</span>
           </button>
         </li>
         <li>
@@ -38,13 +40,12 @@ export default function Header() {
             {/* <img src="logo.png" alt="로고" /> */}
           </Link>
         </li>
+
         <li>
-          <button
-            onClick={() => {
-              setIsOpen(!isOpen);
-            }}
-          >
-            <span className="material-symbols-outlined">menu</span>
+          <button onClick={back}>
+            <span className="material-symbols-outlined">
+              keyboard_backspace
+            </span>
           </button>
         </li>
       </ul>

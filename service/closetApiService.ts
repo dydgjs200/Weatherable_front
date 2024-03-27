@@ -79,7 +79,6 @@ export const postAddStyles = async (data: any) => {
 export const getCrawlingClothes = async () => {
   const accessToken = sessionStorage.getItem('accessToken');
   // 헤더에 액세스 토큰 및 사용자 ID 설정
-  console.log(accessToken);
   try {
     const response = await axios.get(
       process.env.NEXT_PUBLIC_DB_HOST + '/clothinfo',
