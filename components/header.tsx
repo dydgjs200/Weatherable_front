@@ -16,8 +16,7 @@ export default function Header() {
   const backButtonVisible = useSelector(
     (state: RootState) => state.mainPage.backButtonVisible
   );
-  console.log(backButtonVisible);
-
+  console.log('backButtonVisible >', backButtonVisible);
   // 닫기 버튼
   const close = () => {
     setIsOpen(false);
@@ -49,13 +48,14 @@ export default function Header() {
         </li>
 
         <li>
-          {backButtonVisible && (
-            <button onClick={back}>
-              <span className="material-symbols-outlined">
-                keyboard_backspace
-              </span>
-            </button>
-          )}
+          <button
+            style={{ visibility: backButtonVisible ? 'visible' : 'hidden' }}
+            onClick={back}
+          >
+            <span className="material-symbols-outlined">
+              keyboard_backspace
+            </span>
+          </button>
         </li>
       </ul>
       {/* {isOpen && <SideBar open={isOpen} close={close} width={width} />} */}
