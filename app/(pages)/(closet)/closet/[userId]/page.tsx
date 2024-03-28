@@ -34,7 +34,24 @@ interface clothes {
   user_id: number;
   userid: string;
 }
+function findCategory() {
+  if (typeof window !== 'undefined') {
+    const url = window.location.href;
+    const queryString = url.split('?')[1];
+    if (!queryString) return null;
 
+    const queryParams = queryString.split('&');
+
+    for (const param of queryParams) {
+      if (param.startsWith('category=')) {
+        const category = param.split('=')[1];
+        return decodeURIComponent(category);
+      }
+    }
+  }
+
+  return null;
+}
 export default function Closet({ params: { userId } }) {
   const sortStatus = useSelector((state: any) => state.status.status);
   // console.log('sort 상태', sortStatus);
@@ -50,6 +67,13 @@ export default function Closet({ params: { userId } }) {
 
   const [userClothesData, setUserClothesData] = useState<clothes[]>([]);
   //
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  useEffect(() => {
+    const category = findCategory();
+    if (category) {
+      setSelectedCategory(category);
+    }
+  }, []);
   // 전체
   useEffect(() => {
     const userClothesData = async () => {
@@ -65,27 +89,30 @@ export default function Closet({ params: { userId } }) {
 
   // 중분류 카테고리
   useEffect(() => {
-    const userClothesData = async () => {
-      if (selectMajorData !== '') {
-        try {
-          const userClothesDataByCat = await getUserClothesByCatMajor(
-            selectMajorData
+    const fetchUserClothesData = async () => {
+      try {
+        let clothesData;
+        if (selectMajorData !== '') {
+          clothesData = await getUserClothesByCatMajor(selectMajorData);
+        } else {
+          clothesData = await getUserClothes();
+        }
+
+        // 카테고리 필터링
+        if (selectedCategory) {
+          clothesData = clothesData.filter(
+            (item) => item.majorCategory === selectedCategory
           );
-          setUserClothesData(userClothesDataByCat);
-        } catch (error) {
-          console.log(error, '유저 옷장 데이터 가져오기 오류 (카테고리)');
         }
-      } else {
-        try {
-          const userClothesData = await getUserClothes();
-          setUserClothesData(userClothesData);
-        } catch (error) {
-          console.log(error, '유저 옷장 데이터 가져오기 오류 (중분류) ');
-        }
+
+        setUserClothesData(clothesData);
+      } catch (error) {
+        console.log(error, '유저 옷장 데이터 가져오기 오류');
       }
     };
-    userClothesData();
-  }, [selectMajorData]);
+
+    fetchUserClothesData();
+  }, [selectMajorData, selectedCategory]);
 
   // 소분류 카테고리
   useEffect(() => {
