@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/header.module.scss';
 import '../styles/icons.scss';
 import SideBar from './sidebar';
@@ -13,6 +13,8 @@ import { RootState } from '../Store/Store';
 export default function Header() {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
 
+  const router = useRouter();
+
   const backButtonVisible = useSelector(
     (state: RootState) => state.mainPage.backButtonVisible
   );
@@ -22,8 +24,9 @@ export default function Header() {
     setIsOpen(false);
   };
 
+  useEffect(() => {}, []);
+
   // 뒤로가기 버튼
-  const router = useRouter();
   const back = () => {
     router.back();
   };
